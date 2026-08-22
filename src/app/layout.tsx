@@ -6,13 +6,21 @@ import { Footer } from '@/components/layout/Footer';
 import { WhatsAppWidget } from '@/components/ui/WhatsAppWidget';
 import { siteConfig } from '@/config/site';
 
+const getMetadataBase = () => {
+  const url = process.env.NEXT_PUBLIC_SITE_URL || process.env.VERCEL_URL;
+  if (url) {
+    return new URL(`https://${url.replace(/^https?:\/\//, '')}`);
+  }
+  return new URL(siteConfig.url);
+};
+
 export const metadata: Metadata = {
   title: {
     default: 'TRAIBCERT Limited | UKAS & ASCB Accredited ISO Certification & Cyber Essentials',
     template: '%s | TRAIBCERT Limited'
   },
   description: siteConfig.tagline,
-  metadataBase: new URL(siteConfig.url),
+  metadataBase: getMetadataBase(),
   icons: {
     icon: '/icon.svg',
     apple: '/icon.svg',
@@ -80,7 +88,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       <head>
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
-        <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400..800;1,9..40,400..800&family=Fraunces:ital,opsz,wght@0,9..144,500..800;1,9..144,500..800&family=Plus+Jakarta+Sans:ital,wght@0,400..800;1,400..800&family=JetBrains+Mono:wght@500;600&display=swap" rel="stylesheet" />
+        <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400..800;1,9..40,400..800&family=Fraunces:ital,opsz,wght@0,9..144,500..800;1,9..144,500..800&family=Plus+Jakarta+Sans:ital,wght@0,200..800;1,200..800&display=swap" rel="stylesheet" />
         {/* Google Tag Manager / Google Ads Container AW-835011731 */}
         <Script
           id="gtm-script"
