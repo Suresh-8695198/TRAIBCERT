@@ -22,16 +22,12 @@ export const HeroWithQuoteForm: React.FC = () => {
 
       <div className="container" style={{ position: 'relative', zIndex: 2 }}>
         
-        {/* Main Grid: Left Content & Right Floating Quote Form (Matching Reference Screenshot 100%) */}
-        <div style={{ 
+        {/* Main Grid: Left Content & Right Floating Quote Form */}
+        <div className="hero-grid" style={{ 
           display: 'grid', 
           gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))',
           gap: '48px', 
-          alignItems: 'flex-start',
-          '@media (max-width: 768px)': {
-            gridTemplateColumns: '1fr',
-            gap: '32px'
-          }
+          alignItems: 'flex-start'
         }}>
           
           {/* Left Column Content */}
@@ -53,7 +49,7 @@ export const HeroWithQuoteForm: React.FC = () => {
               We at TRAIBCERT are an Independent, Impartial Certification Body taking pride in supporting your compliance needs for ISO Certification, IRCA Training, and Pre-Shipment Inspection services.
             </p>
 
-            {/* 2 Hero Pill Selection Cards (Matching Reference Screenshot 100%) */}
+            {/* 2 Hero Pill Selection Cards */}
             <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: '16px', marginBottom: '44px' }}>
               
               <Link
@@ -118,7 +114,7 @@ export const HeroWithQuoteForm: React.FC = () => {
 
             </div>
 
-            {/* Bottom 50K+ Trust Metric & Badges Strip (Matching Reference Screenshot 100%) */}
+            {/* Bottom 50K+ Trust Metric & Badges Strip */}
             <div style={{
               backgroundColor: '#ffffff',
               borderRadius: '16px',
@@ -163,7 +159,7 @@ export const HeroWithQuoteForm: React.FC = () => {
 
           </div>
 
-          {/* Right Column: Floating White Lead/Quote Form (Matching Reference Screenshot 100%) */}
+          {/* Right Column: Floating White Lead/Quote Form */}
           <div className="hero-animate-in" style={{
             backgroundColor: '#ffffff',
             borderRadius: '20px',
@@ -193,6 +189,10 @@ export const HeroWithQuoteForm: React.FC = () => {
 
       <style>{`
         @media (max-width: 768px) {
+          .hero-grid {
+            grid-template-columns: 1fr !important;
+            gap: 32px !important;
+          }
           section#hero {
             padding-top: 32px;
             padding-bottom: 56px;
