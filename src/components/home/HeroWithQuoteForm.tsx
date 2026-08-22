@@ -23,29 +23,38 @@ export const HeroWithQuoteForm: React.FC = () => {
       <div className="container" style={{ position: 'relative', zIndex: 2 }}>
         
         {/* Main Grid: Left Content & Right Floating Quote Form (Matching Reference Screenshot 100%) */}
-        <div style={{ display: 'grid', gridTemplateColumns: '1fr 480px', gap: '48px', alignItems: 'flex-start' }}>
+        <div style={{ 
+          display: 'grid', 
+          gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))',
+          gap: '48px', 
+          alignItems: 'flex-start',
+          '@media (max-width: 768px)': {
+            gridTemplateColumns: '1fr',
+            gap: '32px'
+          }
+        }}>
           
           {/* Left Column Content */}
           <div className="hero-animate-in" style={{ paddingTop: '12px' }}>
             
             {/* Top Eyebrow Tag */}
-            <div style={{ display: 'inline-flex', alignItems: 'center', gap: '8px', backgroundColor: '#fff4d1', border: '1px solid #fde68a', color: '#c99327', padding: '6px 14px', borderRadius: '999px', fontSize: '12px', fontWeight: 800, textTransform: 'uppercase', letterSpacing: '0.5px', marginBottom: '24px' }}>
+            <div style={{ display: 'inline-flex', alignItems: 'center', gap: '8px', backgroundColor: '#fff4d1', border: '1px solid #fde68a', color: '#c99327', padding: '6px 14px', borderRadius: '9px', marginBottom: '20px', fontSize: 'clamp(10px, 2vw, 12px)' }}>
               <ShieldCheck size={15} />
               <span>INDEPENDENT, IMPARTIAL CERTIFICATION BODY</span>
             </div>
 
             {/* Main Headline */}
-            <h1 style={{ fontSize: 'clamp(34px, 4.2vw, 52px)', fontWeight: 800, color: '#ffffff', lineHeight: 1.15, letterSpacing: '-0.5px', marginBottom: '20px' }}>
+            <h1 style={{ fontSize: 'clamp(24px, 6vw, 52px)', fontWeight: 800, color: '#ffffff', lineHeight: 1.15, letterSpacing: '-0.5px', marginBottom: '20px' }}>
               Accredited ISO Certification & Cyber Security Body
             </h1>
 
             {/* Sub-headline */}
-            <p style={{ fontSize: '16.5px', color: 'rgba(255, 255, 255, 0.88)', lineHeight: 1.6, marginBottom: '36px', maxWidth: '580px' }}>
+            <p style={{ fontSize: 'clamp(14px, 3vw, 16.5px)', color: 'rgba(255, 255, 255, 0.88)', lineHeight: 1.6, marginBottom: '36px', maxWidth: '580px' }}>
               We at TRAIBCERT are an Independent, Impartial Certification Body taking pride in supporting your compliance needs for ISO Certification, IRCA Training, and Pre-Shipment Inspection services.
             </p>
 
             {/* 2 Hero Pill Selection Cards (Matching Reference Screenshot 100%) */}
-            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(240px, 1fr))', gap: '16px', marginBottom: '44px' }}>
+            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: '16px', marginBottom: '44px' }}>
               
               <Link
                 href="/certification"
@@ -65,10 +74,10 @@ export const HeroWithQuoteForm: React.FC = () => {
                 }}
               >
                 <div>
-                  <div style={{ fontSize: '10px', fontWeight: 800, color: '#64748b', textTransform: 'uppercase', letterSpacing: '0.5px', marginBottom: '2px' }}>
+                  <div style={{ fontSize: 'clamp(9px, 2vw, 10px)', fontWeight: 800, color: '#64748b', textTransform: 'uppercase', letterSpacing: '0.5px', marginBottom: '2px' }}>
                     MORE THAN 500 EMPLOYEES
                   </div>
-                  <div style={{ fontSize: '15px', fontWeight: 800, color: '#2c2a75' }}>
+                  <div style={{ fontSize: 'clamp(13px, 3vw, 15px)', fontWeight: 800, color: '#2c2a75' }}>
                     Enterprise ISO Systems
                   </div>
                 </div>
@@ -95,10 +104,10 @@ export const HeroWithQuoteForm: React.FC = () => {
                 }}
               >
                 <div>
-                  <div style={{ fontSize: '10px', fontWeight: 800, color: '#64748b', textTransform: 'uppercase', letterSpacing: '0.5px', marginBottom: '2px' }}>
+                  <div style={{ fontSize: 'clamp(9px, 2vw, 10px)', fontWeight: 800, color: '#64748b', textTransform: 'uppercase', letterSpacing: '0.5px', marginBottom: '2px' }}>
                     FEWER THAN 500 EMPLOYEES
                   </div>
-                  <div style={{ fontSize: '15px', fontWeight: 800, color: '#2c2a75' }}>
+                  <div style={{ fontSize: 'clamp(13px, 3vw, 15px)', fontWeight: 800, color: '#2c2a75' }}>
                     Small to Mid-Sized Businesses
                   </div>
                 </div>
@@ -113,17 +122,16 @@ export const HeroWithQuoteForm: React.FC = () => {
             <div style={{
               backgroundColor: '#ffffff',
               borderRadius: '16px',
-              padding: '20px 24px',
+              padding: 'clamp(16px, 4vw, 24px)',
               color: '#0f172a',
               display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'space-between',
+              flexDirection: 'column',
               gap: '20px',
               boxShadow: '0 12px 32px rgba(0,0,0,0.2)'
             }}>
-              <div style={{ display: 'flex', alignItems: 'center', gap: '16px' }}>
+              <div style={{ display: 'flex', alignItems: 'center', gap: '16px', flexWrap: 'wrap' }}>
                 <div style={{ backgroundColor: '#fff4d1', border: '1px solid #fde68a', borderRadius: '10px', padding: '8px 14px', textAlign: 'center' }}>
-                  <div style={{ fontSize: '24px', fontWeight: 800, color: '#2c2a75', lineHeight: 1 }}>
+                  <div style={{ fontSize: 'clamp(18px, 5vw, 24px)', fontWeight: 800, color: '#2c2a75', lineHeight: 1 }}>
                     5,000+
                   </div>
                   <div style={{ fontSize: '9.5px', fontWeight: 800, color: '#c99327', textTransform: 'uppercase', marginTop: '2px' }}>
@@ -131,13 +139,13 @@ export const HeroWithQuoteForm: React.FC = () => {
                   </div>
                 </div>
 
-                <div style={{ fontSize: '13px', fontWeight: 700, color: '#475569', lineHeight: 1.4, maxWidth: '220px' }}>
+                <div style={{ fontSize: 'clamp(12px, 2vw, 13px)', fontWeight: 700, color: '#475569', lineHeight: 1.4 }}>
                   Global Customers, Clients and Partners Certified with TRAIBCERT
                 </div>
               </div>
 
               {/* Accreditations Badges Strip */}
-              <div style={{ display: 'flex', alignItems: 'center', gap: '10px', borderLeft: '1px solid #e2e8f0', paddingLeft: '16px' }}>
+              <div style={{ display: 'flex', alignItems: 'center', gap: '10px', flexWrap: 'wrap', paddingTop: '12px', borderTop: '1px solid #e2e8f0' }}>
                 <div style={{ textAlign: 'center' }}>
                   <div style={{ backgroundColor: '#fff4d1', color: '#c99327', fontSize: '11px', fontWeight: 800, padding: '4px 8px', borderRadius: '6px' }}>ASCB</div>
                   <div style={{ fontSize: '9.5px', color: '#64748b', fontWeight: 600, marginTop: '2px' }}>Accredited</div>
@@ -159,17 +167,18 @@ export const HeroWithQuoteForm: React.FC = () => {
           <div className="hero-animate-in" style={{
             backgroundColor: '#ffffff',
             borderRadius: '20px',
-            padding: '36px 32px',
+            padding: 'clamp(24px, 6vw, 36px)',
             boxShadow: '0 20px 50px rgba(0,0,0,0.3)',
             border: '1px solid #e2e8f0',
             color: '#0f172a',
-            position: 'relative'
+            position: 'relative',
+            height: 'fit-content'
           }}>
             <div style={{ marginBottom: '20px' }}>
-              <h3 style={{ fontSize: '22px', fontWeight: 800, color: '#2c2a75', lineHeight: 1.25, marginBottom: '6px' }}>
+              <h3 style={{ fontSize: 'clamp(18px, 4vw, 22px)', fontWeight: 800, color: '#2c2a75', lineHeight: 1.25, marginBottom: '6px' }}>
                 Let's connect – we'll guide you to the right solution
               </h3>
-              <p style={{ fontSize: '13.5px', color: '#64748b', lineHeight: 1.5, margin: 0 }}>
+              <p style={{ fontSize: 'clamp(12px, 2vw, 13.5px)', color: '#64748b', lineHeight: 1.5, margin: 0 }}>
                 Complete our fast form below for an instant fixed proposal from our UK lead audit team.
               </p>
             </div>
@@ -181,6 +190,22 @@ export const HeroWithQuoteForm: React.FC = () => {
         </div>
 
       </div>
+
+      <style>{`
+        @media (max-width: 768px) {
+          section#hero {
+            padding-top: 32px;
+            padding-bottom: 56px;
+          }
+        }
+
+        @media (max-width: 480px) {
+          section#hero {
+            padding-top: 24px;
+            padding-bottom: 40px;
+          }
+        }
+      `}</style>
     </section>
   );
 };
