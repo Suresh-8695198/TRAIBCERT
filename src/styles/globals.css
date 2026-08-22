@@ -78,13 +78,13 @@ button, input, select, textarea {
 .container {
   max-width: var(--max-width);
   margin: 0 auto;
-  padding: 0 24px;
+  padding: 0 clamp(16px, 4vw, 24px);
   width: 100%;
 }
 
 /* Corporate Typography Sizes */
 .heading-lg {
-  font-size: clamp(32px, 4vw, 44px);
+  font-size: clamp(28px, 5vw, 44px);
   font-weight: 800;
   color: var(--ink);
   line-height: 1.18;
@@ -92,7 +92,7 @@ button, input, select, textarea {
 }
 
 .heading-md {
-  font-size: clamp(22px, 3vw, 30px);
+  font-size: clamp(18px, 4vw, 30px);
   font-weight: 700;
   color: var(--ink);
   line-height: 1.25;
@@ -102,7 +102,7 @@ button, input, select, textarea {
   display: inline-flex;
   align-items: center;
   gap: 8px;
-  font-size: 12px;
+  font-size: clamp(10px, 2vw, 12px);
   font-weight: 700;
   letter-spacing: 1px;
   text-transform: uppercase;
@@ -118,9 +118,9 @@ button, input, select, textarea {
   align-items: center;
   justify-content: center;
   gap: 8px;
-  padding: 11px 22px;
+  padding: clamp(8px, 2vw, 11px) clamp(16px, 4vw, 22px);
   font-weight: 700;
-  font-size: 14px;
+  font-size: clamp(12px, 2vw, 14px);
   border-radius: var(--radius-md);
   transition: background-color 0.2s ease, border-color 0.2s ease;
   cursor: pointer;
@@ -159,7 +159,7 @@ button, input, select, textarea {
 
 /* Flat Badges */
 .badge {
-  font-size: 11px;
+  font-size: clamp(10px, 2vw, 11px);
   font-weight: 800;
   letter-spacing: 0.5px;
   text-transform: uppercase;
@@ -210,6 +210,17 @@ button, input, select, textarea {
   }
   .mobile-toggle {
     display: flex !important;
+  }
+}
+
+@media (max-width: 640px) {
+  .container {
+    padding: 0 clamp(12px, 3vw, 16px);
+  }
+
+  .btn {
+    padding: clamp(7px, 2vw, 9px) clamp(12px, 3vw, 16px);
+    font-size: clamp(11px, 2vw, 13px);
   }
 }
 
@@ -311,5 +322,19 @@ a:focus, button:focus {
   border-color: #f9b933 !important;
 }
 
+/* Additional Mobile Optimizations */
+@media (max-width: 768px) {
+  input, textarea, select {
+    font-size: 16px !important; /* Prevents auto-zoom on iOS */
+  }
+}
 
+@media (max-width: 480px) {
+  .heading-lg {
+    font-size: clamp(20px, 5vw, 28px);
+  }
 
+  .heading-md {
+    font-size: clamp(16px, 4vw, 22px);
+  }
+}
