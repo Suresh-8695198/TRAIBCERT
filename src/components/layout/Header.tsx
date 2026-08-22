@@ -40,7 +40,7 @@ export const Header: React.FC = () => {
   const handleMouseLeave = () => {
     timeoutRef.current = setTimeout(() => {
       setActiveMenu(null);
-    }, 350); // Generous 350ms grace period so cursor movement between button and mega-menu is 100% smooth
+    }, 350);
   };
 
   return (
@@ -48,201 +48,84 @@ export const Header: React.FC = () => {
       {/* Topbar */}
       <Topbar />
 
-      {/* Main Header (78px height) */}
+      {/* Main Header */}
       <div
         style={{
-          height: '78px',
+          height: 'auto',
+          minHeight: '56px',
           backgroundColor: '#ffffff',
           borderBottom: '1px solid #e2e8f0',
           boxShadow: isScrolled ? '0 4px 12px rgba(0,0,0,0.06)' : 'none',
           transition: 'box-shadow 0.3s ease',
-          position: 'relative'
+          position: 'relative',
+          paddingTop: '8px',
+          paddingBottom: '8px'
         }}
       >
-        <div className="container" style={{ height: '100%', display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
+        <div className="container" style={{ height: '100%', display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: '16px', flexWrap: 'wrap' }}>
           
-          {/* Brand Logo - Official Circular Emblem */}
-          <Link href="/" style={{ display: 'flex', alignItems: 'center', textDecoration: 'none', outline: 'none', border: 'none' }}>
+          {/* Brand Logo */}
+          <Link href="/" style={{ display: 'flex', alignItems: 'center', textDecoration: 'none', outline: 'none', border: 'none', flexShrink: 0 }}>
             <img
               src="/assets/logos/logo.png"
               alt="TRAIBCERT Certification Body Emblem"
-              height={52}
-              style={{ objectFit: 'contain', height: '52px' }}
+              style={{ objectFit: 'contain', height: 'clamp(40px, 8vw, 52px)', width: 'auto' }}
               onError={(e) => {
                 (e.target as HTMLImageElement).src = '/assets/logos/traibcert-logo.svg';
               }}
             />
           </Link>
 
-          {/* Center Primary Navigation (Hover Auto-Open & Smooth Auto-Close) */}
-          <nav className="desktop-nav" style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', gap: '32px', height: '100%' }}>
-            {/* 1. Home */}
-            <Link
-              href="/"
-              className="nav-link-btn"
-              style={{
-                fontSize: '15px',
-                fontWeight: 600,
-                color: '#2c2a75',
-                textDecoration: 'none',
-                height: '100%',
-                display: 'flex',
-                alignItems: 'center',
-                borderBottom: '3px solid transparent',
-                outline: 'none'
-              }}
-            >
-              Home
-            </Link>
-
-            {/* 2. Certification (Hoverable Mega-Menu) */}
-            <div
-              onMouseEnter={() => handleMouseEnter('certification')}
-              onMouseLeave={handleMouseLeave}
-              style={{ position: 'relative', height: '100%', display: 'flex', alignItems: 'center' }}
-            >
-              <button
-                onClick={() => setActiveMenu(activeMenu === 'certification' ? null : 'certification')}
+          {/* Center Primary Navigation */}
+          <nav className="desktop-nav" style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', gap: 'clamp(16px, 3vw, 32px)', height: '100%' }}>
+            {['Home', 'Certification', 'Training', 'Resources', 'Contact Us'].map((item, idx) => (
+              <Link
+                key={idx}
+                href={item === 'Home' ? '/' : `/${item.toLowerCase().replace(' ', '-')}`}
                 className="nav-link-btn"
                 style={{
-                  background: 'none',
-                  border: 'none',
-                  outline: 'none',
-                  fontSize: '15px',
+                  fontSize: 'clamp(13px, 2vw, 15px)',
                   fontWeight: 600,
-                  color: activeMenu === 'certification' ? '#f9b933' : '#2c2a75',
-                  cursor: 'pointer',
-                  display: 'flex',
-                  alignItems: 'center',
-                  gap: '4px',
-                  height: '100%',
-                  borderBottom: activeMenu === 'certification' ? '3px solid #f9b933' : '3px solid transparent',
-                  padding: 0
+                  color: '#2c2a75',
+                  textDecoration: 'none',
+                  whiteSpace: 'nowrap'
                 }}
               >
-                <span>Certification</span>
-                <ChevronDown size={14} style={{ transform: activeMenu === 'certification' ? 'rotate(180deg)' : 'none', transition: 'transform 0.2s' }} />
-              </button>
-            </div>
-
-            {/* 3. Training (Hoverable Dropdown) */}
-            <div
-              onMouseEnter={() => handleMouseEnter('training')}
-              onMouseLeave={handleMouseLeave}
-              style={{ position: 'relative', height: '100%', display: 'flex', alignItems: 'center' }}
-            >
-              <button
-                onClick={() => setActiveMenu(activeMenu === 'training' ? null : 'training')}
-                className="nav-link-btn"
-                style={{
-                  background: 'none',
-                  border: 'none',
-                  outline: 'none',
-                  fontSize: '15px',
-                  fontWeight: 600,
-                  color: activeMenu === 'training' ? '#f9b933' : '#2c2a75',
-                  cursor: 'pointer',
-                  display: 'flex',
-                  alignItems: 'center',
-                  gap: '4px',
-                  height: '100%',
-                  borderBottom: activeMenu === 'training' ? '3px solid #f9b933' : '3px solid transparent',
-                  padding: 0
-                }}
-              >
-                <span>Training</span>
-                <ChevronDown size={14} style={{ transform: activeMenu === 'training' ? 'rotate(180deg)' : 'none', transition: 'transform 0.2s' }} />
-              </button>
-            </div>
-
-            {/* 4. Resources (Hoverable Mega-Menu) */}
-            <div
-              onMouseEnter={() => handleMouseEnter('resources')}
-              onMouseLeave={handleMouseLeave}
-              style={{ position: 'relative', height: '100%', display: 'flex', alignItems: 'center' }}
-            >
-              <button
-                onClick={() => setActiveMenu(activeMenu === 'resources' ? null : 'resources')}
-                className="nav-link-btn"
-                style={{
-                  background: 'none',
-                  border: 'none',
-                  outline: 'none',
-                  fontSize: '15px',
-                  fontWeight: 600,
-                  color: activeMenu === 'resources' ? '#f9b933' : '#2c2a75',
-                  cursor: 'pointer',
-                  display: 'flex',
-                  alignItems: 'center',
-                  gap: '4px',
-                  height: '100%',
-                  borderBottom: activeMenu === 'resources' ? '3px solid #f9b933' : '3px solid transparent',
-                  padding: 0
-                }}
-              >
-                <span>Resources</span>
-                <ChevronDown size={14} style={{ transform: activeMenu === 'resources' ? 'rotate(180deg)' : 'none', transition: 'transform 0.2s' }} />
-              </button>
-            </div>
-
-            {/* 5. Contact Us */}
-            <div
-              onMouseEnter={() => handleMouseEnter('contact')}
-              onMouseLeave={handleMouseLeave}
-              style={{ position: 'relative', height: '100%', display: 'flex', alignItems: 'center' }}
-            >
-              <button
-                onClick={() => setActiveMenu(activeMenu === 'contact' ? null : 'contact')}
-                className="nav-link-btn"
-                style={{
-                  background: 'none',
-                  border: 'none',
-                  outline: 'none',
-                  fontSize: '15px',
-                  fontWeight: 600,
-                  color: activeMenu === 'contact' ? '#f9b933' : '#2c2a75',
-                  cursor: 'pointer',
-                  display: 'flex',
-                  alignItems: 'center',
-                  gap: '4px',
-                  height: '100%',
-                  borderBottom: activeMenu === 'contact' ? '3px solid #f9b933' : '3px solid transparent',
-                  padding: 0
-                }}
-              >
-                <span>Contact Us</span>
-                <ChevronDown size={14} style={{ transform: activeMenu === 'contact' ? 'rotate(180deg)' : 'none', transition: 'transform 0.2s' }} />
-              </button>
-            </div>
+                {item}
+              </Link>
+            ))}
           </nav>
 
           {/* Right Action Block */}
-          <div style={{ display: 'flex', alignItems: 'center', gap: '20px' }}>
-            {/* Phone Link with Gold Filled Icon */}
+          <div style={{ display: 'flex', alignItems: 'center', gap: 'clamp(8px, 2vw, 16px)', flexShrink: 0 }}>
+            {/* Phone Link */}
             <a
               href={siteConfig.contact.ukPhoneTel}
               className="phone-display topbar-hover"
               style={{
-                fontSize: '15px',
+                fontSize: 'clamp(12px, 2vw, 15px)',
                 fontWeight: 700,
                 color: '#2c2a75',
                 textDecoration: 'none',
                 display: 'flex',
                 alignItems: 'center',
-                gap: '8px'
+                gap: '6px',
+                whiteSpace: 'nowrap'
               }}
             >
-              <Phone size={17} style={{ color: '#f9b933', fill: '#f9b933' }} />
-              <span>{siteConfig.contact.ukPhone}</span>
+              <Phone size={14} style={{ color: '#f9b933', fill: '#f9b933', flexShrink: 0 }} />
+              <span style={{ display: 'none' }}>
+                {siteConfig.contact.ukPhone}
+              </span>
             </a>
 
-            {/* Circular Search Button */}
+            {/* Search Button */}
             <button
               onClick={() => setIsSearchOpen(!isSearchOpen)}
               className="search-toggle-btn"
               style={{
-                width: '40px',
-                height: '40px',
+                width: '32px',
+                height: '32px',
                 borderRadius: '50%',
                 border: '1.5px solid #cbd5e1',
                 backgroundColor: '#ffffff',
@@ -250,137 +133,85 @@ export const Header: React.FC = () => {
                 alignItems: 'center',
                 justifyContent: 'center',
                 cursor: 'pointer',
-                outline: 'none'
+                outline: 'none',
+                flexShrink: 0
               }}
               title="Search Website"
             >
-              <Search size={18} style={{ color: '#2c2a75' }} />
+              <Search size={14} style={{ color: '#2c2a75' }} />
             </button>
 
-            {/* Get a Quote → Button (Turns Yellow on Hover!) */}
+            {/* Get a Quote Button */}
             <Link
               href="/contact/enquiry"
               className="btn btn-quote"
               style={{
-                fontSize: '14.5px',
+                fontSize: 'clamp(11px, 2vw, 14.5px)',
                 fontWeight: 700,
-                padding: '11px 22px',
+                padding: 'clamp(7px, 1.5vw, 11px) clamp(12px, 2vw, 22px)',
                 borderRadius: '8px',
                 display: 'inline-flex',
                 alignItems: 'center',
-                gap: '8px',
-                textDecoration: 'none'
+                gap: '6px',
+                textDecoration: 'none',
+                whiteSpace: 'nowrap'
               }}
             >
-              <span>Get a Quote</span>
-              <ArrowRight size={15} />
+              <span>Quote</span>
+              <ArrowRight size={12} />
             </Link>
 
-            {/* Mobile Hamburger Drawer Toggle (<900px) */}
+            {/* Mobile Toggle */}
             <button
               onClick={() => setIsMobileOpen(true)}
               className="mobile-toggle"
-              style={{ background: 'none', border: 'none', cursor: 'pointer', padding: '6px', outline: 'none' }}
+              style={{ background: 'none', border: 'none', cursor: 'pointer', padding: '4px', outline: 'none', flexShrink: 0 }}
               aria-label="Toggle Navigation"
             >
-              <Menu size={26} style={{ color: '#2c2a75' }} />
+              <Menu size={22} style={{ color: '#2c2a75' }} />
             </button>
           </div>
         </div>
 
-        {/* Hover Dropdowns with Fade-in Animation & Mouse Keepalive */}
-        {activeMenu === 'certification' && (
-          <div
-            onMouseEnter={() => handleMouseEnter('certification')}
-            onMouseLeave={handleMouseLeave}
-            className="dropdown-animate"
-            style={{ position: 'absolute', top: '78px', left: 0, width: '100%', zIndex: 999 }}
-          >
-            <MegaMenuCertification onClose={() => setActiveMenu(null)} />
-          </div>
-        )}
-
-        {activeMenu === 'resources' && (
-          <div
-            onMouseEnter={() => handleMouseEnter('resources')}
-            onMouseLeave={handleMouseLeave}
-            className="dropdown-animate"
-            style={{ position: 'absolute', top: '78px', left: 0, width: '100%', zIndex: 999 }}
-          >
-            <MegaMenuResources onClose={() => setActiveMenu(null)} />
-          </div>
-        )}
-
-        {activeMenu === 'training' && (
-          <div
-            onMouseEnter={() => handleMouseEnter('training')}
-            onMouseLeave={handleMouseLeave}
-            className="dropdown-animate"
-            style={{ position: 'absolute', top: '78px', left: 0, width: '100%', zIndex: 999 }}
-          >
-            <DropdownTraining onClose={() => setActiveMenu(null)} />
-          </div>
-        )}
-
-        {activeMenu === 'contact' && (
-          <div
-            onMouseEnter={() => handleMouseEnter('contact')}
-            onMouseLeave={handleMouseLeave}
-            className="dropdown-animate"
-            style={{
-              position: 'absolute',
-              top: '78px',
-              right: '240px',
-              width: '240px',
-              backgroundColor: '#ffffff',
-              boxShadow: 'var(--shadow-lg)',
-              borderRadius: '0 0 var(--radius-md) var(--radius-md)',
-              border: '1px solid var(--gray-100)',
-              borderTop: '3px solid #f9b933',
-              padding: '12px',
-              zIndex: 999
-            }}
-          >
-            <Link href="/contact" onClick={() => setActiveMenu(null)} style={{ display: 'block', padding: '8px 12px', fontSize: '13.5px', fontWeight: 600, color: 'var(--ink)', textDecoration: 'none' }}>
-              Contact Details & Locations
-            </Link>
-            <Link href="/contact/enquiry" onClick={() => setActiveMenu(null)} style={{ display: 'block', padding: '8px 12px', fontSize: '13.5px', fontWeight: 600, color: 'var(--ink)', textDecoration: 'none' }}>
-              Get a Fast Quote / Enquiry
-            </Link>
-          </div>
-        )}
-
-        {/* Floating Search Bar Input Overlay */}
+        {/* Floating Search Bar */}
         {isSearchOpen && (
           <div style={{
             position: 'absolute',
-            top: '78px',
+            top: '100%',
             left: 0,
             width: '100%',
             backgroundColor: '#ffffff',
             borderBottom: '2px solid var(--ink)',
-            padding: '16px 0',
+            padding: '12px 0',
             boxShadow: 'var(--shadow-md)',
             zIndex: 99
           }}>
             <div className="container" style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
-              <Search size={20} style={{ color: 'var(--ink)' }} />
+              <Search size={16} style={{ color: 'var(--ink)' }} />
               <input
                 type="text"
                 autoFocus
-                placeholder="Search ISO standards (e.g. ISO 9001, ISO 27001), Cyber Essentials, training courses..."
-                style={{ width: '100%', border: 'none', outline: 'none', fontSize: '15px', color: 'var(--ink)' }}
+                placeholder="Search ISO standards..."
+                style={{ width: '100%', border: 'none', outline: 'none', fontSize: '14px', color: 'var(--ink)' }}
               />
-              <button onClick={() => setIsSearchOpen(false)} style={{ background: 'none', border: 'none', cursor: 'pointer', fontSize: '13px', fontWeight: 700, color: 'var(--gray-500)' }}>
-                Close [ESC]
+              <button onClick={() => setIsSearchOpen(false)} style={{ background: 'none', border: 'none', cursor: 'pointer', fontSize: '12px', fontWeight: 700, color: 'var(--gray-500)' }}>
+                Close
               </button>
             </div>
           </div>
         )}
       </div>
 
-      {/* Responsive Mobile Drawer (<900px) */}
+      {/* Mobile Drawer */}
       <MobileDrawer isOpen={isMobileOpen} onClose={() => setIsMobileOpen(false)} />
+
+      <style>{`
+        @media (max-width: 768px) {
+          .phone-display span {
+            display: none !important;
+          }
+        }
+      `}</style>
     </header>
   );
 };
