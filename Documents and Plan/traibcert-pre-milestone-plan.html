@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>TRAIBCERT — Pre-Milestone Readiness Plan</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;600&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --ink:#2c2a75;
+  --ink2:#3f3b8f;
+  --ink3:#5b56af;
+  --gold:#f9b933;
+  --gold-hover:#e0a520;
+  --gold-soft:#fff4d1;
+  --gold-strong:#c99327;
+  --topbar:#1a1854;
+  --white:#fff;
+  --gray-50:#f7f7fb;
+  --gray-100:#ececf2;
+  --gray-300:#cfcfdb;
+  --gray-500:#8988a3;
+  --gray-700:#4d4c66;
+  --gray-900:#211f52;
+  --done:#2f9e6e;
+  --done-soft:#e5f6ee;
+  --radius:10px;
+  --font-display:'Plus Jakarta Sans',system-ui,sans-serif;
+  --font-mono:'JetBrains Mono',ui-monospace,monospace;
+}
+html{scroll-behavior:smooth}
+body{
+  font-family:var(--font-display);
+  background:
+    radial-gradient(1200px 500px at 100% -10%, rgba(249,185,51,.10), transparent 60%),
+    radial-gradient(900px 400px at -10% 0%, rgba(44,42,117,.06), transparent 55%),
+    var(--gray-50);
+  color:var(--gray-700);
+  letter-spacing:-.1px;
+  min-height:100vh;
+  padding-bottom:80px;
+}
+
+/* ═══════ TOPBAR (matches brand reference) ═══════ */
+.topbar{background:var(--topbar);color:rgba(255,255,255,.6);font-size:11.5px;padding:8px 0;letter-spacing:.4px}
+.topbar .container{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px}
+.topbar .stamp{color:rgba(255,255,255,.42);font-family:var(--font-mono);text-transform:uppercase}
+.topbar .stamp b{color:var(--gold)}
+
+.container{max-width:1080px;margin:0 auto;padding:0 24px}
+
+/* ═══════ HERO ═══════ */
+.hero{padding:52px 0 34px}
+.hero-top{display:flex;justify-content:space-between;align-items:flex-end;gap:32px;flex-wrap:wrap}
+.eyebrow{display:inline-flex;align-items:center;gap:8px;font-size:11.5px;font-weight:700;letter-spacing:1.4px;text-transform:uppercase;color:var(--gold-strong);background:var(--gold-soft);padding:6px 12px;border-radius:100px;margin-bottom:16px}
+.eyebrow::before{content:'';width:6px;height:6px;border-radius:50%;background:var(--gold-strong)}
+h1{font-size:clamp(28px,4vw,40px);font-weight:800;color:var(--ink);line-height:1.12;letter-spacing:-1px;max-width:640px}
+.sub{margin-top:12px;font-size:15px;color:var(--gray-500);max-width:520px;line-height:1.55}
+
+/* Certification-seal progress dial — the signature element */
+.seal-wrap{display:flex;flex-direction:column;align-items:center;flex-shrink:0}
+.seal{position:relative;width:132px;height:132px}
+.seal svg{transform:rotate(-90deg)}
+.seal-track{fill:none;stroke:var(--gray-100);stroke-width:9}
+.seal-fill{fill:none;stroke:url(#sealGrad);stroke-width:9;stroke-linecap:round;transition:stroke-dashoffset .5s cubic-bezier(.4,0,.2,1)}
+.seal-center{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center}
+.seal-pct{font-family:var(--font-mono);font-weight:700;font-size:26px;color:var(--ink)}
+.seal-label{font-size:9px;letter-spacing:1px;text-transform:uppercase;color:var(--gray-500);margin-top:1px}
+.seal-caption{margin-top:10px;font-size:11px;font-weight:600;letter-spacing:.5px;text-transform:uppercase;color:var(--gray-500)}
+.seal-caption.ready{color:var(--done)}
+
+/* ═══════ SUMMARY STRIP ═══════ */
+.strip{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--gray-100);border:1px solid var(--gray-100);border-radius:var(--radius);overflow:hidden;margin-bottom:40px}
+.strip-cell{background:var(--white);padding:16px 20px}
+.strip-num{font-family:var(--font-mono);font-size:22px;font-weight:700;color:var(--ink)}
+.strip-label{font-size:11.5px;color:var(--gray-500);margin-top:2px}
+
+/* ═══════ PHASES ═══════ */
+.phase{margin-bottom:28px;background:var(--white);border:1px solid var(--gray-100);border-radius:14px;overflow:hidden}
+.phase-head{display:flex;align-items:center;gap:14px;padding:20px 22px;border-bottom:1px solid var(--gray-100);cursor:pointer;user-select:none}
+.phase-num{font-family:var(--font-mono);font-weight:700;font-size:13px;color:var(--white);background:var(--ink);width:28px;height:28px;border-radius:8px;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.phase-title{font-weight:700;font-size:16px;color:var(--ink);flex-grow:1}
+.phase-sub{font-size:12.5px;color:var(--gray-500);margin-top:2px;font-weight:400}
+.phase-progress{font-family:var(--font-mono);font-size:12px;color:var(--gray-500);flex-shrink:0}
+.phase-bar-track{width:64px;height:5px;border-radius:3px;background:var(--gray-100);overflow:hidden;flex-shrink:0}
+.phase-bar-fill{height:100%;background:linear-gradient(90deg,var(--gold-strong),var(--gold));border-radius:3px;transition:width .4s ease}
+.chevron{width:9px;height:9px;border-right:2px solid var(--gray-300);border-bottom:2px solid var(--gray-300);transform:rotate(45deg);transition:transform .25s ease;flex-shrink:0}
+.phase.collapsed .chevron{transform:rotate(-45deg)}
+.phase.collapsed .task-list{max-height:0;padding-top:0;padding-bottom:0}
+
+.task-list{list-style:none;max-height:800px;overflow:hidden;transition:max-height .35s ease}
+.task{display:flex;align-items:flex-start;gap:13px;padding:14px 22px;border-top:1px solid var(--gray-50)}
+.task:first-child{border-top:none}
+.check{width:20px;height:20px;border-radius:6px;border:1.5px solid var(--gray-300);flex-shrink:0;margin-top:1px;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:.15s ease;background:var(--white)}
+.check:hover{border-color:var(--ink3)}
+.check svg{width:12px;height:12px;opacity:0;transform:scale(.6);transition:.15s ease}
+.task.done .check{background:var(--done);border-color:var(--done)}
+.task.done .check svg{opacity:1;transform:scale(1)}
+.task-body{flex-grow:1}
+.task-text{font-size:14px;color:var(--gray-900);line-height:1.5;cursor:pointer}
+.task.done .task-text{color:var(--gray-500);text-decoration:line-through;text-decoration-color:var(--gray-300)}
+.task-meta{display:flex;gap:8px;margin-top:6px;flex-wrap:wrap}
+.tag{font-size:10px;font-weight:700;letter-spacing:.4px;text-transform:uppercase;padding:3px 8px;border-radius:100px}
+.tag.owner-suresh{background:#eef0fc;color:var(--ink)}
+.tag.owner-client{background:var(--gold-soft);color:var(--gold-strong)}
+.tag.blocker{background:#fdeaea;color:#c94141}
+
+/* ═══════ FOOTER NOTE ═══════ */
+.note{margin-top:36px;padding:18px 22px;border-radius:12px;background:var(--ink);color:rgba(255,255,255,.85);font-size:13px;line-height:1.6;display:flex;gap:14px;align-items:flex-start}
+.note b{color:var(--gold)}
+.note-icon{width:30px;height:30px;border-radius:8px;background:rgba(255,255,255,.1);display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:15px}
+
+@media (max-width:640px){
+  .hero-top{flex-direction:column;align-items:flex-start}
+  .strip{grid-template-columns:1fr 1fr}
+  .phase-head{flex-wrap:wrap}
+  .phase-bar-track{display:none}
+}
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <div class="container">
+    <span class="stamp">Fiverr Engagement · <b>Anantha E / Traibcert Ltd</b></span>
+    <span class="stamp">Custom Offer <b>#81,306.22</b> · 30-day clock started Aug 14</span>
+  </div>
+</div>
+
+<div class="container">
+  <div class="hero">
+    <div class="hero-top">
+      <div>
+        <div class="eyebrow">Pre-Milestone 1</div>
+        <h1>Readiness plan before we touch a single component.</h1>
+        <p class="sub">Everything below needs to be locked, confirmed, or handed over by the client before Milestone 1 (Project Setup + Design System + Core Pages) formally starts.</p>
+      </div>
+      <div class="seal-wrap">
+        <div class="seal">
+          <svg width="132" height="132" viewBox="0 0 132 132">
+            <defs>
+              <linearGradient id="sealGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stop-color="#c99327"/>
+                <stop offset="100%" stop-color="#f9b933"/>
+              </linearGradient>
+            </defs>
+            <circle class="seal-track" cx="66" cy="66" r="56"/>
+            <circle id="sealFill" class="seal-fill" cx="66" cy="66" r="56" stroke-dasharray="351.86" stroke-dashoffset="351.86"/>
+          </svg>
+          <div class="seal-center">
+            <div class="seal-pct" id="pctText">0%</div>
+            <div class="seal-label">Ready</div>
+          </div>
+        </div>
+        <div class="seal-caption" id="sealCaption">Not started</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="strip">
+    <div class="strip-cell"><div class="strip-num" id="statDone">0/16</div><div class="strip-label">Tasks complete</div></div>
+    <div class="strip-cell"><div class="strip-num">76</div><div class="strip-label">Pages in nav doc</div></div>
+    <div class="strip-cell"><div class="strip-num">81</div><div class="strip-label">Pages in paid scope</div></div>
+    <div class="strip-cell"><div class="strip-num" style="color:#c94141">5</div><div class="strip-label">Page gap unresolved</div></div>
+  </div>
+
+  <!-- PHASE 1 -->
+  <div class="phase" data-phase>
+    <div class="phase-head" data-toggle>
+      <div class="phase-num">1</div>
+      <div style="flex-grow:1">
+        <div class="phase-title">Scope Reconciliation</div>
+        <div class="phase-sub">76 vs 81 pages has to be closed before anything is billed against Milestone 1</div>
+      </div>
+      <div class="phase-progress"><span data-count>0/4</span></div>
+      <div class="phase-bar-track"><div class="phase-bar-fill" data-bar style="width:0%"></div></div>
+      <div class="chevron"></div>
+    </div>
+    <ul class="task-list">
+      <li class="task"><div class="check" data-check><svg viewBox="0 0 24 24" fill="none"><path d="M5 13l4 4L19 7" stroke="white" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+        <div class="task-body"><div class="task-text" data-text>Get written confirmation from Anantha on where the missing 5 pages come from (new Industries entries, extra ISO standards, or a scope trim to 76)</div>
+          <div class="task-meta"><span class="tag owner-client">Client</span><span class="tag blocker">Blocker</span></div></div></li>
+      <li class="task"><div class="check" data-check><svg viewBox="0 0 24 24" fill="none"><path d="M5 13l4 4L19 7" stroke="white" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+        <div class="task-body"><div class="task-text" data-text>Update the milestone page-count line item once the final number is confirmed</div>
+          <div class="task-meta"><span class="tag owner-suresh">You</span></div></div></li>
+      <li class="task"><div class="check" data-check><svg viewBox="0 0 24 24" fill="none"><path d="M5 13l4 4L19 7" stroke="white" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+        <div class="task-body"><div class="task-text" data-text>Re-share the corrected page count summary back to Anantha for sign-off in writing</div>
+          <div class="task-meta"><span class="tag owner-suresh">You</span></div></div></li>
+      <li class="task"><div class="check" data-check><svg viewBox="0 0 24 24" fill="none"><path d="M5 13l4 4L19 7" stroke="white" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+        <div class="task-body"><div class="task-text" data-text>Confirm whether the Fiverr custom offer needs to be amended/re-sent to match final scope</div>
+          <div class="task-meta"><span class="tag owner-suresh">You</span></div></div></li>
+    </ul>
+  </div>
+
+  <!-- PHASE 2 -->
+  <div class="phase" data-phase>
+    <div class="phase-head" data-toggle>
+      <div class="phase-num">2</div>
+      <div style="flex-grow:1">
+        <div class="phase-title">IA &amp; Design Lock-off</div>
+        <div class="phase-sub">Navigation Sub-Flow v4 + header/footer HTML become the dev contract of truth</div>
+      </div>
+      <div class="phase-progress"><span data-count>0/4</span></div>
+      <div class="phase-bar-track"><div class="phase-bar-fill" data-bar style="width:0%"></div></div>
+      <div class="chevron"></div>
+    </div>
+    <ul class="task-list">
+      <li class="task"><div class="check" data-check><svg viewBox="0 0 24 24" fill="none"><path d="M5 13l4 4L19 7" stroke="white" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+        <div class="task-body"><div class="task-text" data-text>Client formally approves Navigation Sub-Flow v4 as final (not just "looks good")</div>
+          <div class="task-meta"><span class="tag owner-client">Client</span></div></div></li>
+      <li class="task"><div class="check" data-check><svg viewBox="0 0 24 24" fill="none"><path d="M5 13l4 4L19 7" stroke="white" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+        <div class="task-body"><div class="task-text" data-text>Cross-check header/footer HTML against nav doc labels + URLs 1:1, flag any mismatches</div>
+          <div class="task-meta"><span class="tag owner-suresh">You</span></div></div></li>
+      <li class="task"><div class="check" data-check><svg viewBox="0 0 24 24" fill="none"><path d="M5 13l4 4L19 7" stroke="white" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+        <div class="task-body"><div class="task-text" data-text>Confirm ISO 9001:2026 featured-tile copy is final campaign content, not placeholder</div>
+          <div class="task-meta"><span class="tag owner-client">Client</span></div></div></li>
+      <li class="task"><div class="check" data-check><svg viewBox="0 0 24 24" fill="none"><path d="M5 13l4 4L19 7" stroke="white" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+        <div class="task-body"><div class="task-text" data-text>Client confirms the 301 redirect map (old PHP URLs → new structure) is complete and correct</div>
+          <div class="task-meta"><span class="tag owner-client">Client</span></div></div></li>
+    </ul>
+  </div>
+
+  <!-- PHASE 3 -->
+  <div class="phase" data-phase>
+    <div class="phase-head" data-toggle>
+      <div class="phase-num">3</div>
+      <div style="flex-grow:1">
+        <div class="phase-title">Access &amp; Assets Handover</div>
+        <div class="phase-sub">Nothing in Milestone 1 can start cleanly without these in hand</div>
+      </div>
+      <div class="phase-progress"><span data-count>0/6</span></div>
+      <div class="phase-bar-track"><div class="phase-bar-fill" data-bar style="width:0%"></div></div>
+      <div class="chevron"></div>
+    </div>
+    <ul class="task-list">
+      <li class="task"><div class="check" data-check><svg viewBox="0 0 24 24" fill="none"><path d="M5 13l4 4L19 7" stroke="white" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+        <div class="task-body"><div class="task-text" data-text>Zoho Bigin API credentials for the enquiry form integration</div>
+          <div class="task-meta"><span class="tag owner-client">Client</span></div></div></li>
+      <li class="task"><div class="check" data-check><svg viewBox="0 0 24 24" fill="none"><path d="M5 13l4 4L19 7" stroke="white" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+        <div class="task-body"><div class="task-text" data-text>Google Analytics / Tag Manager access for tracking setup</div>
+          <div class="task-meta"><span class="tag owner-client">Client</span></div></div></li>
+      <li class="task"><div class="check" data-check><svg viewBox="0 0 24 24" fill="none"><path d="M5 13l4 4L19 7" stroke="white" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+        <div class="task-body"><div class="task-text" data-text>WhatsApp integration details (Business API or click-to-chat number)</div>
+          <div class="task-meta"><span class="tag owner-client">Client</span></div></div></li>
+      <li class="task"><div class="check" data-check><svg viewBox="0 0 24 24" fill="none"><path d="M5 13l4 4L19 7" stroke="white" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+        <div class="task-body"><div class="task-text" data-text>E-Learning Academy handoff spec (academy.traibcert.org.uk link behaviour, SSO if any)</div>
+          <div class="task-meta"><span class="tag owner-client">Client</span></div></div></li>
+      <li class="task"><div class="check" data-check><svg viewBox="0 0 24 24" fill="none"><path d="M5 13l4 4L19 7" stroke="white" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+        <div class="task-body"><div class="task-text" data-text>Domain/hosting/DNS access (or a clear go-live handover plan) for traibcert.org.uk</div>
+          <div class="task-meta"><span class="tag owner-client">Client</span></div></div></li>
+      <li class="task"><div class="check" data-check><svg viewBox="0 0 24 24" fill="none"><path d="M5 13l4 4L19 7" stroke="white" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+        <div class="task-body"><div class="task-text" data-text>High-res logo files, brand assets, and page-by-page content (or a content delivery schedule) for all pages</div>
+          <div class="task-meta"><span class="tag owner-client">Client</span><span class="tag blocker">Blocker</span></div></div></li>
+    </ul>
+  </div>
+
+  <!-- PHASE 4 -->
+  <div class="phase" data-phase>
+    <div class="phase-head" data-toggle>
+      <div class="phase-num">4</div>
+      <div style="flex-grow:1">
+        <div class="phase-title">Commercial &amp; Kickoff</div>
+        <div class="phase-sub">The paperwork that actually starts the 30-day clock for real</div>
+      </div>
+      <div class="phase-progress"><span data-count>0/2</span></div>
+      <div class="phase-bar-track"><div class="phase-bar-fill" data-bar style="width:0%"></div></div>
+      <div class="chevron"></div>
+    </div>
+    <ul class="task-list">
+      <li class="task"><div class="check" data-check><svg viewBox="0 0 24 24" fill="none"><path d="M5 13l4 4L19 7" stroke="white" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+        <div class="task-body"><div class="task-text" data-text>Custom offer formally accepted on Fiverr (order live, not just "we'll approve tomorrow")</div>
+          <div class="task-meta"><span class="tag owner-client">Client</span><span class="tag blocker">Blocker</span></div></div></li>
+      <li class="task"><div class="check" data-check><svg viewBox="0 0 24 24" fill="none"><path d="M5 13l4 4L19 7" stroke="white" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+        <div class="task-body"><div class="task-text" data-text>Confirm actual Milestone 1 start date and revised delivery date, since days have already passed since the original 30-day quote</div>
+          <div class="task-meta"><span class="tag owner-suresh">You</span></div></div></li>
+    </ul>
+  </div>
+
+  <div class="note">
+    <div class="note-icon">⚠</div>
+    <div><b>Nothing here should block a friendly reply</b> — but treat it as your internal gate before you write a line of code. Milestone 1 is billed as "Project Setup + Design System + Core Pages," so once you start, the 7-day clock on that milestone is running. Lock scope and access first, then start.</div>
+  </div>
+</div>
+
+<script>
+const phases = document.querySelectorAll('[data-phase]');
+const allChecks = document.querySelectorAll('[data-check]');
+const totalTasks = allChecks.length;
+
+function updateSeal(){
+  const done = document.querySelectorAll('.task.done').length;
+  const pct = Math.round((done/totalTasks)*100);
+  const circumference = 351.86;
+  const offset = circumference - (pct/100)*circumference;
+  document.getElementById('sealFill').style.strokeDashoffset = offset;
+  document.getElementById('pctText').textContent = pct + '%';
+  document.getElementById('statDone').textContent = done + '/' + totalTasks;
+  const caption = document.getElementById('sealCaption');
+  if(pct === 0){ caption.textContent = 'Not started'; caption.className='seal-caption'; }
+  else if(pct < 100){ caption.textContent = 'In progress'; caption.className='seal-caption'; }
+  else { caption.textContent = 'Ready to start M1'; caption.className='seal-caption ready'; }
+}
+
+function updatePhase(phase){
+  const tasks = phase.querySelectorAll('.task');
+  const done = phase.querySelectorAll('.task.done').length;
+  phase.querySelector('[data-count]').textContent = done + '/' + tasks.length;
+  phase.querySelector('[data-bar]').style.width = (done/tasks.length*100) + '%';
+}
+
+allChecks.forEach(check=>{
+  const task = check.closest('.task');
+  const text = task.querySelector('[data-text]');
+  const toggle = ()=>{
+    task.classList.toggle('done');
+    updatePhase(task.closest('[data-phase]'));
+    updateSeal();
+  };
+  check.addEventListener('click', toggle);
+  text.addEventListener('click', toggle);
+});
+
+document.querySelectorAll('[data-toggle]').forEach(head=>{
+  head.addEventListener('click', (e)=>{
+    if(e.target.closest('[data-check]')) return;
+    head.closest('.phase').classList.toggle('collapsed');
+  });
+});
+
+phases.forEach(updatePhase);
+updateSeal();
+</script>
+</body>
+</html>
