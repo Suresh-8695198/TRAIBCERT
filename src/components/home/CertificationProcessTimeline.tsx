@@ -39,8 +39,8 @@ const tabs: ProcessTab[] = [
 ];
 
 export const CertificationProcessTimeline: React.FC = () => {
-  const [activeTabId, setActiveTabId] = useState('implementation');
-  const activeTab = tabs.find(t => t.id === activeTabId) || tabs[1];
+  const [activeTabId, setActiveTabId] = useState('get-started');
+  const activeTab = tabs.find(t => t.id === activeTabId) || tabs[0];
 
   return (
     <section

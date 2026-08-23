@@ -210,6 +210,7 @@ export const ExactIndustriesSection: React.FC = () => {
 
           {/* Right Side: Industrial Background Visual View Space */}
           <div
+            className="industry-bg-spacer"
             style={{
               padding: '64px 48px',
               position: 'relative',

@@ -1026,9 +1026,9 @@ body.mobile-drawer-active .whatsapp-btn {
 @media (max-width: 640px) {
   .inspection-image-container {
     height: auto !important;
-    display: grid !important;
-    grid-template-columns: 1fr 1fr !important;
-    gap: 12px !important;
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 16px !important;
   }
   .inspection-accent-bar {
     display: none !important; /* Hide left line on mobile */
@@ -1040,15 +1040,144 @@ body.mobile-drawer-active .whatsapp-btn {
     top: auto !important;
     bottom: auto !important;
     width: 100% !important;
-    height: 180px !important;
+    height: 220px !important;
     border-radius: 12px !important;
     transform: none !important;
   }
-  .inspection-card-1 {
-    grid-column: span 2 !important; /* Spans across 2 columns */
-    height: 220px !important;
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   INDUSTRY SECTION MOBILE SPACER RESPONSIVENESS OVERRIDES
+═══════════════════════════════════════════════════════════════ */
+@media (max-width: 768px) {
+  #industry {
+    background-attachment: scroll !important;
+  }
+  .industry-bg-spacer {
+    display: none !important;
+    height: 0 !important;
+    min-height: 0 !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    overflow: hidden !important;
   }
 }
+
+/* ═══════════════════════════════════════════════════════════════
+   HONEYCOMB BEHEIVE STAGGERED HEXAGONAL GRID SYSTEM
+═══════════════════════════════════════════════════════════════ */
+.honeycomb-grid {
+  display: grid;
+  transition: all 0.35s ease;
+}
+
+/* Interlocking stagger on desktop (4 columns) */
+@media (min-width: 1200px) {
+  .honeycomb-grid {
+    grid-template-columns: repeat(4, 1fr) !important;
+    column-gap: -28px !important; /* Pull columns horizontally close */
+    row-gap: 20px !important;
+    padding-bottom: 120px !important; /* Keep bottom shifted cards from clipping */
+  }
+  .honeycomb-grid > * {
+    margin-left: -16px !important;
+    margin-right: -16px !important;
+    transition: transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1), filter 0.3s ease !important;
+  }
+  /* Shift columns 2 and 4 down by exactly half a card height (110px) to interlock pointed sides */
+  .honeycomb-grid > *:nth-child(4n+2),
+  .honeycomb-grid > *:nth-child(4n+4) {
+    transform: translateY(110px) !important;
+  }
+  .honeycomb-grid > *:nth-child(4n+2):hover,
+  .honeycomb-grid > *:nth-child(4n+4):hover {
+    transform: translateY(105px) scale(1.05) !important;
+  }
+}
+
+/* Interlocking stagger on medium screens (3 columns) */
+@media (min-width: 769px) and (max-width: 1199px) {
+  .honeycomb-grid {
+    grid-template-columns: repeat(3, 1fr) !important;
+    column-gap: -24px !important;
+    row-gap: 20px !important;
+    padding-bottom: 120px !important;
+  }
+  .honeycomb-grid > * {
+    margin-left: -12px !important;
+    margin-right: -12px !important;
+    transition: transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1), filter 0.3s ease !important;
+  }
+  /* Shift column 2 down by 110px */
+  .honeycomb-grid > *:nth-child(3n+2) {
+    transform: translateY(110px) !important;
+  }
+  .honeycomb-grid > *:nth-child(3n+2):hover {
+    transform: translateY(105px) scale(1.05) !important;
+  }
+}
+
+/* Smooth swipe-snapping horizontal carousel on mobile and tablet screens (<= 768px) */
+@media (max-width: 768px) {
+  .honeycomb-grid {
+    display: flex !important;
+    flex-direction: row !important;
+    overflow-x: auto !important;
+    scroll-snap-type: x mandatory !important;
+    scroll-behavior: smooth !important;
+    gap: 16px !important;
+    padding: 24px 16px 40px !important;
+    margin-bottom: 24px !important;
+    -webkit-overflow-scrolling: touch !important;
+    scrollbar-width: none !important; /* Firefox hide */
+  }
+  /* Webkit hide scrollbar */
+  .honeycomb-grid::-webkit-scrollbar {
+    display: none !important;
+  }
+  .honeycomb-grid > * {
+    flex-shrink: 0 !important;
+    width: 250px !important;
+    margin: 0 !important;
+    transform: none !important;
+    scroll-snap-align: center !important;
+    transition: transform 0.25s ease !important;
+  }
+}
+
+/* Display navigation arrows and dots carousel controller on mobile/tablet viewports only */
+@media (max-width: 768px) {
+  .carousel-nav-controls {
+    display: flex !important;
+  }
+}
+
+/* Bulletproof CSS Classes to prevent horizontal text overflows inside sloped hexagons */
+.honeycomb-grid-card-content {
+  position: absolute !important;
+  inset: 0 !important;
+  width: 100% !important;
+  height: 100% !important;
+  max-width: 100% !important;
+  box-sizing: border-box !important;
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: center !important;
+  justify-content: center !important;
+  overflow: hidden !important;
+}
+
+.honeycomb-grid-card-text {
+  display: block !important;
+  width: 100% !important;
+  max-width: 100% !important;
+  white-space: normal !important;
+  word-wrap: break-word !important;
+  overflow-wrap: break-word !important;
+  word-break: break-word !important;
+}
+
+
 
 
 

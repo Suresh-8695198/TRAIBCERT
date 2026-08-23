@@ -5,52 +5,56 @@ import Link from 'next/link';
 import { 
   ShieldCheck, 
   ArrowRight, 
+  ArrowLeft,
   CheckCircle2, 
-  Heart, 
+  Award,
+  Smile,
   Leaf, 
   HeartPulse, 
   Utensils, 
-  Cpu, 
+  Settings,
   Workflow, 
-  Fingerprint, 
+  Lock, 
   ShieldAlert, 
-  Sparkles, 
-  Zap, 
-  Activity, 
-  Droplet, 
+  Users, 
+  Power, 
+  Stethoscope, 
+  Flame, 
   GraduationCap, 
   Building,
+  Brain,
   TrendingUp,
   Target,
-  Users,
   FileText,
   UserCheck,
   Search,
-  RotateCcw
+  RotateCcw,
+  Fingerprint,
+  QrCode
 } from 'lucide-react';
 import { certificationsData } from '@/config/certifications';
 import { CertVerifyLookup } from '@/components/ui/CertVerifyLookup';
 
 // Fully modernized, high-fidelity icon choices for each certification
 const iconMap: { [key: string]: any } = {
-  'iso-9001': CheckCircle2,         // Quality
-  'iso-10002': Heart,                // Customer Satisfaction
-  'iso-14001': Leaf,                 // Environmental
-  'iso-45001': HeartPulse,           // Health & Safety
-  'iso-22000': Utensils,             // Food Safety
-  'iso-20000-1': Cpu,                // IT Service
-  'iso-22301': Workflow,             // Business Continuity
-  'iso-27001': Fingerprint,          // Information Security / Cybersecurity
-  'iso-31000': ShieldAlert,          // Risk Management
-  'iso-26000': Sparkles,             // Social Responsibility
-  'iso-50001': Zap,                  // Energy
-  'iso-13485': Activity,             // Medical Devices
-  'iso-29001': Droplet,              // Oil & Gas
-  'iso-21001': GraduationCap,        // Education
-  'iso-41001': Building,             // Facilities
+  'iso-9001': Award,                 // Quality: Award medal
+  'iso-10002': Smile,                // Customer Satisfaction: Smile badge
+  'iso-14001': Leaf,                 // Environmental: Leaf
+  'iso-45001': HeartPulse,           // Health & Safety: Heart pulse
+  'iso-22000': Utensils,             // Food Safety: Utensils
+  'iso-20000-1': Settings,            // IT Service: Settings gear cog
+  'iso-22301': Workflow,             // Business Continuity: Workflow diagram
+  'iso-27001': Lock,                 // Information Security: Lock padlock
+  'iso-31000': ShieldAlert,          // Risk Management: Shield alert warning
+  'iso-26000': Users,                // Social Responsibility: Users community
+  'iso-50001': Power,                // Energy: Power power button/zap
+  'iso-13485': Stethoscope,          // Medical Devices: Stethoscope
+  'iso-29001': Flame,                // Oil & Gas: Gas flame burner
+  'iso-21001': GraduationCap,        // Education: Graduation cap
+  'iso-41001': Building,             // Facilities: Building/Office
   'cyber-essentials': ShieldCheck,   // Cyber Essentials
   'cyber-essentials-plus': ShieldCheck, // Cyber Essentials Plus
-  'iso-42001': Cpu                   // Artificial Intelligence
+  'iso-42001': Brain                 // Artificial Intelligence: Brain network
 };
 
 // Exact titles for the certification portfolio matching your screenshot
@@ -77,23 +81,28 @@ const certTitlesMap: { [key: string]: string } = {
 
 const allowedSlugs = Object.keys(certTitlesMap);
 
-// Color config array for gradient-based wave elements
+// Color config array for gradient-based wave elements (Exactly matching the 10 infographic colors spectrum)
 const cardColors = [
-  { start: '#1d4ed8', end: '#2563eb', text: '#2563eb' }, // Blue
-  { start: '#6d28d9', end: '#7c3aed', text: '#7c3aed' }, // Purple
-  { start: '#059669', end: '#10b981', text: '#10b981' }, // Green
-  { start: '#dc2626', end: '#ef4444', text: '#ef4444' }, // Red
-  { start: '#0d9488', end: '#14b8a6', text: '#14b8a6' }, // Teal
-  { start: '#d97706', end: '#f59e0b', text: '#f59e0b' }, // Yellow/Gold
-  { start: '#ea580c', end: '#f97316', text: '#f97316' }, // Orange
-  { start: '#1e3a8a', end: '#3b82f6', text: '#3b82f6' }, // Indigo
-  { start: '#4338ca', end: '#6366f1', text: '#6366f1' }, // Blue-Indigo
-  { start: '#7e22ce', end: '#a855f7', text: '#a855f7' }, // Lavender
-  { start: '#be185d', end: '#ec4899', text: '#ec4899' }  // Pink
+  { start: '#5c2e91', end: '#6d36ad', text: '#5c2e91' }, // 01: Deep Purple
+  { start: '#9d2a8c', end: '#b0339d', text: '#9d2a8c' }, // 02: Plum/Dark Pink
+  { start: '#d91a5f', end: '#eb236d', text: '#d91a5f' }, // 03: Magenta
+  { start: '#e95420', end: '#f06637', text: '#e95420' }, // 04: Orange
+  { start: '#fbb03b', end: '#fbc158', text: '#c99327' }, // 05: Yellow/Amber
+  { start: '#8cc63f', end: '#9cd64f', text: '#7fae3a' }, // 06: Lime Green
+  { start: '#00a99d', end: '#0bc0b3', text: '#008c82' }, // 07: Turquoise
+  { start: '#29abe2', end: '#3ebcf2', text: '#1b92c4' }, // 08: Sky Blue
+  { start: '#0071bc', end: '#1a88d4', text: '#0071bc' }, // 09: Medium Blue
+  { start: '#2e3192', end: '#3d41ab', text: '#2e3192' }  // 10: Deep Navy/Violet Blue
 ];
 
 export default function CertificationLandingPage() {
   const [hoveredSlug, setHoveredSlug] = useState<string | null>(null);
+  const [hoveredBenefitIdx, setHoveredBenefitIdx] = useState<number | null>(null);
+
+  // Filter certifications to only show the standard set from your portfolio (defined first for scope availability)
+  const portfolioCerts = certificationsData.filter(cert => 
+    allowedSlugs.includes(cert.slug)
+  );
 
   // Verification Form States
   const [clientCode, setClientCode] = useState('');
@@ -103,10 +112,64 @@ export default function CertificationLandingPage() {
   const [result, setResult] = useState<any | null>(null);
   const [searched, setSearched] = useState(false);
 
-  // Filter certifications to only show the standard set from your portfolio
-  const portfolioCerts = certificationsData.filter(cert => 
-    allowedSlugs.includes(cert.slug)
-  );
+  // Active slide index for indicators & scroll swiping tracking
+  const [activeSlideIndex, setActiveSlideIndex] = useState(0);
+
+  const handleScroll = () => {
+    const container = carouselRef.current;
+    if (!container) return;
+    const scrollPosition = container.scrollLeft;
+    // card width (250px) + gap (16px) = 266px
+    const index = Math.round(scrollPosition / 266);
+    // Boundary checks
+    if (index >= 0 && index < portfolioCerts.length) {
+      setActiveSlideIndex(index);
+    }
+  };
+
+  const scrollCarousel = (direction: 'prev' | 'next') => {
+    const container = carouselRef.current;
+    if (!container) return;
+    const scrollOffset = direction === 'prev' ? -266 : 266;
+    container.scrollBy({ left: scrollOffset, behavior: 'smooth' });
+  };
+
+  const scrollToSlide = (index: number) => {
+    const container = carouselRef.current;
+    if (!container) return;
+    container.scrollTo({ left: index * 266, behavior: 'smooth' });
+  };
+
+  // Carousel autoplay reference & hook for mobile viewports
+  const carouselRef = React.useRef<HTMLDivElement>(null);
+
+  React.useEffect(() => {
+    const container = carouselRef.current;
+    if (!container) return;
+
+    let intervalId: any;
+
+    const startAutoPlay = () => {
+      intervalId = setInterval(() => {
+        // Only run horizontal auto scroll on mobile and tablet screens
+        if (window.innerWidth > 768) return;
+
+        const maxScrollLeft = container.scrollWidth - container.clientWidth;
+        if (container.scrollLeft >= maxScrollLeft - 8) {
+          container.scrollTo({ left: 0, behavior: 'smooth' });
+        } else {
+          // Scroll by card width (250px) + gap (16px) = 266px
+          container.scrollBy({ left: 266, behavior: 'smooth' });
+        }
+      }, 3200);
+    };
+
+    startAutoPlay();
+
+    return () => {
+      if (intervalId) clearInterval(intervalId);
+    };
+  }, []);
 
   const handleVerifySearch = (e: React.FormEvent) => {
     e.preventDefault();
@@ -176,7 +239,7 @@ export default function CertificationLandingPage() {
       
       {/* Modernized Dark Overlay Hero Banner referencing Home design */}
       <section style={{
-        backgroundImage: "linear-gradient(rgba(10, 22, 40, 0.85), rgba(15, 24, 42, 0.95)), url('/assets/images/Home/hero_bg.png')",
+        backgroundImage: "url('/assets/images/Certification/cert_hero_banner.png')",
         backgroundSize: 'cover',
         backgroundPosition: 'center',
         padding: '64px 0 80px',
@@ -198,7 +261,8 @@ export default function CertificationLandingPage() {
             marginBottom: '20px', 
             letterSpacing: '0.5px', 
             textTransform: 'uppercase',
-            fontFamily: 'var(--font-serif)'
+            fontFamily: 'var(--font-sans)',
+            maxWidth: '900px'
           }}>
             Our Certification Portfolio
           </h1>
@@ -208,8 +272,8 @@ export default function CertificationLandingPage() {
             color: 'rgba(255, 255, 255, 0.9)', 
             lineHeight: 1.75, 
             margin: 0, 
-            textAlign: 'justify',
-            maxWidth: '920px'
+            textAlign: 'left',
+            maxWidth: '600px'
           }}>
             At TRAIBCERT, we offer certification services to our clients applicable to any type of manufacturing or service industry and is administered in A on-discriminatory manner.Initially, we at TRAIBCERT make a complete understanding of your organizations exact processes and assess how different standards fit into the existing processes. Once certified, we also ensure that the ISO standards are followed rightly through rigorous monitoring and provide training wherever required. Our certification service portfolio includes,
           </p>
@@ -217,24 +281,56 @@ export default function CertificationLandingPage() {
       </section>
 
       {/* Main Grid Content Area */}
-      <section style={{ padding: '64px 0 80px', backgroundColor: '#f8fafc' }}>
+      <section style={{ padding: '64px 0 16px', backgroundColor: '#f8fafc', overflow: 'hidden' }}>
         <div className="container">
 
-          {/* 4-Column Premium Card Grid */}
-          <div style={{ 
-            display: 'grid', 
-            gridTemplateColumns: 'repeat(4, 1fr)', 
-            gap: '24px',
-            marginBottom: '48px'
-          }}>
+          {/* High-Fidelity Responsive Hexagonal Honeycomb Infographic Grid */}
+          <div 
+            ref={carouselRef} 
+            className="honeycomb-grid" 
+            onScroll={handleScroll}
+            style={{ 
+              marginBottom: '24px',
+              padding: '24px 0 16px'
+            }}
+          >
             {portfolioCerts.map((cert, idx) => {
               const IconComponent = iconMap[cert.slug] || CheckCircle2;
               const isHovered = hoveredSlug === cert.slug;
-              const displayTitle = certTitlesMap[cert.slug] || `${cert.code} ${cert.name}`;
+              
+              // Extract standard codes and short names cleanly avoiding duplicates for non-ISO items
+              const fullTitle = certTitlesMap[cert.slug] || `${cert.code} ${cert.name}`;
+              let displayCode = '';
+              let displayName = '';
+              
+              if (fullTitle.startsWith('ISO')) {
+                const parts = fullTitle.split(' ');
+                displayCode = parts.slice(0, 2).join(' ').replace(/:$/, ''); // e.g. "ISO 9001:2015"
+                displayName = parts.slice(2).join(' '); // e.g. "Quality management systems"
+              } else {
+                displayCode = fullTitle; // e.g. "Cyber Essentials"
+                displayName = ''; // Non-ISO cards have a single, clean title code row
+              }
 
               // Get color configuration based on index
               const colorConfig = cardColors[idx % cardColors.length];
               const indexStr = String(idx + 1).padStart(2, '0');
+
+              // Access contrast guidelines for light background segments (like yellow or lime)
+              const isLightBg = colorConfig.start === '#fbb03b' || colorConfig.start === '#8cc63f';
+              const rightBgColor = colorConfig.start;
+              const textColor = isLightBg ? '#1a1854' : '#ffffff';
+              const numberColor = isLightBg ? 'rgba(26, 24, 84, 0.65)' : 'rgba(255, 255, 255, 0.7)';
+
+              // Compute advanced colorful duotone tint fill color for matching outlines
+              const hexToRgb = (hex: string) => {
+                const cleanHex = hex.replace('#', '');
+                const r = parseInt(cleanHex.substring(0, 2), 16);
+                const g = parseInt(cleanHex.substring(2, 4), 16);
+                const b = parseInt(cleanHex.substring(4, 6), 16);
+                return `${r}, ${g}, ${b}`;
+              };
+              const iconFillColor = `rgba(${hexToRgb(rightBgColor)}, 0.22)`;
 
               return (
                 <Link
@@ -243,92 +339,128 @@ export default function CertificationLandingPage() {
                   onMouseEnter={() => setHoveredSlug(cert.slug)}
                   onMouseLeave={() => setHoveredSlug(null)}
                   style={{
-                    backgroundColor: '#ffffff',
-                    borderRadius: '16px',
                     display: 'flex',
-                    flexDirection: 'row',
-                    alignItems: 'stretch',
+                    flexDirection: 'column',
+                    alignItems: 'center',
+                    justifyContent: 'center',
                     textDecoration: 'none',
                     position: 'relative',
-                    overflow: 'hidden',
-                    transition: 'transform 0.25s ease, box-shadow 0.25s ease',
-                    boxShadow: isHovered 
-                      ? '0 20px 25px -5px rgba(0, 0, 0, 0.08), 0 10px 10px -5px rgba(0, 0, 0, 0.04)'
-                      : '0 4px 6px -1px rgba(0, 0, 0, 0.02), 0 2px 4px -1px rgba(0, 0, 0, 0.01)',
-                    border: '1.5px solid #f1f5f9',
-                    transform: isHovered ? 'translateY(-4px)' : 'translateY(0px)',
-                    minHeight: '140px'
+                    width: '100%',
+                    aspectRatio: '1 / 0.95',
+                    filter: isHovered 
+                      ? 'drop-shadow(0 14px 28px rgba(15,23,42,0.18))'
+                      : 'drop-shadow(0 6px 14px rgba(15,23,42,0.08))',
+                    transform: isHovered ? 'scale(1.05) translateY(-5px)' : 'scale(1) translateY(0px)',
+                    transition: 'all 0.35s cubic-bezier(0.34, 1.56, 0.64, 1)',
+                    cursor: 'pointer'
                   }}
                 >
-                  {/* Left panel with SVG organic wave background */}
-                  <div style={{ position: 'relative', width: '70px', flexShrink: 0, zIndex: 1 }}>
-                    <svg viewBox="0 0 70 140" preserveAspectRatio="none" style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', zIndex: -1 }}>
-                      <defs>
-                        <linearGradient id={`grad-${cert.slug}`} x1="0%" y1="0%" x2="0%" y2="100%">
-                          <stop offset="0%" stopColor={colorConfig.start} />
-                          <stop offset="100%" stopColor={colorConfig.end} />
-                        </linearGradient>
-                      </defs>
-                      <path d="M0,0 L48,0 C62,35 42,75 55,140 L0,140 Z" fill={`url(#grad-${cert.slug})`} />
-                    </svg>
+                  {/* High-Fidelity Rounded Hexagon Background inline SVG */}
+                  <svg 
+                    viewBox="0 0 100 86.6" 
+                    style={{ 
+                      position: 'absolute', 
+                      top: 0, 
+                      left: 0, 
+                      width: '100%', 
+                      height: '100%', 
+                      zIndex: 1, 
+                      color: rightBgColor,
+                      transition: 'color 0.25s ease'
+                    }}
+                  >
+                    {/* Main Hexagon Color Fill */}
+                    <path 
+                      d="M28,3 L72,3 A5,5 0 0,1 76.5,5.5 L97,41 A5,5 0 0,1 97,45.6 L76.5,81.1 A5,5 0 0,1 72,83.6 L28,83.6 A5,5 0 0,1 23.5,81.1 L3,45.6 A5,5 0 0,1 3,41 L23.5,5.5 A5,5 0 0,1 28,3 Z" 
+                      fill="currentColor" 
+                    />
+                    {/* Concentric Outlined Hexagon Border representing the Infographic lines */}
+                    <path 
+                      d="M28,3 L72,3 A5,5 0 0,1 76.5,5.5 L97,41 A5,5 0 0,1 97,45.6 L76.5,81.1 A5,5 0 0,1 72,83.6 L28,83.6 A5,5 0 0,1 23.5,81.1 L3,45.6 A5,5 0 0,1 3,41 L23.5,5.5 A5,5 0 0,1 28,3 Z" 
+                      fill="none" 
+                      stroke={isLightBg ? 'rgba(26, 24, 84, 0.4)' : '#ffffff'}
+                      strokeWidth="1.2" 
+                      opacity={isHovered ? 0.75 : 0.25}
+                      transform={isHovered ? 'scale(0.925)' : 'scale(0.94)'}
+                      transformOrigin="50% 50%"
+                      style={{ transition: 'all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1)' }}
+                    />
+                  </svg>
 
-                    {/* Centered Content Wrapper (Index & Icon) relative to the wave boundaries */}
-                    <div style={{
-                      position: 'absolute',
-                      top: 0,
-                      left: 0,
-                      width: '52px',
-                      height: '100%',
-                      display: 'flex',
-                      flexDirection: 'column',
-                      alignItems: 'center',
-                      justifyContent: 'space-between',
-                      padding: '16px 0'
-                    }}>
-                      {/* Card Index */}
-                      <div style={{ color: 'rgba(255,255,255,0.7)', fontSize: '11px', fontWeight: 800, fontFamily: 'var(--font-mono)' }}>
-                        {indexStr}
-                      </div>
-
-                      {/* Prominent, Centered Icon */}
-                      <div style={{ color: '#ffffff', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-                        <IconComponent size={34} strokeWidth={1.6} />
-                      </div>
-
-                      {/* Spacer to align icon perfectly centered */}
-                      <div style={{ height: '11px' }} />
-                    </div>
-                  </div>
-
-                  {/* Right Text Content Panel */}
-                  <div style={{ 
-                    flexGrow: 1, 
-                    padding: '24px 20px', 
-                    display: 'flex', 
-                    flexDirection: 'column', 
-                    justifyContent: 'space-between',
-                    alignItems: 'flex-start'
-                  }}>
+                  {/* Absolute overlaid text/icon container */}
+                  <div
+                    className="honeycomb-grid-card-content"
+                    style={{
+                      zIndex: 2,
+                      padding: '14px 24px 18px', // Squeezed horizontally to prevent sloped edge overflows
+                      color: textColor,
+                      textAlign: 'center'
+                    }}
+                  >
+                    {/* Index / Option Number (avoiding the word 'STEP') */}
                     <div style={{ 
-                      color: '#0f172a', 
-                      fontSize: '13.5px', 
+                      fontSize: '11px', 
                       fontWeight: 800, 
-                      lineHeight: 1.45,
-                      textAlign: 'left'
+                      fontFamily: 'var(--font-mono)',
+                      color: numberColor, 
+                      letterSpacing: '1px',
+                      marginBottom: '2px'
                     }}>
-                      {displayTitle}
+                      {indexStr}
                     </div>
 
-                    {/* Arrow Icon bottom right */}
-                    <div style={{ 
-                      alignSelf: 'flex-end', 
-                      color: colorConfig.text,
+                    {/* Icon inside white circle like in the infographic - optimized sizing to avoid vertical overflow */}
+                    <div style={{
+                      width: '48px',
+                      height: '48px',
+                      borderRadius: '50%',
+                      backgroundColor: '#ffffff',
                       display: 'flex',
                       alignItems: 'center',
-                      transition: 'transform 0.2s ease',
-                      transform: isHovered ? 'translateX(3px)' : 'translateX(0px)'
+                      justifyContent: 'center',
+                      marginBottom: '8px',
+                      boxShadow: '0 4px 10px rgba(0,0,0,0.1)',
+                      transform: isHovered ? 'scale(1.08) rotate(6deg)' : 'scale(1)',
+                      transition: 'transform 0.3s ease'
                     }}>
-                      <ArrowRight size={16} />
+                      <IconComponent size={24} strokeWidth={2.0} fill={iconFillColor} style={{ color: rightBgColor }} />
+                    </div>
+
+                    {/* Standard Title Code */}
+                    <div 
+                      className="honeycomb-grid-card-text"
+                      style={{ 
+                        fontSize: '14.2px', 
+                        fontWeight: 800, 
+                        marginBottom: displayName ? '3px' : '0px',
+                        color: textColor,
+                        fontFamily: 'var(--font-sans)',
+                        letterSpacing: '0.2px',
+                        lineHeight: 1.2,
+                        alignSelf: 'stretch'
+                      }}
+                    >
+                      {displayCode}
+                    </div>
+
+                    {/* Standard Name */}
+                    <div 
+                      className="honeycomb-grid-card-text"
+                      style={{ 
+                        fontSize: '9.8px', // High-fidelity size adjustment to eliminate overflow
+                        fontWeight: 600, 
+                        lineHeight: 1.28,
+                        color: textColor,
+                        opacity: 0.9,
+                        maxHeight: '26px', // Constrain exactly to max 2 lines (12.5px per line)
+                        overflow: 'hidden',
+                        textOverflow: 'ellipsis',
+                        alignSelf: 'stretch',
+                        padding: '0 2px',
+                        fontFamily: 'var(--font-sans)'
+                      }}
+                    >
+                      {displayName}
                     </div>
                   </div>
                 </Link>
@@ -336,24 +468,136 @@ export default function CertificationLandingPage() {
             })}
           </div>
 
-          {/* Bottom Footer Note */}
-          <div style={{ maxWidth: '1080px', margin: '0 auto' }}>
-            <p style={{ fontSize: '14px', color: '#64748b', lineHeight: 1.6, fontStyle: 'italic', margin: 0 }}>
-              Apart from certification services, we also provide auditing services against specifications and standards which can be tailored to suit your organizational requirements based on specifications.
-            </p>
+          {/* Mobile Carousel Navigation Controls (prev/next arrows & indicator dots) */}
+          <div 
+            className="carousel-nav-controls"
+            style={{
+              display: 'none', // Hidden on desktop
+              alignItems: 'center',
+              justifyContent: 'center',
+              gap: '14px',
+              marginTop: '8px',
+              marginBottom: '36px',
+              width: '100%'
+            }}
+          >
+            {/* Prev Arrow Button */}
+            <button
+              onClick={() => scrollCarousel('prev')}
+              aria-label="Previous standard"
+              style={{
+                width: '38px',
+                height: '38px',
+                borderRadius: '50%',
+                backgroundColor: '#ffffff',
+                border: '1px solid #e2e8f0',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                color: '#1e293b',
+                boxShadow: '0 2px 6px rgba(0,0,0,0.06)',
+                cursor: 'pointer',
+                transition: 'all 0.2s ease',
+                padding: 0
+              }}
+            >
+              <ArrowLeft size={16} strokeWidth={2.5} />
+            </button>
+
+            {/* Dots indicators representing each option slide */}
+            <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
+              {portfolioCerts.map((_, dotIdx) => {
+                const isActive = activeSlideIndex === dotIdx;
+                return (
+                  <button
+                    key={dotIdx}
+                    onClick={() => scrollToSlide(dotIdx)}
+                    aria-label={`Go to slide ${dotIdx + 1}`}
+                    style={{
+                      width: isActive ? '20px' : '8px',
+                      height: '8px',
+                      borderRadius: '4px',
+                      backgroundColor: isActive ? '#f9b933' : '#cbd5e1',
+                      border: 'none',
+                      padding: 0,
+                      cursor: 'pointer',
+                      transition: 'all 0.25s cubic-bezier(0.4, 0, 0.2, 1)'
+                    }}
+                  />
+                );
+              })}
+            </div>
+
+            {/* Next Arrow Button */}
+            <button
+              onClick={() => scrollCarousel('next')}
+              aria-label="Next standard"
+              style={{
+                width: '38px',
+                height: '38px',
+                borderRadius: '50%',
+                backgroundColor: '#ffffff',
+                border: '1px solid #e2e8f0',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                color: '#1e293b',
+                boxShadow: '0 2px 6px rgba(0,0,0,0.06)',
+                cursor: 'pointer',
+                transition: 'all 0.2s ease',
+                padding: 0
+              }}
+            >
+              <ArrowRight size={16} strokeWidth={2.5} />
+            </button>
           </div>
 
         </div>
       </section>
 
       {/* ISO Certification & Its Benefits Section — Infographic Design */}
-      <section style={{ backgroundColor: '#f1f5f9', padding: '100px 0 120px', borderTop: '1px solid #e2e8f0', borderBottom: '1px solid #e2e8f0' }}>
+      <section style={{ 
+        background: 'linear-gradient(135deg, #fffcf0 0%, #fdf3d0 100%)', 
+        padding: '56px 0 80px', 
+        borderTop: '1px solid #fcebbd', 
+        borderBottom: '1px solid #fcebbd',
+        position: 'relative',
+        overflow: 'hidden'
+      }}>
+        {/* Creative Indigo 9-Dot Patterns */}
+        <div style={{ position: 'absolute', top: '24px', left: '24px', opacity: 0.35, pointerEvents: 'none' }}>
+          <svg width="40" height="40" viewBox="0 0 60 60" fill="none">
+            <circle cx="10" cy="10" r="3.5" fill="#4f46e5" />
+            <circle cx="30" cy="10" r="3.5" fill="#4f46e5" />
+            <circle cx="50" cy="10" r="3.5" fill="#4f46e5" />
+            <circle cx="10" cy="30" r="3.5" fill="#4f46e5" />
+            <circle cx="30" cy="30" r="3.5" fill="#4f46e5" />
+            <circle cx="50" cy="30" r="3.5" fill="#4f46e5" />
+            <circle cx="10" cy="50" r="3.5" fill="#4f46e5" />
+            <circle cx="30" cy="50" r="3.5" fill="#4f46e5" />
+            <circle cx="50" cy="50" r="3.5" fill="#4f46e5" />
+          </svg>
+        </div>
+        <div style={{ position: 'absolute', bottom: '24px', right: '24px', opacity: 0.35, pointerEvents: 'none' }}>
+          <svg width="40" height="40" viewBox="0 0 60 60" fill="none">
+            <circle cx="10" cy="10" r="3.5" fill="#4f46e5" />
+            <circle cx="30" cy="10" r="3.5" fill="#4f46e5" />
+            <circle cx="50" cy="10" r="3.5" fill="#4f46e5" />
+            <circle cx="10" cy="30" r="3.5" fill="#4f46e5" />
+            <circle cx="30" cy="30" r="3.5" fill="#4f46e5" />
+            <circle cx="50" cy="30" r="3.5" fill="#4f46e5" />
+            <circle cx="10" cy="50" r="3.5" fill="#4f46e5" />
+            <circle cx="30" cy="50" r="3.5" fill="#4f46e5" />
+            <circle cx="50" cy="50" r="3.5" fill="#4f46e5" />
+          </svg>
+        </div>
+
         <div className="container">
           <div style={{ textAlign: 'center', maxWidth: '720px', margin: '0 auto 80px' }}>
-            <h2 style={{ fontFamily: 'var(--font-serif)', fontSize: '32px', fontWeight: 800, color: '#1a1854', marginBottom: '16px' }}>
+            <h2 style={{ fontFamily: 'var(--font-sans)', fontSize: '32px', fontWeight: 800, color: '#1a1854', marginBottom: '16px' }}>
               ISO certification & its Benefits
             </h2>
-            <p style={{ fontSize: '15px', color: '#475569', lineHeight: 1.65 }}>
+            <p style={{ fontFamily: 'var(--font-sans)', fontSize: '15px', color: '#0f172a', lineHeight: 1.65, fontWeight: 500 }}>
               Certification is a series of standards that forms the foundation and framework for an effective management system. Within any ideal and size of business, it is that set of requirements that enable to optimize Process Performance & Organizational Effectiveness. We at TRAIBCERT, demystify the complete ISO certification system to ensure your management systems are at the required level to achieve:
             </p>
           </div>
@@ -367,20 +611,28 @@ export default function CertificationLandingPage() {
           }}>
             {infographicBenefits.map((step, idx) => {
               const stepStr = String(idx + 1).padStart(2, '0');
+              const isHovered = hoveredBenefitIdx === idx;
 
               return (
                 <div
                   key={idx}
+                  onMouseEnter={() => setHoveredBenefitIdx(idx)}
+                  onMouseLeave={() => setHoveredBenefitIdx(null)}
                   style={{
                     backgroundColor: '#ffffff',
                     borderRadius: '24px',
                     padding: '64px 24px 36px',
-                    boxShadow: '0 20px 40px rgba(15,23,42,0.06)',
+                    boxShadow: isHovered 
+                      ? `0 30px 60px rgba(${step.themeColor === '#1e293b' ? '15,23,42' : '26,24,84'}, 0.14)` 
+                      : '0 20px 40px rgba(15,23,42,0.06)',
                     position: 'relative',
                     display: 'flex',
                     flexDirection: 'column',
                     justifyContent: 'space-between',
-                    minHeight: '260px'
+                    minHeight: '260px',
+                    transform: isHovered ? 'translateY(-12px)' : 'translateY(0px)',
+                    transition: 'all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1)',
+                    cursor: 'pointer'
                   }}
                 >
                   {/* Rotated Sticky Note Badge */}
@@ -399,7 +651,8 @@ export default function CertificationLandingPage() {
                     fontWeight: 800,
                     fontSize: '24px',
                     boxShadow: '0 4px 10px rgba(0,0,0,0.15)',
-                    transform: `rotate(${step.rotateDeg})`,
+                    transform: isHovered ? 'rotate(0deg) scale(1.1)' : `rotate(${step.rotateDeg})`,
+                    transition: 'transform 0.35s ease',
                     zIndex: 2
                   }}>
                     {stepStr}
@@ -413,16 +666,19 @@ export default function CertificationLandingPage() {
                       color: step.themeColor, 
                       marginBottom: '14px',
                       letterSpacing: '0.5px',
-                      marginTop: '8px'
+                      marginTop: '8px',
+                      fontFamily: 'var(--font-sans)'
                     }}>
                       {step.title}
                     </h3>
                     <p style={{ 
                       fontSize: '13.5px', 
-                      color: '#64748b', 
+                      color: '#0f172a', 
                       lineHeight: 1.6, 
                       margin: 0,
-                      textAlign: 'left'
+                      textAlign: 'left',
+                      fontFamily: 'var(--font-sans)',
+                      fontWeight: 500
                     }}>
                       {step.desc}
                     </p>
@@ -430,11 +686,12 @@ export default function CertificationLandingPage() {
 
                   {/* Colored Bottom Accent Pill */}
                   <div style={{
-                    width: '50px',
+                    width: isHovered ? '80px' : '50px',
                     height: '6px',
                     borderRadius: '100px',
                     backgroundColor: step.themeColor,
-                    margin: '28px auto 0'
+                    margin: '28px auto 0',
+                    transition: 'width 0.35s ease'
                   }} />
                 </div>
               );
@@ -444,10 +701,44 @@ export default function CertificationLandingPage() {
       </section>
 
       {/* Verify Your Certificate Here Section */}
-      <section style={{ padding: '88px 0', backgroundColor: '#f8fafc', borderTop: '1px solid #e2e8f0' }}>
+      <section style={{ 
+        padding: '88px 0', 
+        backgroundColor: '#ffffff', 
+        borderTop: '1px solid #f1f5f9',
+        position: 'relative',
+        overflow: 'hidden'
+      }}>
+        {/* Creative Gold Yellow 9-Dot Patterns */}
+        <div style={{ position: 'absolute', top: '32px', left: '32px', opacity: 0.35, pointerEvents: 'none' }}>
+          <svg width="40" height="40" viewBox="0 0 60 60" fill="none">
+            <circle cx="10" cy="10" r="3.5" fill="#f9b933" />
+            <circle cx="30" cy="10" r="3.5" fill="#f9b933" />
+            <circle cx="50" cy="10" r="3.5" fill="#f9b933" />
+            <circle cx="10" cy="30" r="3.5" fill="#f9b933" />
+            <circle cx="30" cy="30" r="3.5" fill="#f9b933" />
+            <circle cx="50" cy="30" r="3.5" fill="#f9b933" />
+            <circle cx="10" cy="50" r="3.5" fill="#f9b933" />
+            <circle cx="30" cy="50" r="3.5" fill="#f9b933" />
+            <circle cx="50" cy="50" r="3.5" fill="#f9b933" />
+          </svg>
+        </div>
+        <div style={{ position: 'absolute', bottom: '32px', right: '32px', opacity: 0.35, pointerEvents: 'none' }}>
+          <svg width="40" height="40" viewBox="0 0 60 60" fill="none">
+            <circle cx="10" cy="10" r="3.5" fill="#f9b933" />
+            <circle cx="30" cy="10" r="3.5" fill="#f9b933" />
+            <circle cx="50" cy="10" r="3.5" fill="#f9b933" />
+            <circle cx="10" cy="30" r="3.5" fill="#f9b933" />
+            <circle cx="30" cy="30" r="3.5" fill="#f9b933" />
+            <circle cx="50" cy="30" r="3.5" fill="#f9b933" />
+            <circle cx="10" cy="50" r="3.5" fill="#f9b933" />
+            <circle cx="30" cy="50" r="3.5" fill="#f9b933" />
+            <circle cx="50" cy="50" r="3.5" fill="#f9b933" />
+          </svg>
+        </div>
+
         <div className="container" style={{ maxWidth: '1120px' }}>
           <div style={{ textAlign: 'center', marginBottom: '56px' }}>
-            <h2 style={{ fontFamily: 'var(--font-serif)', fontSize: '32px', fontWeight: 800, color: '#1a1854' }}>
+            <h2 style={{ fontFamily: 'var(--font-sans)', fontSize: '32px', fontWeight: 800, color: '#1a1854' }}>
               Verify Your Certificate Here
             </h2>
             {/* Visual separator line under the title */}
@@ -459,11 +750,11 @@ export default function CertificationLandingPage() {
             gridTemplateColumns: '1fr 1.2fr', 
             gap: '64px',
             alignItems: 'center',
-            backgroundColor: '#ffffff',
+            backgroundColor: '#1a1854',
             borderRadius: '24px',
             padding: '56px 48px',
-            boxShadow: '0 20px 40px rgba(15,23,42,0.03)',
-            border: '1px solid #e8eff9'
+            boxShadow: '0 30px 70px rgba(26,24,84,0.22)',
+            border: '1px solid #1c1a5d'
           }}>
             
             {/* Left side Graphic Column: High-fidelity blue shield & magnifying glass vector */}
@@ -564,22 +855,23 @@ export default function CertificationLandingPage() {
               <form onSubmit={handleVerifySearch} style={{ display: 'flex', flexDirection: 'column', gap: '24px' }}>
                 
                 {/* Client Code Field Group */}
-                <div style={{ display: 'flex', gap: '16px', alignItems: 'center' }}>
-                  <div style={{ 
-                    width: '44px', 
-                    height: '44px', 
-                    borderRadius: '10px', 
-                    backgroundColor: '#eff6ff', 
-                    display: 'flex', 
-                    alignItems: 'center', 
-                    justifyContent: 'center', 
-                    color: '#1d4ed8', 
-                    flexShrink: 0 
-                  }}>
-                    <UserCheck size={20} />
-                  </div>
-                  <div style={{ flexGrow: 1, display: 'flex', flexDirection: 'column', gap: '6px' }}>
-                    <label style={{ fontSize: '13.5px', fontWeight: 800, color: '#1a1854' }}>Client Code</label>
+                <div style={{ display: 'flex', flexDirection: 'column', gap: '6px' }}>
+                  <label style={{ fontSize: '13.5px', fontWeight: 800, color: '#ffffff' }}>Client Code</label>
+                  <div style={{ position: 'relative', width: '100%' }}>
+                    <div style={{ 
+                      position: 'absolute',
+                      left: '14px',
+                      top: '50%',
+                      transform: 'translateY(-50%)',
+                      display: 'flex', 
+                      alignItems: 'center', 
+                      justifyContent: 'center', 
+                      color: '#1a1854', 
+                      pointerEvents: 'none',
+                      zIndex: 2
+                    }}>
+                      <Fingerprint size={20} strokeWidth={2.0} />
+                    </div>
                     <input
                       type="text"
                       placeholder="Client Code"
@@ -587,12 +879,14 @@ export default function CertificationLandingPage() {
                       onChange={(e) => setClientCode(e.target.value)}
                       style={{
                         width: '100%',
-                        padding: '12px 16px',
+                        padding: '12px 16px 12px 46px',
                         borderRadius: '8px',
-                        border: '1px solid #cbd5e1',
+                        border: '1px solid rgba(255,255,255,0.15)',
                         fontSize: '14px',
                         outline: 'none',
                         backgroundColor: '#ffffff',
+                        color: '#0f172a',
+                        boxSizing: 'border-box',
                         transition: 'border-color 0.2s ease'
                       }}
                     />
@@ -600,22 +894,23 @@ export default function CertificationLandingPage() {
                 </div>
 
                 {/* Certificate No Field Group */}
-                <div style={{ display: 'flex', gap: '16px', alignItems: 'center' }}>
-                  <div style={{ 
-                    width: '44px', 
-                    height: '44px', 
-                    borderRadius: '10px', 
-                    backgroundColor: '#eff6ff', 
-                    display: 'flex', 
-                    alignItems: 'center', 
-                    justifyContent: 'center', 
-                    color: '#1d4ed8', 
-                    flexShrink: 0 
-                  }}>
-                    <FileText size={20} />
-                  </div>
-                  <div style={{ flexGrow: 1, display: 'flex', flexDirection: 'column', gap: '6px' }}>
-                    <label style={{ fontSize: '13.5px', fontWeight: 800, color: '#1a1854' }}>Certificate No</label>
+                <div style={{ display: 'flex', flexDirection: 'column', gap: '6px' }}>
+                  <label style={{ fontSize: '13.5px', fontWeight: 800, color: '#ffffff' }}>Certificate No</label>
+                  <div style={{ position: 'relative', width: '100%' }}>
+                    <div style={{ 
+                      position: 'absolute',
+                      left: '14px',
+                      top: '50%',
+                      transform: 'translateY(-50%)',
+                      display: 'flex', 
+                      alignItems: 'center', 
+                      justifyContent: 'center', 
+                      color: '#1a1854', 
+                      pointerEvents: 'none',
+                      zIndex: 2
+                    }}>
+                      <QrCode size={20} strokeWidth={2.0} />
+                    </div>
                     <input
                       type="text"
                       required
@@ -624,12 +919,14 @@ export default function CertificationLandingPage() {
                       onChange={(e) => setClientCertNumber(e.target.value)}
                       style={{
                         width: '100%',
-                        padding: '12px 16px',
+                        padding: '12px 16px 12px 46px',
                         borderRadius: '8px',
-                        border: '1px solid #cbd5e1',
+                        border: '1px solid rgba(255,255,255,0.15)',
                         fontSize: '14px',
                         outline: 'none',
                         backgroundColor: '#ffffff',
+                        color: '#0f172a',
+                        boxSizing: 'border-box',
                         transition: 'border-color 0.2s ease'
                       }}
                     />
@@ -637,22 +934,23 @@ export default function CertificationLandingPage() {
                 </div>
 
                 {/* Standard Field Group */}
-                <div style={{ display: 'flex', gap: '16px', alignItems: 'center' }}>
-                  <div style={{ 
-                    width: '44px', 
-                    height: '44px', 
-                    borderRadius: '10px', 
-                    backgroundColor: '#eff6ff', 
-                    display: 'flex', 
-                    alignItems: 'center', 
-                    justifyContent: 'center', 
-                    color: '#1d4ed8', 
-                    flexShrink: 0 
-                  }}>
-                    <ShieldCheck size={20} />
-                  </div>
-                  <div style={{ flexGrow: 1, display: 'flex', flexDirection: 'column', gap: '6px' }}>
-                    <label style={{ fontSize: '13.5px', fontWeight: 800, color: '#1a1854' }}>Standard</label>
+                <div style={{ display: 'flex', flexDirection: 'column', gap: '6px' }}>
+                  <label style={{ fontSize: '13.5px', fontWeight: 800, color: '#ffffff' }}>Standard</label>
+                  <div style={{ position: 'relative', width: '100%' }}>
+                    <div style={{ 
+                      position: 'absolute',
+                      left: '14px',
+                      top: '50%',
+                      transform: 'translateY(-50%)',
+                      display: 'flex', 
+                      alignItems: 'center', 
+                      justifyContent: 'center', 
+                      color: '#1a1854', 
+                      pointerEvents: 'none',
+                      zIndex: 2
+                    }}>
+                      <Workflow size={20} strokeWidth={2.0} />
+                    </div>
                     <input
                       type="text"
                       placeholder="Standard"
@@ -660,12 +958,14 @@ export default function CertificationLandingPage() {
                       onChange={(e) => setStandard(e.target.value)}
                       style={{
                         width: '100%',
-                        padding: '12px 16px',
+                        padding: '12px 16px 12px 46px',
                         borderRadius: '8px',
-                        border: '1px solid #cbd5e1',
+                        border: '1px solid rgba(255,255,255,0.15)',
                         fontSize: '14px',
                         outline: 'none',
                         backgroundColor: '#ffffff',
+                        color: '#0f172a',
+                        boxSizing: 'border-box',
                         transition: 'border-color 0.2s ease'
                       }}
                     />
@@ -673,7 +973,7 @@ export default function CertificationLandingPage() {
                 </div>
 
                 {/* Action Buttons styled precisely as rounded pills in the screenshot */}
-                <div style={{ display: 'flex', gap: '16px', marginTop: '8px', paddingLeft: '60px' }}>
+                <div style={{ display: 'flex', gap: '16px', marginTop: '8px', paddingLeft: '0px' }}>
                   <button
                     type="submit"
                     disabled={isSearching}
@@ -720,7 +1020,7 @@ export default function CertificationLandingPage() {
 
               {/* Real-time Result Overlay */}
               {searched && (
-                <div style={{ marginTop: '28px', paddingLeft: '60px' }}>
+                <div style={{ marginTop: '28px', paddingLeft: '0px' }}>
                   {result ? (
                     <div style={{ 
                       background: '#e5f6ee', 

@@ -45,7 +45,7 @@ export const MegaMenuCertification: React.FC<{ onClose: () => void }> = ({ onClo
         }}>
           ISO Standards
         </div>
-        <ul style={{ listStyle: 'none', display: 'flex', flexDirection: 'column', gap: '2px', maxHeight: '380px', overflowY: 'auto' }}>
+        <ul style={{ listStyle: 'none', display: 'flex', flexDirection: 'column', gap: '2px' }}>
           <li>
             <Link href="/certification" onClick={onClose} style={{ fontSize: '13.5px', color: '#2c2a75', fontWeight: 700, padding: '5px 0', display: 'block' }}>
               All Standards Overview
