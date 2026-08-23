@@ -1,12 +1,23 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { X, ChevronDown, Phone, Mail } from 'lucide-react';
 import { siteConfig } from '@/config/site';
 
 export const MobileDrawer: React.FC<{ isOpen: boolean; onClose: () => void }> = ({ isOpen, onClose }) => {
   const [openSub, setOpenSub] = useState<string | null>(null);
+
+  useEffect(() => {
+    if (isOpen) {
+      document.body.classList.add('mobile-drawer-active');
+    } else {
+      document.body.classList.remove('mobile-drawer-active');
+    }
+    return () => {
+      document.body.classList.remove('mobile-drawer-active');
+    };
+  }, [isOpen]);
 
   if (!isOpen) return null;
 

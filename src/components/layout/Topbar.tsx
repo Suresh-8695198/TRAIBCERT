@@ -5,7 +5,7 @@ import { siteConfig } from '@/config/site';
 
 export const Topbar: React.FC = () => {
   return (
-    <div style={{ backgroundColor: '#151347', color: 'rgba(255,255,255,0.88)', fontSize: '12px', padding: '8px 0', borderBottom: '1px solid rgba(255,255,255,0.08)' }}>
+    <div id="topbar" style={{ backgroundColor: '#151347', color: 'rgba(255,255,255,0.88)', fontSize: '12px', padding: '8px 0', borderBottom: '1px solid rgba(255,255,255,0.08)' }}>
       <div className="container" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'nowrap' }}>
         {/* Left Side: Contact Phones & Email */}
         <div style={{ display: 'flex', alignItems: 'center', gap: '22px' }}>

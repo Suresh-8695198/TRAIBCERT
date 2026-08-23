@@ -11,6 +11,7 @@ export const WhatsAppWidget: React.FC = () => {
       href={siteConfig.contact.whatsAppUrl}
       target="_blank"
       rel="noopener noreferrer"
+      className="whatsapp-btn"
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
       style={{

@@ -21,7 +21,7 @@ export const Footer: React.FC = () => {
       <div className="container">
         
         {/* Newsletter Subscription Card (Solid White BG, Half Outside Footer / Half Inside Footer) */}
-        <div style={{
+        <div className="newsletter-card" style={{
           backgroundColor: '#ffffff',
           border: '1px solid #e2e8f0',
           borderRadius: '16px',
@@ -52,7 +52,7 @@ export const Footer: React.FC = () => {
               <span>Thank you for subscribing to TRAIBCERT Insights!</span>
             </div>
           ) : (
-            <form onSubmit={handleSubscribe} style={{ display: 'flex', gap: '12px', width: '100%', maxWidth: '480px' }}>
+            <form onSubmit={handleSubscribe} className="newsletter-form" style={{ display: 'flex', gap: '12px', width: '100%', maxWidth: '480px' }}>
               <input
                 type="email"
                 required

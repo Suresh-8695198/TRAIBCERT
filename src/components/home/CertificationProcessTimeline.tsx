@@ -72,7 +72,7 @@ export const CertificationProcessTimeline: React.FC = () => {
           </p>
 
           {/* Interactive Process Tabs Pill Bar */}
-          <div style={{ display: 'flex', flexWrap: 'wrap', gap: '8px', marginBottom: '32px', borderBottom: '1px solid rgba(255, 255, 255, 0.2)', paddingBottom: '18px' }}>
+          <div className="process-tabs-container" style={{ display: 'flex', flexWrap: 'wrap', gap: '8px', marginBottom: '32px', borderBottom: '1px solid rgba(255, 255, 255, 0.2)', paddingBottom: '18px' }}>
             {tabs.map((tab) => {
               const isActive = tab.id === activeTabId;
               return (

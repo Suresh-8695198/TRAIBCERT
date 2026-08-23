@@ -187,7 +187,7 @@ button, input, select, textarea {
 
 /* Header & Mobile Responsiveness Controls */
 @media (min-width: 900px) {
-  .mobile-toggle {
+  .mobile-toggle, .menu-toggle {
     display: none !important;
   }
   .desktop-nav {
@@ -208,7 +208,7 @@ button, input, select, textarea {
   .phone-display {
     display: none !important;
   }
-  .mobile-toggle {
+  .mobile-toggle, .menu-toggle {
     display: flex !important;
   }
 }
@@ -261,6 +261,12 @@ a:focus, button:focus {
 
 .btn-quote:hover svg {
   color: #2c2a75 !important;
+}
+
+@media (max-width: 640px) {
+  header .btn-quote {
+    display: none !important;
+  }
 }
 
 /* Nav Link Hover States */
@@ -322,19 +328,521 @@ a:focus, button:focus {
   border-color: #f9b933 !important;
 }
 
-/* Additional Mobile Optimizations */
-@media (max-width: 768px) {
-  input, textarea, select {
-    font-size: 16px !important; /* Prevents auto-zoom on iOS */
+/* ═══════════════════════════════════════════════════════════════
+   GLOBAL RESPONSIVE SYSTEM — All Sections & Devices
+   Breakpoints: xs<480 | sm<640 | md<768 | lg<1024 | xl≥1025
+═══════════════════════════════════════════════════════════════ */
+
+/* Prevent horizontal overflow globally */
+html, body {
+  overflow-x: hidden;
+  max-width: 100vw;
+}
+
+* {
+  min-width: 0; /* Allow flex/grid children to shrink */
+}
+
+img {
+  max-width: 100%;
+}
+
+/* ─── Tablet (≤1024px) ─── */
+@media (max-width: 1024px) {
+  /* Inspection Section */
+  #inspection-services .container > div {
+    grid-template-columns: 1fr !important;
+    gap: 48px !important;
+  }
+  #inspection-services .container > div > div:last-child {
+    height: 420px !important;
+  }
+
+  /* CertificationStandardsSlider */
+  #certification-standards-slider .container > div {
+    grid-template-columns: 1fr !important;
+    gap: 24px !important;
+  }
+
+  /* Training section grids */
+  #training-courses .container {
+    overflow: hidden;
+  }
+
+  /* E-Learning 3D carousel */
+  #e-learning .container {
+    overflow: hidden;
   }
 }
 
-@media (max-width: 480px) {
-  .heading-lg {
-    font-size: clamp(20px, 5vw, 28px);
+/* ─── Mobile Landscape + Tablet (≤900px) ─── */
+@media (max-width: 900px) {
+  /* OurServices hero banner two-column */
+  #our-services .container [style*="grid-template-columns: '1fr 400px'"],
+  #our-services .container [style*="grid-template-columns: \"1fr 400px\""],
+  #our-services .container [style*="grid-template-columns: 1fr 400px"] {
+    grid-template-columns: 1fr !important;
   }
 
-  .heading-md {
-    font-size: clamp(16px, 4vw, 22px);
+  /* Industries Section */
+  #industry .container > div > div {
+    grid-template-columns: 1fr !important;
   }
+
+  /* CertificationStandardsSlider inner flex */
+  #certification-standards-slider .container > div > div:first-child {
+    flex-direction: column !important;
+    gap: 24px !important;
+    align-items: flex-start !important;
+  }
+  #certification-standards-slider .container > div > div:first-child > div[style*="width: '1px'"],
+  #certification-standards-slider .container > div > div:first-child > div[style*="width: 1px"] {
+    display: none !important;
+  }
+  #certification-standards-slider .container > div > div:last-child {
+    flex-direction: row !important;
+    width: 100% !important;
+    justify-content: space-between !important;
+    align-items: center !important;
+  }
+}
+
+/* ─── Mobile (≤768px) ─── */
+@media (max-width: 768px) {
+  /* Global section padding */
+  section {
+    padding-top: 56px !important;
+    padding-bottom: 56px !important;
+  }
+
+  /* Inspection image stack */
+  #inspection-services .container > div > div:last-child {
+    height: 360px !important;
+  }
+
+  /* E-Learning grid — force single column */
+  #e-learning [style*="grid-template-columns: 'repeat(3"],
+  #e-learning [style*="grid-template-columns: repeat(3"] {
+    grid-template-columns: 1fr !important;
+  }
+
+  /* Training grid — 2 columns on tablet/mobile */
+  #training-courses [style*="grid-template-columns: 'repeat(4"],
+  #training-courses [style*="grid-template-columns: repeat(4"] {
+    grid-template-columns: repeat(2, 1fr) !important;
+  }
+
+  /* Our Services 6-card grid */
+  #our-services [style*="repeat(3"] {
+    grid-template-columns: repeat(2, 1fr) !important;
+  }
+
+  /* Industry left card padding */
+  #industry .container > div > div:first-child {
+    padding: 48px 28px !important;
+  }
+  #industry .container > div > div:last-child {
+    padding: 40px 28px !important;
+  }
+
+  /* Industries two-col inner grid */
+  #industry [style*="grid-template-columns: '1fr 1fr'"],
+  #industry [style*="grid-template-columns: 1fr 1fr"] {
+    grid-template-columns: 1fr !important;
+  }
+
+  /* ExactIndustriesSection */
+  #industry .container > div {
+    grid-template-columns: 1fr !important;
+  }
+
+  /* CertificationStandards whiteSpace nowrap fix */
+  #certification-standards-slider h2 {
+    white-space: normal !important;
+  }
+
+  /* Hero section */
+  #hero [style*="grid-template-columns"],
+  #hero-section [style*="grid-template-columns"] {
+    grid-template-columns: 1fr !important;
+  }
+
+  /* Footer grid */
+  footer [style*="grid-template-columns"] {
+    grid-template-columns: repeat(2, 1fr) !important;
+    gap: 32px !important;
+  }
+}
+
+/* ─── Mobile Portrait (≤640px) ─── */
+@media (max-width: 640px) {
+  /* All 2-col grids → single column */
+  [style*="grid-template-columns: '1fr 1fr'"],
+  [style*='grid-template-columns: "1fr 1fr"'],
+  [style*="grid-template-columns: 1fr 1fr"] {
+    grid-template-columns: 1fr !important;
+  }
+
+  /* All 3-col grids → single column */
+  [style*="repeat(3, 1fr)"],
+  [style*="repeat(3, minmax"] {
+    grid-template-columns: 1fr !important;
+  }
+
+  /* Our Services hero banner */
+  #our-services {
+    padding: 0 !important;
+  }
+  #our-services .container {
+    padding: 0 !important;
+  }
+
+  /* Inspection section cards column */
+  #inspection-services .container > div > div:last-child {
+    height: 460px !important;
+  }
+
+  /* Inspection absolute image card widths — left card full width */
+  #inspection-services .container > div > div:last-child > div:nth-child(2) {
+    width: 100% !important;
+    height: 260px !important;
+    position: relative !important;
+  }
+  #inspection-services .container > div > div:last-child > div:nth-child(3) {
+    width: 48% !important;
+    height: 52% !important;
+    top: 280px !important;
+    right: auto !important;
+    left: 0 !important;
+  }
+  #inspection-services .container > div > div:last-child > div:nth-child(4) {
+    width: 48% !important;
+    top: 280px !important;
+  }
+
+  /* Certification Standards inner */
+  #certification-standards-slider .container {
+    padding: 40px 20px !important;
+  }
+  #certification-standards-slider .container > div {
+    grid-template-columns: 1fr !important;
+    gap: 28px !important;
+  }
+
+  /* Footer single column */
+  footer [style*="grid-template-columns"] {
+    grid-template-columns: 1fr !important;
+    gap: 28px !important;
+  }
+
+  /* Training courses → single column */
+  #training-courses [style*="repeat(4"] {
+    grid-template-columns: repeat(1, 1fr) !important;
+  }
+  #training-courses [style*="repeat(2"] {
+    grid-template-columns: repeat(1, 1fr) !important;
+  }
+
+  /* E-Learning section */
+  #e-learning [style*="grid-template-columns"] {
+    grid-template-columns: 1fr !important;
+  }
+
+  /* Hero overflow fix */
+  #hero, #hero-section {
+    min-height: auto !important;
+  }
+
+  /* Section header text */
+  .section-title {
+    font-size: clamp(22px, 5vw, 28px) !important;
+  }
+
+  /* Topbar hide on mobile */
+  #topbar {
+    display: none !important;
+  }
+}
+
+/* ─── Extra Small (≤480px) ─── */
+@media (max-width: 480px) {
+  /* Container padding */
+  .container {
+    padding: 0 16px !important;
+  }
+
+  /* Our Services 6-cards → single column */
+  #our-services [style*="repeat"] {
+    grid-template-columns: 1fr !important;
+  }
+
+  /* Certification slider heading nowrap */
+  #certification-standards-slider h2 {
+    font-size: clamp(22px, 6vw, 28px) !important;
+    white-space: normal !important;
+  }
+
+  /* Industry card industry list items font */
+  #industry a {
+    font-size: 13px !important;
+  }
+
+  /* Inspection image stack — stack vertically */
+  #inspection-services .container > div > div:last-child {
+    height: auto !important;
+    min-height: 480px !important;
+  }
+
+  /* Fix absolute positioned cards overflowing on tiny screens */
+  #inspection-services .container > div > div:last-child > div[style*="position: 'absolute'"],
+  #inspection-services .container > div > div:last-child > div[style*="position: absolute"] {
+    position: relative !important;
+    width: 100% !important;
+    height: 220px !important;
+    top: auto !important;
+    left: auto !important;
+    right: auto !important;
+    margin-bottom: 16px !important;
+  }
+
+  /* Inspect accent bar hide on xs */
+  #inspection-services [style*="left: '-20px'"],
+  #inspection-services [style*="left: -20px"] {
+    display: none !important;
+  }
+
+  /* Training section padding */
+  #training-courses {
+    padding: 48px 0 !important;
+  }
+
+  /* Footer */
+  footer {
+    padding: 48px 0 24px !important;
+  }
+
+  /* CTA section */
+  #contact-cta [style*="grid-template-columns"] {
+    grid-template-columns: 1fr !important;
+  }
+
+  /* Banner sections */
+  #certification-standards-slider {
+    padding: 0 !important;
+  }
+}
+
+/* ─── Flex wrap safety net for all flex rows ─── */
+@media (max-width: 768px) {
+  /* iOS: prevent input auto-zoom */
+  input, textarea, select {
+    font-size: 16px !important;
+  }
+
+  [style*="display: 'flex'"][style*="gap"] {
+    flex-wrap: wrap;
+  }
+
+  /* Prevent text overflow */
+  h1, h2, h3, h4 {
+    word-break: break-word;
+    overflow-wrap: break-word;
+  }
+
+  p, span, a {
+    overflow-wrap: break-word;
+  }
+
+  /* backgroundAttachment: fixed breaks on mobile Safari */
+  [style*="backgroundAttachment: 'fixed'"] {
+    background-attachment: scroll !important;
+  }
+}
+
+/* ─── E-Learning 3D Carousel Mobile Fix ─── */
+@media (max-width: 768px) {
+  #e-learning [style*="perspective"] {
+    perspective: none !important;
+  }
+  #e-learning [style*="rotateY"] {
+    transform: none !important;
+  }
+  #e-learning [style*="gridTemplateColumns: 'repeat(3"] {
+    grid-template-columns: 1fr !important;
+    gap: 24px !important;
+  }
+}
+
+/* ─── Industries Section Mobile ─── */
+@media (max-width: 768px) {
+  #industry {
+    background-attachment: scroll !important;
+  }
+  #industry .container > div {
+    grid-template-columns: 1fr !important;
+  }
+  #industry [style*="gridTemplateColumns: '1fr 1fr'"] {
+    grid-template-columns: 1fr !important;
+  }
+  #industry [style*="gap: '24px'"] {
+    gap: 12px !important;
+  }
+}
+
+/* ─── AccreditationsBanner horizontal scroll fix ─── */
+@media (max-width: 640px) {
+  #accreditations [style*="display: 'flex'"] {
+    flex-wrap: wrap !important;
+    justify-content: center !important;
+  }
+}
+
+/* ─── Header / Nav Mobile ─── */
+@media (max-width: 899px) {
+  header {
+    padding: 0 !important;
+  }
+  header .container {
+    padding: 0 16px !important;
+  }
+}
+
+/* ─── CertificationProcessTimeline ─── */
+@media (max-width: 768px) {
+  #certification-process [style*="gridTemplateColumns"] {
+    grid-template-columns: 1fr !important;
+    gap: 24px !important;
+  }
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   CLASS-BASED LAYOUT OVERRIDES (MOBILE & TABLET RESPONSIVENESS)
+═══════════════════════════════════════════════════════════════ */
+
+/* Hero Grid and Form Container */
+@media (max-width: 1024px) {
+  .hero-grid {
+    grid-template-columns: 1fr !important;
+    gap: 40px !important;
+  }
+}
+@media (max-width: 480px) {
+  .hero-form-container {
+    padding: 24px 16px !important;
+    width: 100% !important;
+  }
+  /* Prevent Captcha & Form inputs from overflowing */
+  .hero-form-container form, 
+  .hero-form-container input, 
+  .hero-form-container select, 
+  .hero-form-container textarea {
+    width: 100% !important;
+    max-width: 100% !important;
+  }
+}
+
+/* Standards Slider Grid */
+@media (max-width: 900px) {
+  .standards-slider-grid {
+    grid-template-columns: 1fr !important;
+    gap: 24px !important;
+  }
+  .standards-left-flex {
+    flex-direction: column !important;
+    align-items: flex-start !important;
+    gap: 16px !important;
+    width: 100% !important;
+  }
+  .standards-vertical-divider {
+    display: none !important;
+  }
+  .standards-slide-card {
+    width: 100% !important;
+  }
+}
+
+/* Footer Newsletter Card & Form */
+@media (max-width: 900px) {
+  .newsletter-card {
+    flex-direction: column !important;
+    align-items: stretch !important;
+    padding: 32px 24px !important;
+    margin-top: -40px !important;
+    gap: 20px !important;
+  }
+  .newsletter-form {
+    max-width: 100% !important;
+  }
+}
+@media (max-width: 480px) {
+  .newsletter-form {
+    flex-direction: column !important;
+    gap: 10px !important;
+  }
+  .newsletter-form input {
+    width: 100% !important;
+  }
+  .newsletter-form button {
+    width: 100% !important;
+  }
+}
+
+/* Footer Navigation Grid */
+@media (max-width: 1024px) {
+  .footer-grid {
+    grid-template-columns: 1fr 1fr !important;
+    gap: 36px !important;
+  }
+}
+@media (max-width: 640px) {
+  .footer-grid {
+    grid-template-columns: 1fr !important;
+    gap: 28px !important;
+  }
+}
+
+/* Infographic Capsule Grid (ISO Standards Showcase Grid) Mobile Fix */
+@media (max-width: 1024px) {
+  .infographic-capsule-grid {
+    grid-template-columns: 1fr !important;
+    gap: 20px !important;
+  }
+  .infographic-capsule-grid > svg {
+    display: none !important; /* Hide Bezier connector curves */
+  }
+  /* Hide the central spectrum circle Graphic container */
+  .infographic-capsule-grid > div:nth-child(3) {
+    display: none !important;
+  }
+  /* Force both left & right column layouts to act as vertical blocks */
+  .infographic-capsule-grid > div:first-of-type,
+  .infographic-capsule-grid > div:last-of-type {
+    width: 100% !important;
+    gap: 16px !important;
+  }
+}
+
+/* Process Timeline Tabs Mobile Fix */
+@media (max-width: 640px) {
+  .process-tabs-container {
+    display: grid !important;
+    grid-template-columns: 1fr 1fr !important;
+    gap: 10px !important;
+    width: 100% !important;
+    border-bottom: none !important;
+    padding-bottom: 0 !important;
+  }
+  .process-tabs-container button {
+    width: 100% !important;
+    padding: 12px 10px !important;
+    font-size: 13px !important;
+    text-align: center !important;
+    justify-content: center !important;
+  }
+}
+
+
+/* Hide WhatsApp widget when mobile drawer is open */
+body.mobile-drawer-active .whatsapp-btn {
+  display: none !important;
 }

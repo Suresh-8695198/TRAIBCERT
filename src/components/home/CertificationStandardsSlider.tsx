@@ -111,6 +111,7 @@ export const CertificationStandardsSlider: React.FC = () => {
 
       <div className="container" style={{ position: 'relative', zIndex: 2, padding: '52px 0' }}>
         <div
+          className="standards-slider-grid"
           style={{
             display: 'grid',
             gridTemplateColumns: '1fr auto',
@@ -119,7 +120,7 @@ export const CertificationStandardsSlider: React.FC = () => {
           }}
         >
           {/* ─── Left: Title + counter + nav ─── */}
-          <div style={{ display: 'flex', alignItems: 'center', gap: '40px', flexWrap: 'wrap' }}>
+          <div className="standards-left-flex" style={{ display: 'flex', alignItems: 'center', gap: '40px', flexWrap: 'wrap' }}>
 
             {/* Section label */}
             <div>
@@ -159,10 +160,10 @@ export const CertificationStandardsSlider: React.FC = () => {
             </div>
 
             {/* Vertical divider */}
-            <div style={{ width: '1px', height: '80px', backgroundColor: 'rgba(255,255,255,0.15)', flexShrink: 0 }} />
+            <div className="standards-vertical-divider" style={{ width: '1px', height: '80px', backgroundColor: 'rgba(255,255,255,0.15)', flexShrink: 0 }} />
 
             {/* Slide card */}
-            <div style={{ flex: 1, minWidth: '280px' }}>
+            <div className="standards-slide-card" style={{ flex: 1, minWidth: '280px' }}>
               {/* ISO code + name */}
               <div
                 key={currentIndex}
