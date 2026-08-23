@@ -1,114 +1,149 @@
-import React from 'react';
-import Link from 'next/link';
-import { ArrowRight, Play, Settings, ShieldCheck, RefreshCw } from 'lucide-react';
+'use client';
 
-const processSteps = [
+import React, { useState } from 'react';
+import Link from 'next/link';
+import { ArrowRight } from 'lucide-react';
+
+interface ProcessTab {
+  id: string;
+  label: string;
+  title: string;
+  desc: string;
+}
+
+const tabs: ProcessTab[] = [
   {
-    step: '01',
-    title: 'Get Started',
-    icon: Play,
-    description: 'Initial enquiry, scope determination & custom fixed proposal.'
+    id: 'get-started',
+    label: 'Get Started',
+    title: 'Get Started with TRAIBCERT Training & Guidance',
+    desc: 'Our training services helps organisation teams to understand the standard requirements better during implementation, We will also help you understand what implementation of a quality management system is all about – Contact Us to know more on our training modules'
   },
   {
-    step: '02',
-    title: 'Implementation',
-    icon: Settings,
-    description: 'QMS/ISMS system setup & team training requirement alignment.'
+    id: 'implementation',
+    label: 'Implementation',
+    title: 'Expert Implementation & GAP Analysis Audits',
+    desc: 'With our help Expert guidance you can select a tailored professional management consultant in your industry vertex. We make GAP analysis audits and evaluate your processes and determine the most effective way to enhance the management system. Our assistance enables you to get the most value from your implementation.'
   },
   {
-    step: '03',
-    title: 'Certification',
-    icon: ShieldCheck,
-    description: 'Stage 1 & Stage 2 accredited auditing & certificate issuance.'
+    id: 'certification',
+    label: 'Certification',
+    title: 'Independent Accredited Certification Services',
+    desc: 'Our core activity of certification service is offered for various standards. Kindly Fill the enquiry form to know more in our proposal and gain the certification.'
   },
   {
-    step: '04',
-    title: 'Maintenance',
-    icon: RefreshCw,
-    description: 'Annual surveillance audits & 3-year continuous improvement.'
+    id: 'maintenance',
+    label: 'Maintenance',
+    title: 'Surveillance Audits & Continuous System Improvement',
+    desc: 'Surveillance audits and periodic system reviews ensure ongoing compliance and continuous improvement of your ISO management system across standard revisions.'
   }
 ];
 
 export const CertificationProcessTimeline: React.FC = () => {
+  const [activeTabId, setActiveTabId] = useState('implementation');
+  const activeTab = tabs.find(t => t.id === activeTabId) || tabs[1];
+
   return (
-    <section id="process" style={{ backgroundColor: '#ffffff', padding: '88px 0', borderTop: '1px solid #e2e8f0' }}>
-      <div className="container">
+    <section style={{ backgroundColor: '#134767', color: '#ffffff', overflow: 'hidden' }}>
+      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(340px, 1fr))', minHeight: '520px' }}>
         
-        {/* Section Header */}
-        <div style={{ textAlign: 'center', maxWidth: '760px', margin: '0 auto 56px' }}>
-          <span className="eyebrow" style={{ marginBottom: '12px' }}>
-            STEP-BY-STEP WORKFLOW
-          </span>
-          <h2 className="heading-lg" style={{ marginBottom: '16px' }}>
-            Our Certification Process and Time Line
+        {/* Left Column: Process Information & Interactive Tabs */}
+        <div style={{ padding: '64px 48px', display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
+          <h2 style={{ fontSize: 'clamp(28px, 4vw, 40px)', fontWeight: 800, color: '#ffffff', marginBottom: '8px', lineHeight: 1.15 }}>
+            Our Certification Process<br />and Time Line
           </h2>
-          <p style={{ fontSize: '16px', color: '#475569', lineHeight: 1.6 }}>
-            Our certification & training services are offered for various ISO STANDARDS.
+
+          <p style={{ fontSize: '15px', color: 'rgba(255, 255, 255, 0.88)', marginBottom: '32px', fontWeight: 500 }}>
+            Our certification &amp; training services are offer for various ISO STANDARDS.
           </p>
-        </div>
 
-        {/* 4 Process Timeline Nodes */}
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(240px, 1fr))', gap: '24px', marginBottom: '48px' }}>
-          {processSteps.map((s, idx) => {
-            const Icon = s.icon;
-            return (
-              <div
-                key={idx}
-                style={{
-                  backgroundColor: '#f8fafc',
-                  borderRadius: '16px',
-                  padding: '32px 24px',
-                  border: '1px solid #e2e8f0',
-                  position: 'relative',
-                  textAlign: 'center'
-                }}
-              >
-                <div style={{ position: 'absolute', top: '16px', right: '16px', fontSize: '12px', fontWeight: 800, color: '#c99327', backgroundColor: '#fff4d1', padding: '3px 8px', borderRadius: '4px' }}>
-                  STEP {s.step}
-                </div>
+          {/* Interactive Process Tabs Pill Bar */}
+          <div style={{ display: 'flex', flexWrap: 'wrap', gap: '10px', marginBottom: '32px', borderBottom: '1px solid rgba(255, 255, 255, 0.15)', paddingBottom: '16px' }}>
+            {tabs.map((tab) => {
+              const isActive = tab.id === activeTabId;
+              return (
+                <button
+                  key={tab.id}
+                  onClick={() => setActiveTabId(tab.id)}
+                  style={{
+                    backgroundColor: isActive ? '#00b4d8' : 'transparent',
+                    color: '#ffffff',
+                    border: 'none',
+                    borderRadius: isActive ? '6px' : '0px',
+                    padding: '8px 18px',
+                    fontSize: '14px',
+                    fontWeight: 700,
+                    cursor: 'pointer',
+                    position: 'relative',
+                    transition: 'all 0.2s ease'
+                  }}
+                >
+                  {tab.label}
+                  {isActive && (
+                    <span
+                      style={{
+                        position: 'absolute',
+                        bottom: '-8px',
+                        left: '50%',
+                        transform: 'translateX(-50%)',
+                        width: '0',
+                        height: '0',
+                        borderLeft: '6px solid transparent',
+                        borderRight: '6px solid transparent',
+                        borderTop: '6px solid #00b4d8'
+                      }}
+                    />
+                  )}
+                </button>
+              );
+            })}
+          </div>
 
-                <div style={{ width: '56px', height: '56px', borderRadius: '50%', backgroundColor: '#2c2a75', color: '#ffffff', display: 'flex', alignItems: 'center', justifyContent: 'center', margin: '0 auto 20px', boxShadow: '0 8px 20px rgba(44,42,117,0.2)' }}>
-                  <Icon size={24} />
-                </div>
-
-                <h3 style={{ fontSize: '19px', fontWeight: 800, color: '#2c2a75', marginBottom: '10px' }}>
-                  {s.title}
-                </h3>
-
-                <p style={{ fontSize: '13.5px', color: '#64748b', lineHeight: 1.5, margin: 0 }}>
-                  {s.description}
-                </p>
-              </div>
-            );
-          })}
-        </div>
-
-        {/* Training Support Callout Box */}
-        <div style={{
-          backgroundColor: '#fff4d1',
-          border: '1px solid #fde68a',
-          borderRadius: '16px',
-          padding: '28px 36px',
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'space-between',
-          flexWrap: 'wrap',
-          gap: '20px'
-        }}>
-          <div style={{ maxWidth: '780px' }}>
-            <h4 style={{ fontSize: '17px', fontWeight: 800, color: '#2c2a75', margin: '0 0 6px' }}>
-              Need Implementation & Training Guidance?
-            </h4>
-            <p style={{ fontSize: '14px', color: '#334155', lineHeight: 1.6, margin: 0 }}>
-              Our training services help organisation teams to understand the standard requirements better during implementation. We will also help you understand what implementation of a quality management system is all about – Contact Us to know more on our training modules.
+          {/* Active Tab Content */}
+          <div style={{ marginBottom: '32px', minHeight: '110px' }}>
+            <p style={{ fontSize: '14.5px', color: 'rgba(255, 255, 255, 0.92)', lineHeight: 1.65, margin: 0 }}>
+              {activeTab.desc}
             </p>
           </div>
 
-          <Link href="/contact" className="btn btn-ink" style={{ padding: '12px 24px', fontSize: '14px' }}>
-            <span>Contact Us / View More</span>
-            <ArrowRight size={16} />
-          </Link>
+          <div>
+            <Link
+              href="/contact"
+              style={{
+                display: 'inline-flex',
+                alignItems: 'center',
+                gap: '8px',
+                backgroundColor: '#f9b933',
+                color: '#1a1854',
+                padding: '12px 28px',
+                borderRadius: '30px',
+                fontSize: '14.5px',
+                fontWeight: 800,
+                textDecoration: 'none',
+                boxShadow: 'none',
+                transition: 'all 0.2s ease'
+              }}
+              onMouseOver={(e) => {
+                (e.currentTarget as HTMLElement).style.backgroundColor = '#e0a520';
+              }}
+              onMouseOut={(e) => {
+                (e.currentTarget as HTMLElement).style.backgroundColor = '#f9b933';
+              }}
+            >
+              <span>View More</span>
+              <ArrowRight size={16} />
+            </Link>
+          </div>
         </div>
+
+        {/* Right Column: Hero Image (World Map Meeting Photo) */}
+        <div
+          style={{
+            backgroundImage: "url('/assets/images/Home/process_meeting.jpg')",
+            backgroundSize: 'cover',
+            backgroundPosition: 'center',
+            minHeight: '360px'
+          }}
+        />
 
       </div>
     </section>

@@ -1,81 +1,157 @@
+'use client';
+
 import React from 'react';
 import Link from 'next/link';
-import { ArrowUpRight, ShieldCheck } from 'lucide-react';
+import {
+  CheckCircle2,
+  ThumbsUp,
+  Globe,
+  HardHat,
+  UtensilsCrossed,
+  Users,
+  Factory,
+  Cog,
+  Handshake,
+  Lock,
+  Umbrella,
+  HeartHandshake,
+  Lightbulb,
+  Database,
+  GraduationCap,
+  ArrowRight
+} from 'lucide-react';
 
-const standardsList = [
-  { code: 'ISO 9001:2015', name: 'Quality Management Systems', slug: 'iso-9001' },
-  { code: 'ISO 10002:2018', name: 'Customer Satisfaction', slug: 'iso-10002' },
-  { code: 'ISO 14001:2026', name: 'Environmental Management Systems', slug: 'iso-14001' },
-  { code: 'ISO 45001:2018', name: 'Occupational Health & Safety', slug: 'iso-45001' },
-  { code: 'ISO 22000:2018', name: 'Food Safety Management Systems', slug: 'iso-22000' },
-  { code: 'ISO 20000-1:2018', name: 'IT Service Management System', slug: 'iso-20000-1' },
-  { code: 'ISO 29001:2020', name: 'QMS for Oil & Natural Gas', slug: 'iso-29001' },
-  { code: 'ISO 41001:2018', name: 'Facilities Management Systems', slug: 'iso-41001' },
-  { code: 'ISO 22301:2019', name: 'Business Continuity Management', slug: 'iso-22301' },
-  { code: 'ISO 27001:2022', name: 'Information Security Management', slug: 'iso-27001' },
-  { code: 'ISO 31000:2018', name: 'Risk Management', slug: 'iso-31000' },
-  { code: 'ISO 26000:2010', name: 'Guidance on Social Responsibility', slug: 'iso-26000' },
-  { code: 'ISO 50001:2018', name: 'Energy Management Systems', slug: 'iso-50001' },
-  { code: 'ISO 13485:2016', name: 'Medical Devices QMS', slug: 'iso-13485' },
-  { code: 'ISO 21001:2018', name: 'Educational Organization Systems', slug: 'iso-21001' }
+const quickLinks = [
+  { text: 'ISO 9001:2015 Quality management systems', icon: CheckCircle2, color: '#0284c7', slug: 'iso-9001' },
+  { text: 'ISO 10002:2018 Customer Satisfaction', icon: ThumbsUp, color: '#ef4444', slug: 'iso-10002' },
+  { text: 'ISO 14001:2015 Environmental Management Systems', icon: Globe, color: '#10b981', slug: 'iso-14001' },
+  { text: 'ISO 45001:2018 Occupational Health & safety Management System', icon: HardHat, color: '#06b6d4', slug: 'iso-45001' },
+  { text: 'ISO 22000:2018 Food Safety Management Systems', icon: UtensilsCrossed, color: '#f97316', slug: 'iso-22000' },
+  { text: 'ISO 20000-1:2018 IT Service Management System', icon: Users, color: '#3b82f6', slug: 'iso-20000-1' },
+  { text: 'ISO 29001:2020 QMS for the Oil and Natural Gas Industry', icon: Factory, color: '#dc2626', slug: 'iso-29001' },
+  { text: 'ISO 41001:2018 Facilities Management Systems', icon: Cog, color: '#14b8a6', slug: 'iso-41001' },
+  { text: 'ISO 22301:2019 Business Continuity Management Systems', icon: Handshake, color: '#eab308', slug: 'iso-22301' },
+  { text: 'ISO 27001:2022 Information Security Management System', icon: Lock, color: '#2563eb', slug: 'iso-27001' },
+  { text: 'ISO 31000:2018 - Risk Management', icon: Umbrella, color: '#f97316', slug: 'iso-31000' },
+  { text: 'ISO 26000:2010 Guidance on social responsibility', icon: HeartHandshake, color: '#16a34a', slug: 'iso-26000' },
+  { text: 'ISO 50001:2018 - Energy management', icon: Lightbulb, color: '#eab308', slug: 'iso-50001' },
+  { text: 'ISO 13485:2016 Medical devices-Quality management systems', icon: Database, color: '#e11d48', slug: 'iso-13485' },
+  { text: 'ISO 21001:2018 Educational organization management systems', icon: GraduationCap, color: '#475569', slug: 'iso-21001' }
 ];
 
 export const ISOStandardsShowcaseGrid: React.FC = () => {
   return (
-    <section id="certification-standards" style={{ backgroundColor: '#2c2a75', color: '#ffffff', padding: '88px 0', position: 'relative' }}>
+    <section
+      style={{
+        backgroundImage: "linear-gradient(rgba(15, 23, 42, 0.75), rgba(15, 23, 42, 0.75)), url('/assets/images/Home/process_meeting.jpg')",
+        backgroundSize: 'cover',
+        backgroundPosition: 'center',
+        backgroundAttachment: 'fixed',
+        padding: '72px 0',
+        position: 'relative'
+      }}
+    >
       <div className="container">
-        
-        {/* Header */}
-        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end', marginBottom: '48px', flexWrap: 'wrap', gap: '20px' }}>
-          <div>
-            <span className="eyebrow" style={{ background: 'rgba(249,185,51,0.15)', color: '#f9b933', marginBottom: '12px' }}>
-              ISO STANDARDS & CERTIFICATION SCOPES
-            </span>
-            <h2 style={{ fontSize: 'clamp(28px, 3.5vw, 42px)', fontWeight: 800, color: '#ffffff', margin: 0 }}>
-              Certification Standards We Audit
-            </h2>
-          </div>
+        <div
+          style={{
+            display: 'grid',
+            gridTemplateColumns: 'repeat(auto-fit, minmax(340px, 1fr))',
+            gap: '40px',
+            alignItems: 'center'
+          }}
+        >
+          {/* Left Column: Floating White Card with Quick Links (Matching Screenshot 2) */}
+          <div
+            style={{
+              backgroundColor: '#ffffff',
+              borderRadius: '16px',
+              padding: '36px 32px',
+              boxShadow: '0 20px 48px rgba(0, 0, 0, 0.22)'
+            }}
+          >
+            <h3 style={{ fontSize: '24px', fontWeight: 800, color: '#1a1854', marginBottom: '24px', letterSpacing: '-0.5px' }}>
+              Quick <span style={{ color: '#1a1854' }}>Links</span>
+            </h3>
 
-          <p style={{ fontSize: '15px', color: 'rgba(255,255,255,0.8)', maxWidth: '480px', margin: 0 }}>
-            At TRAIBCERT, we offer certification services to our clients applicable to any type of manufacturing or service industry, administered in a non-discriminatory manner.
-          </p>
-        </div>
-
-        {/* 15 Standards Grid */}
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(220px, 1fr))', gap: '16px' }}>
-          {standardsList.map((st) => (
-            <Link
-              key={st.slug}
-              href={`/certification/${st.slug}`}
+            <div
               style={{
-                backgroundColor: 'rgba(255, 255, 255, 0.07)',
-                border: '1px solid rgba(255, 255, 255, 0.15)',
-                borderRadius: '12px',
-                padding: '20px',
-                textDecoration: 'none',
-                color: '#ffffff',
-                display: 'flex',
-                flexDirection: 'column',
-                justifyContent: 'space-between',
-                minHeight: '120px',
-                backdropFilter: 'blur(4px)',
-                transition: 'transform 0.2s ease, borderColor 0.2s ease'
+                display: 'grid',
+                gridTemplateColumns: 'repeat(auto-fit, minmax(240px, 1fr))',
+                gap: '14px 20px'
               }}
             >
-              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-                <span style={{ fontSize: '11px', fontWeight: 800, color: '#f9b933', backgroundColor: 'rgba(249,185,51,0.15)', padding: '2px 8px', borderRadius: '4px' }}>
-                  {st.code}
-                </span>
-                <ArrowUpRight size={16} style={{ color: '#f9b933' }} />
-              </div>
+              {quickLinks.map((item, index) => {
+                const Icon = item.icon;
+                return (
+                  <Link
+                    key={index}
+                    href={`/certification/${item.slug}`}
+                    style={{
+                      display: 'flex',
+                      alignItems: 'flex-start',
+                      gap: '10px',
+                      textDecoration: 'none',
+                      color: '#334155',
+                      fontSize: '13px',
+                      fontWeight: 600,
+                      lineHeight: 1.4,
+                      transition: 'color 0.2s ease'
+                    }}
+                    onMouseOver={(e) => {
+                      (e.currentTarget as HTMLElement).style.color = '#1a1854';
+                    }}
+                    onMouseOut={(e) => {
+                      (e.currentTarget as HTMLElement).style.color = '#334155';
+                    }}
+                  >
+                    <div style={{ color: item.color, flexShrink: 0, marginTop: '2px' }}>
+                      <Icon size={18} strokeWidth={2} />
+                    </div>
+                    <span>{item.text}</span>
+                  </Link>
+                );
+              })}
+            </div>
+          </div>
 
-              <div style={{ fontSize: '14.5px', fontWeight: 700, color: '#ffffff', marginTop: '12px', lineHeight: 1.3 }}>
-                {st.name}
-              </div>
+          {/* Right Column: CERTIFICATION Hero Statement */}
+          <div style={{ color: '#ffffff', paddingLeft: '12px' }}>
+            <h2 style={{ fontSize: 'clamp(28px, 4vw, 42px)', fontWeight: 800, color: '#ffffff', marginBottom: '20px', letterSpacing: '0.5px', textTransform: 'uppercase' }}>
+              CERTIFICATION
+            </h2>
+
+            <p style={{ fontSize: '16px', color: 'rgba(255, 255, 255, 0.92)', lineHeight: 1.7, marginBottom: '32px', fontWeight: 400 }}>
+              At <strong>TRAIBCERT</strong>, we offer certification services to our clients applicable to any type of manufacturing or service industry and is administered in a non-discriminatory manner.
+            </p>
+
+            <Link
+              href="/services/certification"
+              style={{
+                display: 'inline-flex',
+                alignItems: 'center',
+                gap: '8px',
+                backgroundColor: '#f9b933',
+                color: '#1a1854',
+                padding: '13px 32px',
+                borderRadius: '30px',
+                fontSize: '15px',
+                fontWeight: 800,
+                textDecoration: 'none',
+                boxShadow: 'none',
+                transition: 'all 0.2s ease'
+              }}
+              onMouseOver={(e) => {
+                (e.currentTarget as HTMLElement).style.backgroundColor = '#e0a520';
+              }}
+              onMouseOut={(e) => {
+                (e.currentTarget as HTMLElement).style.backgroundColor = '#f9b933';
+              }}
+            >
+              <span>View More</span>
+              <ArrowRight size={16} />
             </Link>
-          ))}
+          </div>
         </div>
-
       </div>
     </section>
   );
