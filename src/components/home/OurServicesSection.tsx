@@ -22,8 +22,6 @@ export const OurServicesSection: React.FC = () => {
       bg: '#3eb89b',
       textColor: '#ffffff',
       icon: Award,
-      decorTop: '+',
-      decorBottom: 'o',
       desc: 'At TRAIBCERT, we offer certification services to our clients applicable to any type of manufacturing...',
       link: '/services/certification',
       cta: 'View More',
@@ -34,8 +32,6 @@ export const OurServicesSection: React.FC = () => {
       bg: '#d6bd96',
       textColor: '#2a241e',
       icon: GraduationCap,
-      decorTop: '^',
-      decorBottom: '+',
       desc: 'At TRAIBCERT, we have developed a suite of ISO training courses, total package of the approach, highly ‘ interactive with real world examples...',
       link: '/services/training',
       cta: 'View More',
@@ -46,8 +42,6 @@ export const OurServicesSection: React.FC = () => {
       bg: '#38b6ff',
       textColor: '#ffffff',
       icon: FileCheck,
-      decorTop: 'x',
-      decorBottom: 'o',
       desc: 'The present scenario of business environment, out-sourcing majority of jobs &services to the appropriate agencies....',
       link: '/services/inspection',
       cta: 'View More'
@@ -57,8 +51,6 @@ export const OurServicesSection: React.FC = () => {
       bg: '#ee6c4d',
       textColor: '#ffffff',
       icon: Monitor,
-      decorTop: '+',
-      decorBottom: '(+)',
       desc: 'Learning conducted via electronic media, typically on the Internet. successful e-learning depends on the self-motivation of individuals to study effectively.',
       link: '/services/e-learning',
       cta: 'View More'
@@ -69,8 +61,6 @@ export const OurServicesSection: React.FC = () => {
       bg: '#98c9a3',
       textColor: '#1a3824',
       icon: PackageCheck,
-      decorTop: 'o',
-      decorBottom: '+',
       desc: 'Start your Certification journey with our expert guidance- Your step by step document for an seamless and effortless certification process now',
       link: '/resources/guide.pdf',
       isDownload: true,
@@ -82,8 +72,6 @@ export const OurServicesSection: React.FC = () => {
       bg: '#f2a925',
       textColor: '#ffffff',
       icon: ShieldAlert,
-      decorTop: '+',
-      decorBottom: 'x',
       desc: 'Risk management is an increasingly important business driver and stakeholders have become much more concerned about risk...',
       link: '/services/risk-management',
       cta: 'View More'
@@ -97,10 +85,10 @@ export const OurServicesSection: React.FC = () => {
         {/* Main Layout Container */}
         <div style={{ display: 'flex', flexDirection: 'column', gap: '24px' }}>
           
-          {/* Top Hero Banner Card (Header Title: "Our Services" + Exact User Paragraph + View More Button) */}
+          {/* Top Hero Banner Card (Indigo #1a1854 Background, 0px Rounded Corners) */}
           <div
             style={{
-              backgroundColor: '#e5a33c',
+              backgroundColor: '#1a1854',
               color: '#ffffff',
               borderRadius: '0px',
               padding: '40px 48px',
@@ -113,10 +101,23 @@ export const OurServicesSection: React.FC = () => {
               gap: '24px'
             }}
           >
-            {/* Background Line-Art Accents (+ o x decor) */}
-            <div style={{ position: 'absolute', right: '40px', top: '15px', opacity: 0.18, fontSize: '26px', userSelect: 'none' }}>
-              + &nbsp; o &nbsp; x &nbsp; + &nbsp; o
-            </div>
+            {/* Background Geometric Grid Accent */}
+            <svg
+              style={{
+                position: 'absolute',
+                right: '40px',
+                top: '20px',
+                width: '120px',
+                height: '80px',
+                opacity: 0.15,
+                pointerEvents: 'none'
+              }}
+            >
+              <pattern id="heroGridPattern" width="16" height="16" patternUnits="userSpaceOnUse">
+                <circle cx="2" cy="2" r="1.5" fill="#ffffff" />
+              </pattern>
+              <rect width="120" height="80" fill="url(#heroGridPattern)" />
+            </svg>
 
             <div style={{ maxWidth: '780px', position: 'relative', zIndex: 2 }}>
               <h2 style={{ fontSize: 'clamp(32px, 4.5vw, 42px)', fontWeight: 800, color: '#ffffff', marginBottom: '14px', lineHeight: 1.15 }}>
@@ -133,8 +134,8 @@ export const OurServicesSection: React.FC = () => {
                   display: 'inline-flex',
                   alignItems: 'center',
                   gap: '10px',
-                  backgroundColor: '#1a1854',
-                  color: '#ffffff',
+                  backgroundColor: '#f9b933',
+                  color: '#1a1854',
                   padding: '10px 20px 10px 24px',
                   borderRadius: '8px',
                   fontSize: '14.5px',
@@ -144,13 +145,13 @@ export const OurServicesSection: React.FC = () => {
                   transition: 'all 0.25s cubic-bezier(0.34, 1.56, 0.64, 1)'
                 }}
                 onMouseOver={(e) => {
-                  (e.currentTarget as HTMLElement).style.backgroundColor = '#252175';
+                  (e.currentTarget as HTMLElement).style.backgroundColor = '#e0a520';
                   (e.currentTarget as HTMLElement).style.transform = 'translateY(-2px)';
                   const badge = (e.currentTarget as HTMLElement).querySelector('.arrow-badge') as HTMLElement;
                   if (badge) badge.style.transform = 'translate(3px, -3px) rotate(45deg) scale(1.15)';
                 }}
                 onMouseOut={(e) => {
-                  (e.currentTarget as HTMLElement).style.backgroundColor = '#1a1854';
+                  (e.currentTarget as HTMLElement).style.backgroundColor = '#f9b933';
                   (e.currentTarget as HTMLElement).style.transform = 'none';
                   const badge = (e.currentTarget as HTMLElement).querySelector('.arrow-badge') as HTMLElement;
                   if (badge) badge.style.transform = 'none';
@@ -166,8 +167,8 @@ export const OurServicesSection: React.FC = () => {
                     width: '28px',
                     height: '28px',
                     borderRadius: '6px',
-                    backgroundColor: '#f9b933',
-                    color: '#1a1854',
+                    backgroundColor: '#1a1854',
+                    color: '#f9b933',
                     flexShrink: 0,
                     transition: 'transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1)'
                   }}
@@ -199,9 +200,26 @@ export const OurServicesSection: React.FC = () => {
                     display: 'flex',
                     flexDirection: 'column',
                     justifyContent: 'space-between',
-                    position: 'relative'
+                    position: 'relative',
+                    overflow: 'hidden'
                   }}
                 >
+                  {/* Subtle Creative Modern Corner Geometry Accent Pattern */}
+                  <svg
+                    style={{
+                      position: 'absolute',
+                      right: '-10px',
+                      top: '-10px',
+                      width: '72px',
+                      height: '72px',
+                      opacity: 0.16,
+                      pointerEvents: 'none'
+                    }}
+                  >
+                    <circle cx="36" cy="36" r="32" fill="none" stroke="currentColor" strokeWidth="2" />
+                    <circle cx="36" cy="36" r="20" fill="none" stroke="currentColor" strokeWidth="1.5" strokeDasharray="4 4" />
+                  </svg>
+
                   <div>
                     {/* Optional Sub-tag */}
                     {card.subTag && (
@@ -210,15 +228,9 @@ export const OurServicesSection: React.FC = () => {
                       </div>
                     )}
 
-                    {/* Line Art Icon with + o x accent decorations */}
-                    <div style={{ position: 'relative', width: '64px', height: '64px', marginBottom: '18px' }}>
+                    {/* Service Icon */}
+                    <div style={{ position: 'relative', width: '56px', height: '56px', marginBottom: '18px', display: 'flex', alignItems: 'center' }}>
                       <Icon size={46} strokeWidth={1.6} style={{ color: card.textColor }} />
-                      <span style={{ position: 'absolute', top: '-4px', right: '0px', fontSize: '12px', opacity: 0.8 }}>
-                        {card.decorTop}
-                      </span>
-                      <span style={{ position: 'absolute', bottom: '0px', right: '-8px', fontSize: '10px', opacity: 0.8 }}>
-                        {card.decorBottom}
-                      </span>
                     </div>
 
                     <h3 style={{ fontSize: '20px', fontWeight: 800, color: card.textColor, marginBottom: '10px', lineHeight: 1.25 }}>
