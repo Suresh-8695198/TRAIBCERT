@@ -104,6 +104,18 @@ const categories = ['All Courses', 'ISO 9001', 'ISO 45001', 'ISO 27001', 'ISO 14
 export const ELearningCoursesSection: React.FC = () => {
   const [selectedCategory, setSelectedCategory] = useState('All Courses');
   const [currentIndex, setCurrentIndex] = useState(0);
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const handleResize = () => {
+      setIsMobile(window.innerWidth <= 768);
+    };
+    handleResize();
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
+
+  const visibleCount = isMobile ? 1 : 3;
 
   const filteredCourses = selectedCategory === 'All Courses'
     ? coursesData
@@ -111,22 +123,22 @@ export const ELearningCoursesSection: React.FC = () => {
 
   // Auto Scroll Carousel Effect (every 4.5 seconds)
   useEffect(() => {
-    if (filteredCourses.length <= 3) return;
+    if (filteredCourses.length <= visibleCount) return;
     const timer = setInterval(() => {
-      setCurrentIndex(prev => (prev + 1) % (filteredCourses.length - 2));
+      setCurrentIndex(prev => (prev + 1) % (filteredCourses.length - (visibleCount - 1)));
     }, 4500);
     return () => clearInterval(timer);
-  }, [filteredCourses.length]);
+  }, [filteredCourses.length, visibleCount]);
 
   const handleNext = () => {
-    if (filteredCourses.length > 3) {
-      setCurrentIndex(prev => (prev + 1) % (filteredCourses.length - 2));
+    if (filteredCourses.length > visibleCount) {
+      setCurrentIndex(prev => (prev + 1) % (filteredCourses.length - (visibleCount - 1)));
     }
   };
 
   const handlePrev = () => {
-    if (filteredCourses.length > 3) {
-      setCurrentIndex(prev => (prev - 1 + (filteredCourses.length - 2)) % (filteredCourses.length - 2));
+    if (filteredCourses.length > visibleCount) {
+      setCurrentIndex(prev => (prev - 1 + (filteredCourses.length - (visibleCount - 1))) % (filteredCourses.length - (visibleCount - 1)));
     }
   };
 
@@ -255,17 +267,17 @@ export const ELearningCoursesSection: React.FC = () => {
           <div
             style={{
               display: 'grid',
-              gridTemplateColumns: 'repeat(3, minmax(0, 1fr))',
+              gridTemplateColumns: isMobile ? '1fr' : 'repeat(3, minmax(0, 1fr))',
               gap: '24px',
               perspective: '1200px',
               transformStyle: 'preserve-3d',
               padding: '24px 0'
             }}
           >
-            {filteredCourses.slice(currentIndex, currentIndex + 3).map((course, idx) => {
+            {filteredCourses.slice(currentIndex, currentIndex + visibleCount).map((course, idx) => {
               // Dynamic 3D Rotation angles for each and every card
-              const isCenter = idx === 1;
-              const isLeft = idx === 0;
+              const isCenter = isMobile ? true : idx === 1;
+              const isLeft = isMobile ? false : idx === 0;
               
               // Each card gets a distinct 3D rotation tilt angle
               const baseRotateY = isCenter ? 0 : isLeft ? 16 : -16;

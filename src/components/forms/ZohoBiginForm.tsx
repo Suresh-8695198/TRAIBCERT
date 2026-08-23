@@ -196,7 +196,7 @@ export const ZohoBiginForm: React.FC<ZohoFormProps> = ({ defaultStandard = 'Cert
       )}
 
       {/* Row 1: First Name & Organisation Name */}
-      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(140px, 1fr))', gap: '12px' }}>
+      <div className="zoho-form-row" style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(140px, 1fr))', gap: '12px' }}>
         <div>
           <label style={labelStyle}>
             <span>First Name</span>
@@ -263,7 +263,7 @@ export const ZohoBiginForm: React.FC<ZohoFormProps> = ({ defaultStandard = 'Cert
       </div>
 
       {/* Row 2: Email & Phone Number */}
-      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(140px, 1fr))', gap: '12px' }}>
+      <div className="zoho-form-row" style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(140px, 1fr))', gap: '12px' }}>
         <div>
           <label style={labelStyle}>
             <span>Email</span>

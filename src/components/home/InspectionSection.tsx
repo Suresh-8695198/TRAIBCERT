@@ -154,10 +154,11 @@ export const InspectionSection: React.FC = () => {
           </div>
 
           {/* ─── Right Column: Creative Image Cards ─── */}
-          <div style={{ position: 'relative', height: '520px' }}>
+          <div className="inspection-image-container" style={{ position: 'relative', height: '520px' }}>
 
             {/* Decorative vertical accent bar */}
             <div
+              className="inspection-accent-bar"
               style={{
                 position: 'absolute',
                 left: '-20px',
@@ -173,6 +174,7 @@ export const InspectionSection: React.FC = () => {
 
             {/* Card 1 — Main large card (left, full-height) */}
             <div
+              className="inspection-card inspection-card-1"
               onMouseEnter={() => setHovered1(true)}
               onMouseLeave={() => setHovered1(false)}
               style={{
@@ -239,6 +241,7 @@ export const InspectionSection: React.FC = () => {
 
             {/* Card 2 — Smaller card (right, top) */}
             <div
+              className="inspection-card inspection-card-2"
               onMouseEnter={() => setHovered2(true)}
               onMouseLeave={() => setHovered2(false)}
               style={{
@@ -285,6 +288,7 @@ export const InspectionSection: React.FC = () => {
 
             {/* Floating Image Card (bottom-right) */}
             <div
+              className="inspection-card inspection-card-3"
               style={{
                 position: 'absolute',
                 right: 0,

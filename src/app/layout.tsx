@@ -1,19 +1,11 @@
 import type { Metadata } from 'next';
 import Script from 'next/script';
-import { Plus_Jakarta_Sans } from 'next/font/google';
 import '@/styles/globals.css';
 import { Header } from '@/components/layout/Header';
 import { Footer } from '@/components/layout/Footer';
 import { WhatsAppWidget } from '@/components/ui/WhatsAppWidget';
 import { ScrollAnimationObserver } from '@/components/ui/ScrollAnimationObserver';
 import { siteConfig } from '@/config/site';
-
-const plusJakartaSans = Plus_Jakarta_Sans({
-  subsets: ['latin'],
-  weight: ['400', '500', '600', '700', '800'],
-  variable: '--font-plus-jakarta',
-  display: 'swap'
-});
 
 const getMetadataBase = () => {
   const url = process.env.NEXT_PUBLIC_SITE_URL || process.env.VERCEL_URL;
@@ -100,8 +92,13 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   };
 
   return (
-    <html lang="en" className={plusJakartaSans.variable}>
+    <html lang="en">
       <head>
+        {/* Load Google Fonts directly for clean, standard font names (No next/font generated hash suffix) */}
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
+        <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet" />
+
         {/* Google Tag Manager / Google Ads Container AW-835011731 */}
         <Script
           id="gtm-script"
@@ -121,13 +118,14 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLdOrg) }}
         />
       </head>
-      <body className={plusJakartaSans.className}>
+      <body>
         <Header />
         <main style={{ flexGrow: 1 }}>
           {children}
         </main>
         <Footer />
         <WhatsAppWidget />
+        <ScrollAnimationObserver />
       </body>
     </html>
   );

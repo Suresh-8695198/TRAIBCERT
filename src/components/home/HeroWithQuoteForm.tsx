@@ -32,6 +32,7 @@ export const HeroWithQuoteForm: React.FC = () => {
       
       {/* 1. Dark Blue Hero Section */}
       <section
+        className="hero-top-section"
         style={{
           position: 'relative',
           backgroundColor: '#090e2e',
@@ -101,13 +102,13 @@ export const HeroWithQuoteForm: React.FC = () => {
       </section>
 
       {/* 2. White Horizontal Banner Strip directly below Hero (Moved Higher Up) */}
-      <section style={{ backgroundColor: '#ffffff', borderBottom: 'none', paddingTop: '36px', paddingBottom: '36px', marginTop: '-45px', position: 'relative', zIndex: 10 }}>
+      <section className="hero-banner-strip-section" style={{ backgroundColor: '#ffffff', borderBottom: 'none', paddingTop: '36px', paddingBottom: '36px', marginTop: '-45px', position: 'relative', zIndex: 10 }}>
         <div className="container">
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(360px, 1fr))', gap: '24px', alignItems: 'center' }}>
+          <div className="hero-banner-strip-grid" style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(360px, 1fr))', gap: '24px', alignItems: 'center' }}>
             
             {/* Left Content: Clean Flush Logo Badge + Vertical Divider + Statement Text + Button */}
-            <div style={{ display: 'flex', alignItems: 'center', gap: '24px', width: '100%' }}>
-              <div style={{ flexShrink: 0, paddingRight: '20px', borderRight: '1.5px solid #e2e8f0' }}>
+            <div className="hero-banner-strip-content" style={{ display: 'flex', alignItems: 'center', gap: '24px', width: '100%' }}>
+              <div className="hero-banner-strip-logo" style={{ flexShrink: 0, paddingRight: '20px', borderRight: '1.5px solid #e2e8f0' }}>
                 <img
                   src="/assets/images/Home/certification-logo.jpg"
                   alt="TRAIBCERT Certification Logo"
@@ -177,7 +178,7 @@ export const HeroWithQuoteForm: React.FC = () => {
 
       {/* 3. Floating Right Form Card Overlapping Both Dark Blue Hero Banner & White Strip (User Friendly & Bounded) */}
       <div
-        className="container"
+        className="container hero-floating-form-wrapper"
         style={{
           position: 'absolute',
           top: '76px',
@@ -188,9 +189,10 @@ export const HeroWithQuoteForm: React.FC = () => {
           zIndex: 40
         }}
       >
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))', gap: '40px' }}>
+        <div className="hero-floating-form-grid" style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))', gap: '40px' }}>
           <div />
           <div
+            className="hero-floating-form-card"
             style={{
               pointerEvents: 'auto',
               backgroundColor: '#ffffff',

@@ -47,7 +47,7 @@ export const CertificationProcessTimeline: React.FC = () => {
       id="certification-process"
       style={{
         backgroundImage: "url('/assets/images/Home/certification_section_hme.png')",
-        backgroundSize: '100% 100%',
+        backgroundSize: 'cover',
         backgroundRepeat: 'no-repeat',
         backgroundPosition: 'center center',
         color: '#ffffff',

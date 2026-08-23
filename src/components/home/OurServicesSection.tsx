@@ -189,9 +189,12 @@ export const OurServicesSection: React.FC = () => {
           >
             {serviceCards.map((card, index) => {
               const Icon = card.icon;
+              const directions = ['reveal-left', 'reveal-bottom', 'reveal-right', 'reveal-left', 'reveal-scale', 'reveal-right'];
+              const dirClass = directions[index];
               return (
                 <div
                   key={index}
+                  className={`reveal-item ${dirClass} stagger-${(index % 4) + 1}`}
                   style={{
                     backgroundColor: card.bg,
                     color: card.textColor,

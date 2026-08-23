@@ -14,13 +14,15 @@ export const ScrollAnimationObserver: React.FC = () => {
         entries.forEach((entry) => {
           if (entry.isIntersecting) {
             entry.target.classList.add('reveal-active');
-            observer.unobserve(entry.target); // Trigger only once
+          } else {
+            // Keep animations playing every time they scroll back in
+            entry.target.classList.remove('reveal-active');
           }
         });
       },
       {
-        threshold: 0.08, // Trigger when 8% of the section is visible
-        rootMargin: '0px 0px -40px 0px',
+        threshold: 0.05, // Trigger early as soon as 5% of section is visible
+        rootMargin: '0px 0px -20px 0px',
       }
     );
 

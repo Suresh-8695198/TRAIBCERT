@@ -846,3 +846,210 @@ img {
 body.mobile-drawer-active .whatsapp-btn {
   display: none !important;
 }
+
+/* ═══════════════════════════════════════════════════════════════
+   PREMIUM SCROLL REVEAL ANIMATIONS (INTERSECTION OBSERVER TARGETS)
+═══════════════════════════════════════════════════════════════ */
+
+/* Default reveal-ready state: offset downwards, zero opacity, and hardware-accelerated transitions */
+.reveal-ready {
+  opacity: 0 !important;
+  will-change: transform, opacity;
+  transition: opacity 0.85s cubic-bezier(0.16, 1, 0.3, 1), 
+              transform 0.85s cubic-bezier(0.16, 1, 0.3, 1) !important;
+}
+
+/* Individual direction transforms */
+.reveal-ready.reveal-bottom {
+  transform: translateY(48px) translateZ(0) !important;
+}
+.reveal-ready.reveal-left {
+  transform: translateX(-48px) translateZ(0) !important;
+}
+.reveal-ready.reveal-right {
+  transform: translateX(48px) translateZ(0) !important;
+}
+.reveal-ready.reveal-scale {
+  transform: scale(0.92) translateZ(0) !important;
+}
+
+/* Active animation state: slides smoothly to original transform position and fully reveals */
+.reveal-ready.reveal-active {
+  opacity: 1 !important;
+  transform: translate(0) scale(1) translateZ(0) !important;
+}
+
+/* Staggered load delays for interior cards or sub-elements inside observed sections */
+.reveal-active .stagger-1 {
+  transition-delay: 0.12s !important;
+}
+.reveal-active .stagger-2 {
+  transition-delay: 0.24s !important;
+}
+.reveal-active .stagger-3 {
+  transition-delay: 0.36s !important;
+}
+.reveal-active .stagger-4 {
+  transition-delay: 0.48s !important;
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   HERO FLOATING FORM CARD MOBILE RESPONSIVENESS OVERRIDES
+═══════════════════════════════════════════════════════════════ */
+@media (max-width: 900px) {
+  /* Reduce excessive padding at bottom of Hero on mobile */
+  .hero-top-section {
+    padding-bottom: 76px !important;
+    min-height: auto !important;
+  }
+
+  /* Turn off absolute positioning so it flows naturally below Section 2 without overlapping */
+  .hero-floating-form-wrapper {
+    position: relative !important;
+    top: auto !important;
+    left: auto !important;
+    transform: none !important;
+    pointer-events: auto !important;
+    padding: 0 16px !important;
+    margin-top: 32px !important; /* Spacing directly below banner strip button */
+    margin-bottom: 40px !important;
+    width: 100% !important;
+    max-width: 100% !important;
+  }
+  
+  .hero-floating-form-grid {
+    grid-template-columns: 1fr !important;
+    gap: 0 !important;
+    width: 100% !important;
+  }
+  
+  /* Hide the left empty grid spacer slot on mobile */
+  .hero-floating-form-grid > div:first-child {
+    display: none !important;
+  }
+  
+  .hero-floating-form-card {
+    max-width: 100% !important;
+    width: 100% !important;
+    margin: 0 auto !important;
+    transform: none !important; /* Disable translateY float effect */
+    box-shadow: 0 8px 24px rgba(15, 23, 42, 0.12) !important;
+    position: relative !important;
+  }
+}
+
+@media (max-width: 480px) {
+  .hero-floating-form-wrapper {
+    margin-top: 24px !important;
+    padding: 0 12px !important;
+  }
+  .hero-floating-form-card {
+    padding: 24px 20px !important; /* Slightly compress padding on tiny phones */
+  }
+  /* Stack Zoho Form input fields vertically to prevent placeholder clipping */
+  .zoho-form-row {
+    grid-template-columns: 1fr !important;
+    gap: 14px !important;
+  }
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   TEXT SCROLL entrance ANIMATION REVEALS
+═══════════════════════════════════════════════════════════════ */
+
+/* Targets child texts (h2, p, eyebrow, button elements) inside observed sections */
+.reveal-ready h2,
+.reveal-ready p,
+.reveal-ready .eyebrow,
+.reveal-ready .btn-quote,
+.reveal-ready a.btn {
+  opacity: 0;
+  transform: translateY(22px) translateZ(0);
+  transition: opacity 0.85s cubic-bezier(0.16, 1, 0.3, 1),
+              transform 0.85s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: transform, opacity;
+}
+
+/* On reveal-active class addition, transition them into view with staggered delays */
+.reveal-ready.reveal-active h2,
+.reveal-ready.reveal-active p,
+.reveal-ready.reveal-active .eyebrow,
+.reveal-ready.reveal-active .btn-quote,
+.reveal-ready.reveal-active a.btn {
+  opacity: 1;
+  transform: translateY(0) translateZ(0);
+}
+
+.reveal-ready h2 {
+  transition-delay: 0.08s;
+}
+.reveal-ready p {
+  transition-delay: 0.16s;
+}
+.reveal-ready .btn-quote, .reveal-ready a.btn {
+  transition-delay: 0.24s;
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   HERO BANNER STRIP LOGOS RESPONSIVENESS OVERRIDES
+═══════════════════════════════════════════════════════════════ */
+@media (max-width: 768px) {
+  .hero-banner-strip-grid {
+    grid-template-columns: 1fr !important;
+    gap: 16px !important;
+  }
+  .hero-banner-strip-content {
+    flex-direction: column !important;
+    align-items: center !important;
+    text-align: center !important;
+    gap: 20px !important;
+    width: 100% !important;
+  }
+  .hero-banner-strip-logo {
+    border-right: none !important;
+    border-bottom: 1.5px solid #e2e8f0 !important;
+    padding-right: 0 !important;
+    padding-bottom: 20px !important;
+    width: 100% !important;
+    display: flex !important;
+    justify-content: center !important;
+    align-items: center !important;
+  }
+  .hero-banner-strip-logo img {
+    margin: 0 auto !important;
+  }
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   INSPECTION SECTION MOBILE CARDS RESPONSIVENESS OVERRIDES
+═══════════════════════════════════════════════════════════════ */
+@media (max-width: 640px) {
+  .inspection-image-container {
+    height: auto !important;
+    display: grid !important;
+    grid-template-columns: 1fr 1fr !important;
+    gap: 12px !important;
+  }
+  .inspection-accent-bar {
+    display: none !important; /* Hide left line on mobile */
+  }
+  .inspection-card {
+    position: relative !important;
+    left: auto !important;
+    right: auto !important;
+    top: auto !important;
+    bottom: auto !important;
+    width: 100% !important;
+    height: 180px !important;
+    border-radius: 12px !important;
+    transform: none !important;
+  }
+  .inspection-card-1 {
+    grid-column: span 2 !important; /* Spans across 2 columns */
+    height: 220px !important;
+  }
+}
+
+
+
+
