@@ -22,7 +22,7 @@ export const ExactHeroSection: React.FC = () => {
 
       <div className="container" style={{ position: 'relative', zIndex: 2 }}>
         
-        <div style={{ display: 'grid', gridTemplateColumns: '1fr 480px', gap: '48px', alignItems: 'flex-start' }}>
+        <div className="hero-grid" style={{ display: 'grid', gridTemplateColumns: '1fr 480px', gap: '48px', alignItems: 'flex-start' }}>
           
           {/* Left Column Text Content */}
           <div style={{ paddingTop: '16px' }}>
@@ -89,7 +89,7 @@ export const ExactHeroSection: React.FC = () => {
           </div>
 
           {/* Right Column: Floating Quote Form */}
-          <div style={{
+          <div className="hero-form-container" style={{
             backgroundColor: '#ffffff',
             borderRadius: '20px',
             padding: '36px 32px',
