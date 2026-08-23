@@ -9,9 +9,6 @@ import { ExactIndustriesSection } from '@/components/home/ExactIndustriesSection
 import { InspectionSection } from '@/components/home/InspectionSection';
 import { CertificationStandardsSlider } from '@/components/home/CertificationStandardsSlider';
 import { GlobalPresenceMapSection } from '@/components/home/GlobalPresenceMapSection';
-import { EssentialGuideBanner } from '@/components/home/EssentialGuideBanner';
-import { RealResultsTestimonialSection } from '@/components/home/RealResultsTestimonialSection';
-import { NewsInsightsSection } from '@/components/home/NewsInsightsSection';
 
 export const metadata = {
   title: 'TRAIBCERT Limited | Independent ISO Certification Body',
@@ -48,17 +45,8 @@ export default function HomePage() {
       {/* 9. Certification Standard's Slanted Slider */}
       <CertificationStandardsSlider />
 
-      {/* 10. Our Presence 3D Interactive World Map (Positioned directly after Certification Standards) */}
+      {/* 10. Our Presence 3D Interactive World Map */}
       <GlobalPresenceMapSection />
-
-      {/* 11. 6 Step Essential Guide Lead Magnet */}
-      <EssentialGuideBanner />
-
-      {/* 12. Real Results. Real ROI Testimonial & Video */}
-      <RealResultsTestimonialSection />
-
-      {/* 13. News & Industry Insights with Segmented Tabs */}
-      <NewsInsightsSection />
     </main>
   );
 }
