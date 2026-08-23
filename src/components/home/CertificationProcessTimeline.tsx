@@ -2,7 +2,7 @@
 
 import React, { useState } from 'react';
 import Link from 'next/link';
-import { ArrowRight } from 'lucide-react';
+import { ArrowUpRight } from 'lucide-react';
 
 interface ProcessTab {
   id: string;
@@ -43,21 +43,36 @@ export const CertificationProcessTimeline: React.FC = () => {
   const activeTab = tabs.find(t => t.id === activeTabId) || tabs[1];
 
   return (
-    <section style={{ backgroundColor: '#134767', color: '#ffffff', overflow: 'hidden' }}>
-      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(340px, 1fr))', minHeight: '520px' }}>
-        
-        {/* Left Column: Process Information & Interactive Tabs */}
-        <div style={{ padding: '64px 48px', display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
-          <h2 style={{ fontSize: 'clamp(28px, 4vw, 40px)', fontWeight: 800, color: '#ffffff', marginBottom: '8px', lineHeight: 1.15 }}>
+    <section
+      id="certification-process"
+      style={{
+        backgroundImage: "url('/assets/images/Home/certification_section_hme.png')",
+        backgroundSize: '100% 100%',
+        backgroundRepeat: 'no-repeat',
+        backgroundPosition: 'center center',
+        color: '#ffffff',
+        minHeight: '520px',
+        display: 'flex',
+        alignItems: 'center',
+        position: 'relative',
+        overflow: 'hidden',
+        padding: '76px 0 84px'
+      }}
+    >
+      <div className="container" style={{ position: 'relative', zIndex: 2 }}>
+        <div style={{ maxWidth: '640px' }}>
+          
+          {/* Section Heading */}
+          <h2 style={{ fontSize: 'clamp(32px, 4.5vw, 44px)', fontWeight: 800, color: '#ffffff', marginBottom: '14px', lineHeight: 1.15, letterSpacing: '-0.5px' }}>
             Our Certification Process<br />and Time Line
           </h2>
 
-          <p style={{ fontSize: '15px', color: 'rgba(255, 255, 255, 0.88)', marginBottom: '32px', fontWeight: 500 }}>
+          <p style={{ fontSize: '15px', color: 'rgba(255, 255, 255, 0.88)', marginBottom: '36px', fontWeight: 500 }}>
             Our certification &amp; training services are offer for various ISO STANDARDS.
           </p>
 
           {/* Interactive Process Tabs Pill Bar */}
-          <div style={{ display: 'flex', flexWrap: 'wrap', gap: '10px', marginBottom: '32px', borderBottom: '1px solid rgba(255, 255, 255, 0.15)', paddingBottom: '16px' }}>
+          <div style={{ display: 'flex', flexWrap: 'wrap', gap: '8px', marginBottom: '32px', borderBottom: '1px solid rgba(255, 255, 255, 0.2)', paddingBottom: '18px' }}>
             {tabs.map((tab) => {
               const isActive = tab.id === activeTabId;
               return (
@@ -65,11 +80,11 @@ export const CertificationProcessTimeline: React.FC = () => {
                   key={tab.id}
                   onClick={() => setActiveTabId(tab.id)}
                   style={{
-                    backgroundColor: isActive ? '#00b4d8' : 'transparent',
+                    backgroundColor: isActive ? '#00aeef' : 'transparent',
                     color: '#ffffff',
                     border: 'none',
-                    borderRadius: isActive ? '6px' : '0px',
-                    padding: '8px 18px',
+                    borderRadius: '6px',
+                    padding: '9px 22px',
                     fontSize: '14px',
                     fontWeight: 700,
                     cursor: 'pointer',
@@ -82,14 +97,14 @@ export const CertificationProcessTimeline: React.FC = () => {
                     <span
                       style={{
                         position: 'absolute',
-                        bottom: '-8px',
+                        bottom: '-9px',
                         left: '50%',
                         transform: 'translateX(-50%)',
                         width: '0',
                         height: '0',
                         borderLeft: '6px solid transparent',
                         borderRight: '6px solid transparent',
-                        borderTop: '6px solid #00b4d8'
+                        borderTop: '6px solid #00aeef'
                       }}
                     />
                   )}
@@ -98,53 +113,66 @@ export const CertificationProcessTimeline: React.FC = () => {
             })}
           </div>
 
-          {/* Active Tab Content */}
-          <div style={{ marginBottom: '32px', minHeight: '110px' }}>
-            <p style={{ fontSize: '14.5px', color: 'rgba(255, 255, 255, 0.92)', lineHeight: 1.65, margin: 0 }}>
+          {/* Active Tab Description Text */}
+          <div style={{ marginBottom: '36px', minHeight: '90px' }}>
+            <p style={{ fontSize: '14.5px', color: 'rgba(255, 255, 255, 0.92)', lineHeight: 1.68, margin: 0, fontWeight: 400 }}>
               {activeTab.desc}
             </p>
           </div>
 
+          {/* Yellow View More Button */}
           <div>
             <Link
               href="/contact"
               style={{
                 display: 'inline-flex',
                 alignItems: 'center',
-                gap: '8px',
+                gap: '10px',
                 backgroundColor: '#f9b933',
                 color: '#1a1854',
-                padding: '12px 28px',
-                borderRadius: '30px',
+                padding: '10px 20px 10px 24px',
+                borderRadius: '8px',
                 fontSize: '14.5px',
                 fontWeight: 800,
                 textDecoration: 'none',
                 boxShadow: 'none',
-                transition: 'all 0.2s ease'
+                transition: 'all 0.25s cubic-bezier(0.34, 1.56, 0.64, 1)'
               }}
               onMouseOver={(e) => {
                 (e.currentTarget as HTMLElement).style.backgroundColor = '#e0a520';
+                (e.currentTarget as HTMLElement).style.transform = 'translateY(-2px)';
+                const badge = (e.currentTarget as HTMLElement).querySelector('.arrow-badge') as HTMLElement;
+                if (badge) badge.style.transform = 'translate(3px, -3px) rotate(45deg) scale(1.15)';
               }}
               onMouseOut={(e) => {
                 (e.currentTarget as HTMLElement).style.backgroundColor = '#f9b933';
+                (e.currentTarget as HTMLElement).style.transform = 'none';
+                const badge = (e.currentTarget as HTMLElement).querySelector('.arrow-badge') as HTMLElement;
+                if (badge) badge.style.transform = 'none';
               }}
             >
               <span>View More</span>
-              <ArrowRight size={16} />
+              <span
+                className="arrow-badge"
+                style={{
+                  display: 'inline-flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  width: '28px',
+                  height: '28px',
+                  borderRadius: '6px',
+                  backgroundColor: '#1a1854',
+                  color: '#f9b933',
+                  flexShrink: 0,
+                  transition: 'transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1)'
+                }}
+              >
+                <ArrowUpRight size={16} strokeWidth={2.5} />
+              </span>
             </Link>
           </div>
+
         </div>
-
-        {/* Right Column: Hero Image (World Map Meeting Photo) */}
-        <div
-          style={{
-            backgroundImage: "url('/assets/images/Home/process_meeting.jpg')",
-            backgroundSize: 'cover',
-            backgroundPosition: 'center',
-            minHeight: '360px'
-          }}
-        />
-
       </div>
     </section>
   );

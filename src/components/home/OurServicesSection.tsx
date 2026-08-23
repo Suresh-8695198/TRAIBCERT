@@ -10,6 +10,7 @@ import {
   PackageCheck,
   ShieldAlert,
   ArrowRight,
+  ArrowUpRight,
   Download
 } from 'lucide-react';
 
@@ -131,26 +132,48 @@ export const OurServicesSection: React.FC = () => {
                 style={{
                   display: 'inline-flex',
                   alignItems: 'center',
-                  gap: '8px',
+                  gap: '10px',
                   backgroundColor: '#1a1854',
                   color: '#ffffff',
-                  padding: '12px 28px',
+                  padding: '10px 20px 10px 24px',
                   borderRadius: '8px',
                   fontSize: '14.5px',
                   fontWeight: 800,
                   textDecoration: 'none',
                   boxShadow: 'none',
-                  transition: 'all 0.2s ease'
+                  transition: 'all 0.25s cubic-bezier(0.34, 1.56, 0.64, 1)'
                 }}
                 onMouseOver={(e) => {
-                  (e.currentTarget as HTMLElement).style.backgroundColor = '#262378';
+                  (e.currentTarget as HTMLElement).style.backgroundColor = '#252175';
+                  (e.currentTarget as HTMLElement).style.transform = 'translateY(-2px)';
+                  const badge = (e.currentTarget as HTMLElement).querySelector('.arrow-badge') as HTMLElement;
+                  if (badge) badge.style.transform = 'translate(3px, -3px) rotate(45deg) scale(1.15)';
                 }}
                 onMouseOut={(e) => {
                   (e.currentTarget as HTMLElement).style.backgroundColor = '#1a1854';
+                  (e.currentTarget as HTMLElement).style.transform = 'none';
+                  const badge = (e.currentTarget as HTMLElement).querySelector('.arrow-badge') as HTMLElement;
+                  if (badge) badge.style.transform = 'none';
                 }}
               >
                 <span>View More</span>
-                <ArrowRight size={16} />
+                <span
+                  className="arrow-badge"
+                  style={{
+                    display: 'inline-flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    width: '28px',
+                    height: '28px',
+                    borderRadius: '6px',
+                    backgroundColor: '#f9b933',
+                    color: '#1a1854',
+                    flexShrink: 0,
+                    transition: 'transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1)'
+                  }}
+                >
+                  <ArrowUpRight size={16} strokeWidth={2.5} />
+                </span>
               </Link>
             </div>
           </div>
