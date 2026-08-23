@@ -1,13 +1,14 @@
 import React from 'react';
 import { HeroWithQuoteForm } from '@/components/home/HeroWithQuoteForm';
+import { RecommendStatsSection } from '@/components/home/RecommendStatsSection';
+import { SplitSolutionsSection } from '@/components/home/SplitSolutionsSection';
 import { ExactServicesSection } from '@/components/home/ExactServicesSection';
-import { EssentialGuideBanner } from '@/components/home/EssentialGuideBanner';
-import { CertificationProcessTimeline } from '@/components/home/CertificationProcessTimeline';
 import { ISOStandardsShowcaseGrid } from '@/components/home/ISOStandardsShowcaseGrid';
-import { ELearningCatalogSection } from '@/components/home/ELearningCatalogSection';
-import { InHouseTrainingSection } from '@/components/home/InHouseTrainingSection';
+import { CertificationProcessTimeline } from '@/components/home/CertificationProcessTimeline';
+import { EssentialGuideBanner } from '@/components/home/EssentialGuideBanner';
+import { RealResultsTestimonialSection } from '@/components/home/RealResultsTestimonialSection';
+import { NewsInsightsSection } from '@/components/home/NewsInsightsSection';
 import { ExactIndustriesSection } from '@/components/home/ExactIndustriesSection';
-import { SubscribeEnquirySection } from '@/components/home/SubscribeEnquirySection';
 
 export const metadata = {
   title: 'TRAIBCERT Limited | Independent ISO Certification Body',
@@ -17,32 +18,37 @@ export const metadata = {
 export default function HomePage() {
   return (
     <main>
-      {/* 1. Hero & Independent Impartial Certification Body intro (Matching Reference Screenshot 100%) */}
+      {/* 1. Hero & Quote Form (Frames 0 & 1) */}
       <HeroWithQuoteForm />
 
-      {/* 2. Our Services 4 Pillars (Certification, Training, Inspection, E-Learning) */}
+      {/* 2. 96% Client Recommendation & 3 Light Cyan Cards (Frame 2) */}
+      <RecommendStatsSection />
+
+      {/* 3. Split Image & Solutions List with Chevron Arrows (Frame 3) */}
+      <SplitSolutionsSection />
+
+      {/* 4. Our Core 4 Services Pillars */}
       <ExactServicesSection />
 
-      {/* 3. 6 Step Essential Guide for Certification Lead Magnet */}
-      <EssentialGuideBanner />
-
-      {/* 4. Our Certification Process & Time Line */}
-      <CertificationProcessTimeline />
-
-      {/* 5. ISO Certification Standards Grid (15 Key Standards) */}
+      {/* 5. ISO Certification Standards We Audit */}
       <ISOStandardsShowcaseGrid />
 
-      {/* 6. E-Learning Courses Catalog Grid */}
-      <ELearningCatalogSection />
+      {/* 6. Step-by-Step Certification Process & Time Line */}
+      <CertificationProcessTimeline />
 
-      {/* 7. ISO Training & Risk Management In-House Modules */}
-      <InHouseTrainingSection />
+      {/* 7. 6 Step Essential Guide Lead Magnet */}
+      <EssentialGuideBanner />
 
-      {/* 8. Industry Sectors We Support */}
+      {/* 8. Real Results. Real ROI Testimonial & Video (Frames 4 & 5) */}
+      <RealResultsTestimonialSection />
+
+      {/* 9. News & Industry Insights with Segmented Tabs (Frames 6 & 7) */}
+      <NewsInsightsSection />
+
+      {/* 10. Industry Sectors We Support */}
       <ExactIndustriesSection />
-
-      {/* 9. Subscribe & Fast Proposal Enquiry Form */}
-      <SubscribeEnquirySection />
     </main>
   );
 }
+
+

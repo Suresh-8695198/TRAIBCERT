@@ -1,65 +1,69 @@
 import React from 'react';
 import Link from 'next/link';
-import { GraduationCap, ExternalLink } from 'lucide-react';
 import { trainingCoursesData } from '@/config/training';
 
 export const DropdownTraining: React.FC<{ onClose: () => void }> = ({ onClose }) => {
   return (
-    <div style={{
-      position: 'absolute',
-      top: '100%',
-      left: '50%',
-      transform: 'translateX(-50%)',
-      width: '520px',
-      maxHeight: '500px',
-      backgroundColor: 'var(--white)',
-      boxShadow: 'var(--shadow-lg)',
-      borderRadius: '0 0 var(--radius-md) var(--radius-md)',
-      border: '1px solid var(--gray-100)',
-      borderTop: '3px solid var(--ink)',
-      padding: '20px',
-      zIndex: 100,
-      overflowY: 'auto'
-    }}>
-      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '12px', paddingBottom: '10px', borderBottom: '1px solid var(--gray-100)' }}>
-        <h4 style={{ fontSize: '13px', fontWeight: 800, color: 'var(--gold-strong)', letterSpacing: '0.8px', textTransform: 'uppercase', display: 'flex', alignItems: 'center', gap: '6px' }}>
-          <GraduationCap size={16} /> ISO Training Courses ({trainingCoursesData.length - 1})
-        </h4>
-        <a
-          href="https://academy.traibcert.org.uk"
-          target="_blank"
-          rel="noopener noreferrer"
-          style={{ fontSize: '11.5px', color: 'var(--ink)', fontWeight: 700, display: 'flex', alignItems: 'center', gap: '4px' }}
-        >
-          <span>E-Learning Academy</span>
-          <ExternalLink size={12} />
-        </a>
-      </div>
-
-      <ul style={{ listStyle: 'none', display: 'flex', flexDirection: 'column', gap: '8px' }}>
-        {trainingCoursesData.map(course => (
+    <div
+      style={{
+        position: 'absolute',
+        top: '100%',
+        left: '50%',
+        transform: 'translateX(-50%)',
+        width: '520px',
+        maxWidth: 'calc(100vw - 48px)',
+        backgroundColor: '#ffffff',
+        boxShadow: '0 12px 40px rgba(20, 20, 40, 0.14)',
+        borderRadius: '0 0 8px 8px',
+        border: '1px solid #ededf0',
+        borderTop: '2px solid #f9b933',
+        padding: '14px 8px',
+        zIndex: 1000
+      }}
+      onMouseEnter={(e) => e.stopPropagation()}
+    >
+      <ul style={{ listStyle: 'none', maxHeight: '520px', overflowY: 'auto', margin: 0, padding: 0 }}>
+        <li>
+          <Link
+            href="/training"
+            onClick={onClose}
+            style={{
+              display: 'block',
+              padding: '10px 18px',
+              fontSize: '13.5px',
+              fontWeight: 700,
+              color: '#2c2a75',
+              backgroundColor: '#f8f8fa',
+              borderBottom: '1px solid #ededf0',
+              borderRadius: '4px 4px 0 0',
+              marginBottom: '4px',
+              textDecoration: 'none'
+            }}
+          >
+            All Training Programmes →
+          </Link>
+        </li>
+        {trainingCoursesData.filter(c => c.slug !== 'training-overview').map(course => (
           <li key={course.slug}>
             <Link
-              href={course.slug === 'training-overview' ? '/training' : `/training/${course.slug}`}
+              href={`/training/${course.slug}`}
               onClick={onClose}
               style={{
-                fontSize: '13px',
-                color: 'var(--gray-900)',
-                fontWeight: 600,
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'space-between',
-                padding: '6px 10px',
-                borderRadius: 'var(--radius-sm)',
-                transition: 'background 0.2s'
+                display: 'block',
+                padding: '10px 18px',
+                fontSize: '13.5px',
+                color: '#4a4a5a',
+                fontWeight: 500,
+                lineHeight: 1.3,
+                borderRadius: '4px',
+                textDecoration: 'none'
               }}
-              className="training-item"
             >
               <div>
-                <span>{course.code} — {course.name.replace(' Training', '')}</span>
-                <div style={{ fontSize: '11px', color: 'var(--gray-500)', fontWeight: 400 }}>
+                <span style={{ fontWeight: 600, color: '#2c2a75' }}>{course.code} — {course.name.replace(' Training', '')}</span>
+                <span style={{ display: 'block', fontSize: '11px', color: '#8a8a9a', fontWeight: 400, marginTop: '2px' }}>
                   {course.levels.join(' · ')}
-                </div>
+                </span>
               </div>
             </Link>
           </li>
@@ -68,3 +72,4 @@ export const DropdownTraining: React.FC<{ onClose: () => void }> = ({ onClose })
     </div>
   );
 };
+

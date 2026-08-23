@@ -197,7 +197,7 @@ export const MobileDrawer: React.FC<{ isOpen: boolean; onClose: () => void }> = 
               textAlign: 'center',
               textDecoration: 'none',
               marginBottom: '12px',
-              boxShadow: '0 4px 14px rgba(249, 185, 51, 0.35)'
+              boxShadow: 'none'
             }}
           >
             Get a Quote →

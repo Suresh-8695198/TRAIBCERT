@@ -17,7 +17,7 @@ export const Footer: React.FC = () => {
   };
 
   return (
-    <footer style={{ backgroundColor: '#2c2a75', color: 'rgba(255,255,255,0.85)', borderTop: '5px solid #f9b933', paddingTop: '56px', paddingBottom: '32px' }}>
+    <footer style={{ backgroundColor: '#1a1854', color: 'rgba(255,255,255,0.85)', borderTop: '5px solid #f9b933', paddingTop: '56px', paddingBottom: '32px' }}>
       <div className="container">
         
         {/* Newsletter Subscription Strip (Matching Screenshot 1) */}
@@ -70,7 +70,7 @@ export const Footer: React.FC = () => {
                 type="submit"
                 style={{
                   backgroundColor: '#f9b933',
-                  color: '#2c2a75',
+                  color: '#1a1854',
                   fontWeight: 800,
                   fontSize: '14px',
                   padding: '12px 24px',
@@ -78,7 +78,8 @@ export const Footer: React.FC = () => {
                   border: 'none',
                   cursor: 'pointer',
                   whiteSpace: 'nowrap',
-                  boxShadow: '0 4px 12px rgba(249, 185, 51, 0.3)'
+                  boxShadow: 'none',
+                  transition: 'all 0.2s ease'
                 }}
               >
                 Subscribe

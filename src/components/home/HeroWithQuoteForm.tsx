@@ -1,211 +1,194 @@
 'use client';
 
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
-import { ArrowUpRight, ShieldCheck, Award, CheckCircle2, Building2, Users } from 'lucide-react';
+import { ArrowUpRight } from 'lucide-react';
 import { ZohoBiginForm } from '@/components/forms/ZohoBiginForm';
 
 export const HeroWithQuoteForm: React.FC = () => {
+  const [offsetY, setOffsetY] = useState(0);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      const scrollPos = window.scrollY;
+      // Gentle, friendly subtle float bounded at 60px max, keeping form top safely clear of header
+      setOffsetY(Math.min(scrollPos * 0.15, 60));
+    };
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
   return (
-    <section id="hero" style={{ backgroundColor: '#2c2a75', color: '#ffffff', position: 'relative', overflow: 'hidden', paddingTop: '56px', paddingBottom: '88px' }}>
+    <div style={{ position: 'relative', overflow: 'visible' }}>
       
-      {/* Dark Indigo Technical Radial Background Overlay (Clean, Corporate, No Neon Glows) */}
-      <div style={{
-        position: 'absolute',
-        top: 0,
-        left: 0,
-        right: 0,
-        bottom: 0,
-        backgroundImage: 'radial-gradient(circle at 85% 15%, rgba(249, 185, 51, 0.08) 0%, transparent 45%), radial-gradient(circle at 15% 85%, rgba(26, 24, 84, 0.6) 0%, transparent 50%)',
-        pointerEvents: 'none'
-      }} />
-
-      <div className="container" style={{ position: 'relative', zIndex: 2 }}>
-        
-        {/* Main Grid: Left Content & Right Floating Quote Form */}
-        <div className="hero-grid" style={{ 
-          display: 'grid', 
-          gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))',
-          gap: '48px', 
-          alignItems: 'flex-start'
-        }}>
-          
-          {/* Left Column Content */}
-          <div className="hero-animate-in" style={{ paddingTop: '12px' }}>
-            
-            {/* Top Eyebrow Tag */}
-            <div style={{ display: 'inline-flex', alignItems: 'center', gap: '8px', backgroundColor: '#fff4d1', border: '1px solid #fde68a', color: '#c99327', padding: '6px 14px', borderRadius: '9px', marginBottom: '20px', fontSize: 'clamp(10px, 2vw, 12px)' }}>
-              <ShieldCheck size={15} />
-              <span>INDEPENDENT, IMPARTIAL CERTIFICATION BODY</span>
-            </div>
-
-            {/* Main Headline */}
-            <h1 style={{ fontSize: 'clamp(24px, 6vw, 52px)', fontWeight: 800, color: '#ffffff', lineHeight: 1.15, letterSpacing: '-0.5px', marginBottom: '20px' }}>
-              Accredited ISO Certification & Cyber Security Body
-            </h1>
-
-            {/* Sub-headline */}
-            <p style={{ fontSize: 'clamp(14px, 3vw, 16.5px)', color: 'rgba(255, 255, 255, 0.88)', lineHeight: 1.6, marginBottom: '36px', maxWidth: '580px' }}>
-              We at TRAIBCERT are an Independent, Impartial Certification Body taking pride in supporting your compliance needs for ISO Certification, IRCA Training, and Pre-Shipment Inspection services.
-            </p>
-
-            {/* 2 Hero Pill Selection Cards */}
-            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: '16px', marginBottom: '44px' }}>
-              
-              <Link
-                href="/certification"
-                className="hero-pill-card"
+      {/* 1. Dark Blue Hero Section */}
+      <section
+        style={{
+          position: 'relative',
+          backgroundColor: '#090e2e',
+          backgroundImage: "url('/assets/images/Home/hero_bg.png')",
+          backgroundSize: 'cover',
+          backgroundPosition: 'center',
+          backgroundRepeat: 'no-repeat',
+          color: '#ffffff',
+          paddingTop: '120px',
+          paddingBottom: '260px',
+          minHeight: '620px'
+        }}
+      >
+        <div className="container" style={{ position: 'relative', zIndex: 2 }}>
+          <div
+            style={{
+              display: 'grid',
+              gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))',
+              gap: '40px',
+              alignItems: 'flex-start'
+            }}
+          >
+            {/* Left Hero Content: Headline with Word-by-Word Staggered Bottom-to-Top Animation */}
+            <div>
+              <style>{`
+                @keyframes heroWordUp {
+                  from {
+                    opacity: 0;
+                    transform: translateY(28px);
+                  }
+                  to {
+                    opacity: 1;
+                    transform: translateY(0);
+                  }
+                }
+              `}</style>
+              <h1
                 style={{
-                  backgroundColor: '#ffffff',
-                  color: '#2c2a75',
-                  borderRadius: '12px',
-                  padding: '16px 20px',
-                  textDecoration: 'none',
-                  display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: 'space-between',
-                  gap: '12px',
-                  boxShadow: '0 8px 24px rgba(0,0,0,0.18)',
-                  border: '1.5px solid transparent'
+                  fontSize: 'clamp(32px, 4.5vw, 48px)',
+                  fontWeight: 800,
+                  lineHeight: 1.15,
+                  color: '#ffffff',
+                  marginBottom: '0px',
+                  letterSpacing: '-0.5px'
                 }}
               >
-                <div>
-                  <div style={{ fontSize: 'clamp(9px, 2vw, 10px)', fontWeight: 800, color: '#64748b', textTransform: 'uppercase', letterSpacing: '0.5px', marginBottom: '2px' }}>
-                    MORE THAN 500 EMPLOYEES
-                  </div>
-                  <div style={{ fontSize: 'clamp(13px, 3vw, 15px)', fontWeight: 800, color: '#2c2a75' }}>
-                    Enterprise ISO Systems
-                  </div>
-                </div>
-                <div style={{ width: '32px', height: '32px', borderRadius: '8px', backgroundColor: '#2c2a75', color: '#ffffff', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
-                  <ArrowUpRight size={18} />
-                </div>
-              </Link>
-
-              <Link
-                href="/certification/cyber-essentials"
-                className="hero-pill-card"
-                style={{
-                  backgroundColor: '#ffffff',
-                  color: '#2c2a75',
-                  borderRadius: '12px',
-                  padding: '16px 20px',
-                  textDecoration: 'none',
-                  display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: 'space-between',
-                  gap: '12px',
-                  boxShadow: '0 8px 24px rgba(0,0,0,0.18)',
-                  border: '1.5px solid transparent'
-                }}
-              >
-                <div>
-                  <div style={{ fontSize: 'clamp(9px, 2vw, 10px)', fontWeight: 800, color: '#64748b', textTransform: 'uppercase', letterSpacing: '0.5px', marginBottom: '2px' }}>
-                    FEWER THAN 500 EMPLOYEES
-                  </div>
-                  <div style={{ fontSize: 'clamp(13px, 3vw, 15px)', fontWeight: 800, color: '#2c2a75' }}>
-                    Small to Mid-Sized Businesses
-                  </div>
-                </div>
-                <div style={{ width: '32px', height: '32px', borderRadius: '8px', backgroundColor: '#2c2a75', color: '#ffffff', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
-                  <ArrowUpRight size={18} />
-                </div>
-              </Link>
-
+                {["Independent,", "Impartial", "Certification", "Body", "for", "ISO", "Standards"].map((word, index) => (
+                  <span
+                    key={index}
+                    style={{
+                      display: 'inline-block',
+                      marginRight: '0.26em',
+                      opacity: 0,
+                      animation: `heroWordUp 0.65s cubic-bezier(0.16, 1, 0.3, 1) ${index * 0.08}s forwards`
+                    }}
+                  >
+                    {word}
+                  </span>
+                ))}
+              </h1>
             </div>
 
-            {/* Bottom 50K+ Trust Metric & Badges Strip */}
-            <div style={{
-              backgroundColor: '#ffffff',
-              borderRadius: '16px',
-              padding: 'clamp(16px, 4vw, 24px)',
-              color: '#0f172a',
-              display: 'flex',
-              flexDirection: 'column',
-              gap: '20px',
-              boxShadow: '0 12px 32px rgba(0,0,0,0.2)'
-            }}>
-              <div style={{ display: 'flex', alignItems: 'center', gap: '16px', flexWrap: 'wrap' }}>
-                <div style={{ backgroundColor: '#fff4d1', border: '1px solid #fde68a', borderRadius: '10px', padding: '8px 14px', textAlign: 'center' }}>
-                  <div style={{ fontSize: 'clamp(18px, 5vw, 24px)', fontWeight: 800, color: '#2c2a75', lineHeight: 1 }}>
-                    5,000+
-                  </div>
-                  <div style={{ fontSize: '9.5px', fontWeight: 800, color: '#c99327', textTransform: 'uppercase', marginTop: '2px' }}>
-                    CERTIFIED
-                  </div>
-                </div>
-
-                <div style={{ fontSize: 'clamp(12px, 2vw, 13px)', fontWeight: 700, color: '#475569', lineHeight: 1.4 }}>
-                  Global Customers, Clients and Partners Certified with TRAIBCERT
-                </div>
-              </div>
-
-              {/* Accreditations Badges Strip */}
-              <div style={{ display: 'flex', alignItems: 'center', gap: '10px', flexWrap: 'wrap', paddingTop: '12px', borderTop: '1px solid #e2e8f0' }}>
-                <div style={{ textAlign: 'center' }}>
-                  <div style={{ backgroundColor: '#fff4d1', color: '#c99327', fontSize: '11px', fontWeight: 800, padding: '4px 8px', borderRadius: '6px' }}>ASCB</div>
-                  <div style={{ fontSize: '9.5px', color: '#64748b', fontWeight: 600, marginTop: '2px' }}>Accredited</div>
-                </div>
-                <div style={{ textAlign: 'center' }}>
-                  <div style={{ backgroundColor: '#fff4d1', color: '#c99327', fontSize: '11px', fontWeight: 800, padding: '4px 8px', borderRadius: '6px' }}>IASME</div>
-                  <div style={{ fontSize: '9.5px', color: '#64748b', fontWeight: 600, marginTop: '2px' }}>Partner</div>
-                </div>
-                <div style={{ textAlign: 'center' }}>
-                  <div style={{ backgroundColor: '#e5f6ee', color: '#2f9e6e', fontSize: '11px', fontWeight: 800, padding: '4px 8px', borderRadius: '6px' }}>IRCA</div>
-                  <div style={{ fontSize: '9.5px', color: '#64748b', fontWeight: 600, marginTop: '2px' }}>Approved</div>
-                </div>
-              </div>
-            </div>
-
+            {/* Right Column Spacer (Leaves Room for Overlapping Floating Form Card) */}
+            <div style={{ minHeight: '260px' }} />
           </div>
+        </div>
+      </section>
 
-          {/* Right Column: Floating White Lead/Quote Form */}
-          <div className="hero-animate-in" style={{
-            backgroundColor: '#ffffff',
-            borderRadius: '20px',
-            padding: 'clamp(24px, 6vw, 36px)',
-            boxShadow: '0 20px 50px rgba(0,0,0,0.3)',
-            border: '1px solid #e2e8f0',
-            color: '#0f172a',
-            position: 'relative',
-            height: 'fit-content'
-          }}>
-            <div style={{ marginBottom: '20px' }}>
-              <h3 style={{ fontSize: 'clamp(18px, 4vw, 22px)', fontWeight: 800, color: '#2c2a75', lineHeight: 1.25, marginBottom: '6px' }}>
-                Let's connect – we'll guide you to the right solution
-              </h3>
-              <p style={{ fontSize: 'clamp(12px, 2vw, 13.5px)', color: '#64748b', lineHeight: 1.5, margin: 0 }}>
-                Complete our fast form below for an instant fixed proposal from our UK lead audit team.
+      {/* 2. White Horizontal Banner Strip directly below Hero (Moved Higher Up) */}
+      <section style={{ backgroundColor: '#ffffff', borderBottom: 'none', paddingTop: '36px', paddingBottom: '36px', marginTop: '-45px', position: 'relative', zIndex: 10 }}>
+        <div className="container">
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(360px, 1fr))', gap: '24px', alignItems: 'center' }}>
+            
+            {/* Left Content: Clean Flush Logo Badge + Vertical Divider + Statement Text + Button */}
+            <div style={{ display: 'flex', alignItems: 'center', gap: '24px', width: '100%' }}>
+              <div style={{ flexShrink: 0, paddingRight: '20px', borderRight: '1.5px solid #e2e8f0' }}>
+                <img
+                  src="/assets/images/Home/certification-logo.jpg"
+                  alt="TRAIBCERT Certification Logo"
+                  style={{ height: '105px', width: 'auto', objectFit: 'contain', display: 'block' }}
+                />
+              </div>
+              <div style={{ flexGrow: 1, width: '100%' }}>
+                <p style={{ fontSize: '16.5px', color: '#1a1854', lineHeight: 1.6, margin: '0 0 16px', fontWeight: 500 }}>
+                  We at <strong>Traibcert</strong>, are an Independent, <strong>Impartial Certification</strong> Body for various ISO standards taking pride in supporting your compliance needs for <strong>Certification- Audits, Training, inspection & Regulatory Compliance</strong>.
+                </p>
+                <Link
+                  href="/about"
+                  style={{
+                    display: 'inline-flex',
+                    alignItems: 'center',
+                    gap: '8px',
+                    backgroundColor: '#f9b933',
+                    color: '#1a1854',
+                    padding: '11px 28px',
+                    borderRadius: '8px',
+                    fontSize: '14.5px',
+                    fontWeight: 800,
+                    textDecoration: 'none',
+                    boxShadow: 'none',
+                    transition: 'all 0.2s ease'
+                  }}
+                  onMouseOver={(e) => {
+                    (e.currentTarget as HTMLElement).style.backgroundColor = '#e0a520';
+                    (e.currentTarget as HTMLElement).style.transform = 'translateY(-2px)';
+                  }}
+                  onMouseOut={(e) => {
+                    (e.currentTarget as HTMLElement).style.backgroundColor = '#f9b933';
+                    (e.currentTarget as HTMLElement).style.transform = 'none';
+                  }}
+                >
+                  <span>View More</span>
+                  <span>→</span>
+                </Link>
+              </div>
+            </div>
+
+            {/* Right Column Spacer */}
+            <div />
+          </div>
+        </div>
+      </section>
+
+      {/* 3. Floating Right Form Card Overlapping Both Dark Blue Hero Banner & White Strip (User Friendly & Bounded) */}
+      <div
+        className="container"
+        style={{
+          position: 'absolute',
+          top: '76px',
+          left: '50%',
+          transform: 'translateX(-50%)',
+          width: '100%',
+          pointerEvents: 'none',
+          zIndex: 40
+        }}
+      >
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))', gap: '40px' }}>
+          <div />
+          <div
+            style={{
+              pointerEvents: 'auto',
+              backgroundColor: '#ffffff',
+              borderRadius: '12px',
+              padding: '28px 32px',
+              color: '#0f172a',
+              boxShadow: '0 12px 32px rgba(15, 23, 42, 0.08), 0 2px 6px rgba(0, 0, 0, 0.04)',
+              border: '1px solid #e2e8f0',
+              transform: `translateY(${offsetY}px)`,
+              transition: 'transform 0.2s cubic-bezier(0.16, 1, 0.3, 1)',
+              willChange: 'transform'
+            }}
+          >
+            <div style={{ marginBottom: '16px' }}>
+              <h2 style={{ fontSize: '20px', fontWeight: 800, color: '#1a1854', marginBottom: '4px' }}>
+                Get in Touch
+              </h2>
+              <p style={{ fontSize: '12px', color: '#64748b', margin: 0, lineHeight: 1.45 }}>
+                If you have any questions about the services we provide simply use the form below. We try and respond to all queries and comments within 24 hours.
               </p>
             </div>
 
-            {/* Zoho Bigin Native Form */}
             <ZohoBiginForm defaultStandard="ISO 9001:2015" />
           </div>
-
         </div>
-
       </div>
 
-      <style>{`
-        @media (max-width: 768px) {
-          .hero-grid {
-            grid-template-columns: 1fr !important;
-            gap: 32px !important;
-          }
-          section#hero {
-            padding-top: 32px;
-            padding-bottom: 56px;
-          }
-        }
-
-        @media (max-width: 480px) {
-          section#hero {
-            padding-top: 24px;
-            padding-bottom: 40px;
-          }
-        }
-      `}</style>
-    </section>
+    </div>
   );
 };
