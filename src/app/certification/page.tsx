@@ -507,14 +507,14 @@ export default function CertificationLandingPage() {
                   <path d="M-6 0 L-2 4 L6 -4" fill="none" stroke="#ffffff" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" />
                 </g>
 
-                {/* Large Magnifying Glass overlay */}
-                <g transform="translate(178, 142)">
+                {/* Large Magnifying Glass overlay shifted down and right to avoid obscuring the ISO logo */}
+                <g transform="translate(205, 175)">
                   {/* Handle shadow */}
-                  <line x1="28" y1="28" x2="58" y2="58" stroke="#94a3b8" strokeWidth="11" strokeLinecap="round" />
+                  <line x1="22" y1="22" x2="52" y2="52" stroke="#94a3b8" strokeWidth="11" strokeLinecap="round" />
                   {/* Handle body */}
-                  <line x1="28" y1="28" x2="58" y2="58" stroke="#0f172a" strokeWidth="9" strokeLinecap="round" />
+                  <line x1="22" y1="22" x2="52" y2="52" stroke="#0f172a" strokeWidth="9" strokeLinecap="round" />
                   {/* Handle metal clip connection */}
-                  <line x1="22" y1="22" x2="29" y2="29" stroke="#cbd5e1" strokeWidth="9" strokeLinecap="round" />
+                  <line x1="16" y1="16" x2="23" y2="23" stroke="#cbd5e1" strokeWidth="9" strokeLinecap="round" />
                   {/* Glass frame shadow */}
                   <circle cx="0" cy="0" r="32" fill="none" stroke="rgba(15,23,42,0.06)" strokeWidth="6.5" />
                   {/* Glass frame body */}
