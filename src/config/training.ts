@@ -22,6 +22,13 @@ export const trainingCoursesData: TrainingCourse[] = [
     summary: 'Master quality management system implementation, auditing, and continuous improvement.'
   },
   {
+    slug: 'iso-10002',
+    code: 'ISO 10002:2018',
+    name: 'Customer Satisfaction Training',
+    levels: ['Awareness', 'Internal Auditor'],
+    summary: 'Develop skills to handle complaints and improve customer satisfaction.'
+  },
+  {
     slug: 'iso-14001',
     code: 'ISO 14001:2026',
     name: 'Environmental Management Training',
@@ -76,6 +83,13 @@ export const trainingCoursesData: TrainingCourse[] = [
     name: 'Risk Management Training',
     levels: ['Awareness', 'Internal Auditor'],
     summary: 'Enterprise risk identification, risk evaluation, and mitigation techniques.'
+  },
+  {
+    slug: 'iso-26000',
+    code: 'ISO 26000:2010',
+    name: 'Social Responsibility Training',
+    levels: ['Awareness', 'Internal Auditor'],
+    summary: 'Understand core social responsibility principles and implementation guidelines.'
   },
   {
     slug: 'iso-50001',
