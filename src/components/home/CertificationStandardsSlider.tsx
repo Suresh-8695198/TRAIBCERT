@@ -1,115 +1,309 @@
 'use client';
 
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
+import { ChevronLeft, ChevronRight, Award } from 'lucide-react';
 
 interface StandardItem {
   code: string;
   name: string;
+  category: string;
 }
 
 const standardsData: StandardItem[] = [
-  { code: 'ISO 9001:2015', name: 'Quality Management System' },
-  { code: 'ISO 10002:2018', name: 'Customer Satisfaction' },
-  { code: 'ISO 13485:2016', name: 'Medical Devices Quality Management' },
-  { code: 'ISO 29001:2020', name: 'Quality Management System for Oil & Natural Gas' },
-  { code: 'ISO 50001:2018', name: 'Energy Management' },
-  { code: 'ISO 26000:2010', name: 'Guidance on Social Responsibility' },
-  { code: 'ISO 31000:2018', name: 'Risk Management' },
-  { code: 'ISO 27001:2022', name: 'Information Security Management System' },
-  { code: 'ISO 22301:2019', name: 'Business Continuity Management Systems' },
-  { code: 'ISO 20000-1:2018', name: 'IT Service Management System' },
-  { code: 'ISO 22000:2018', name: 'Food Safety Management Systems' },
-  { code: 'ISO 45001:2018', name: 'Occupational Health & Safety Management System' },
-  { code: 'ISO 21001:2018', name: 'Educational Organization Management Systems' },
-  { code: 'ISO 41001:2018', name: 'Facilities Management Systems' }
+  { code: 'ISO 9001:2015', name: 'Quality Management System', category: 'Quality' },
+  { code: 'ISO 10002:2018', name: 'Customer Satisfaction', category: 'Customer' },
+  { code: 'ISO 13485:2016', name: 'Medical Devices Quality Management', category: 'Medical' },
+  { code: 'ISO 29001:2020', name: 'Quality Management for Oil & Natural Gas', category: 'Energy' },
+  { code: 'ISO 50001:2018', name: 'Energy Management', category: 'Energy' },
+  { code: 'ISO 26000:2010', name: 'Guidance on Social Responsibility', category: 'Social' },
+  { code: 'ISO 31000:2018', name: 'Risk Management', category: 'Risk' },
+  { code: 'ISO 27001:2022', name: 'Information Security Management System', category: 'Security' },
+  { code: 'ISO 22301:2019', name: 'Business Continuity Management Systems', category: 'Business' },
+  { code: 'ISO 20000-1:2018', name: 'IT Service Management System', category: 'IT' },
+  { code: 'ISO 22000:2018', name: 'Food Safety Management Systems', category: 'Food' },
+  { code: 'ISO 45001:2018', name: 'Occupational Health & Safety Management', category: 'Safety' },
+  { code: 'ISO 21001:2018', name: 'Educational Organization Management Systems', category: 'Education' },
+  { code: 'ISO 41001:2018', name: 'Facilities Management Systems', category: 'Facilities' },
 ];
 
 export const CertificationStandardsSlider: React.FC = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
+  const [animDir, setAnimDir] = useState<'left' | 'right'>('right');
+  const [isAnimating, setIsAnimating] = useState(false);
+  const [progress, setProgress] = useState(0);
+
+  const INTERVAL = 4000;
+
+  const goTo = useCallback((idx: number, dir: 'left' | 'right') => {
+    if (isAnimating) return;
+    setAnimDir(dir);
+    setIsAnimating(true);
+    setTimeout(() => {
+      setCurrentIndex(idx);
+      setIsAnimating(false);
+      setProgress(0);
+    }, 350);
+  }, [isAnimating]);
+
+  const next = useCallback(() => {
+    goTo((currentIndex + 1) % standardsData.length, 'right');
+  }, [currentIndex, goTo]);
+
+  const prev = useCallback(() => {
+    goTo((currentIndex - 1 + standardsData.length) % standardsData.length, 'left');
+  }, [currentIndex, goTo]);
 
   useEffect(() => {
-    const timer = setInterval(() => {
-      setCurrentIndex((prev) => (prev + 1) % standardsData.length);
-    }, 4000);
-    return () => clearInterval(timer);
-  }, []);
+    const interval = setInterval(() => next(), INTERVAL);
+    return () => clearInterval(interval);
+  }, [next]);
 
-  const currentItem = standardsData[currentIndex];
+  useEffect(() => {
+    setProgress(0);
+    const step = 100 / (INTERVAL / 50);
+    const ticker = setInterval(() => {
+      setProgress(p => Math.min(p + step, 100));
+    }, 50);
+    return () => clearInterval(ticker);
+  }, [currentIndex]);
+
+  const current = standardsData[currentIndex];
 
   return (
     <section
       id="certification-standards-slider"
       style={{
-        backgroundImage: "linear-gradient(rgba(18, 69, 103, 0.9), rgba(18, 69, 103, 0.9)), url('/assets/images/Home/process_meeting.jpg')",
-        backgroundSize: 'cover',
-        backgroundPosition: 'center',
-        padding: '56px 0',
         position: 'relative',
-        overflow: 'hidden'
+        overflow: 'hidden',
+        padding: '0'
       }}
     >
-      <div className="container">
+      {/* Full-bleed background photo with dark indigo overlay */}
+      <div
+        style={{
+          position: 'absolute',
+          inset: 0,
+          backgroundImage: `url('https://images.unsplash.com/photo-1450101499163-c8848c66ca85?w=1600&q=80&auto=format&fit=crop')`,
+          backgroundSize: 'cover',
+          backgroundPosition: 'center',
+          zIndex: 0
+        }}
+      />
+      <div
+        style={{
+          position: 'absolute',
+          inset: 0,
+          background: 'linear-gradient(90deg, rgba(26,24,84,0.97) 0%, rgba(26,24,84,0.88) 50%, rgba(26,24,84,0.70) 100%)',
+          zIndex: 1
+        }}
+      />
+
+      {/* Dot grid background decoration */}
+      <svg
+        style={{ position: 'absolute', right: 0, top: 0, width: '260px', height: '100%', opacity: 0.04, zIndex: 1, pointerEvents: 'none' }}
+      >
+        {[...Array(8)].map((_, row) =>
+          [...Array(6)].map((_, col) => (
+            <circle key={`${row}-${col}`} cx={20 + col * 36} cy={20 + row * 36} r="3" fill="#f9b933" />
+          ))
+        )}
+      </svg>
+
+      <div className="container" style={{ position: 'relative', zIndex: 2, padding: '52px 0' }}>
         <div
           style={{
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'space-between',
-            flexWrap: 'wrap',
-            gap: '32px',
-            position: 'relative',
-            zIndex: 2
+            display: 'grid',
+            gridTemplateColumns: '1fr auto',
+            gap: '48px',
+            alignItems: 'center'
           }}
         >
-          {/* Left Title: Certification Standard's */}
-          <div style={{ flex: '1 1 300px', zIndex: 3 }}>
-            <h2 style={{ fontSize: 'clamp(28px, 4vw, 36px)', fontWeight: 800, color: '#ffffff', margin: 0, letterSpacing: '-0.5px' }}>
-              Certification Standard&apos;s
-            </h2>
-          </div>
+          {/* ─── Left: Title + counter + nav ─── */}
+          <div style={{ display: 'flex', alignItems: 'center', gap: '40px', flexWrap: 'wrap' }}>
 
-          {/* Center Slanted Parallelogram Yellow Card (Matching Screenshot) */}
-          <div
-            style={{
-              flex: '1 1 520px',
-              maxWidth: '650px',
-              backgroundColor: '#f9b933',
-              color: '#1a1854',
-              padding: '36px 56px',
-              position: 'relative',
-              clipPath: 'polygon(14% 0, 100% 0, 86% 100%, 0% 100%)',
-              textAlign: 'center',
-              boxShadow: '0 12px 32px rgba(0,0,0,0.2)'
-            }}
-          >
-            <div style={{ minHeight: '70px', display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center' }}>
+            {/* Section label */}
+            <div>
+              <div
+                style={{
+                  display: 'inline-flex',
+                  alignItems: 'center',
+                  gap: '8px',
+                  backgroundColor: '#f9b933',
+                  color: '#1a1854',
+                  fontSize: '10px',
+                  fontWeight: 800,
+                  letterSpacing: '2px',
+                  textTransform: 'uppercase',
+                  padding: '5px 12px',
+                  borderRadius: '4px',
+                  marginBottom: '14px'
+                }}
+              >
+                <Award size={12} strokeWidth={2.5} />
+                Global Standards
+              </div>
+              <h2
+                style={{
+                  fontSize: 'clamp(26px, 3.2vw, 38px)',
+                  fontWeight: 900,
+                  color: '#ffffff',
+                  margin: 0,
+                  letterSpacing: '-0.5px',
+                  lineHeight: 1.15,
+                  whiteSpace: 'nowrap'
+                }}
+              >
+                Certification<br />
+                <span style={{ color: '#f9b933' }}>Standard&apos;s</span>
+              </h2>
+            </div>
+
+            {/* Vertical divider */}
+            <div style={{ width: '1px', height: '80px', backgroundColor: 'rgba(255,255,255,0.15)', flexShrink: 0 }} />
+
+            {/* Slide card */}
+            <div style={{ flex: 1, minWidth: '280px' }}>
+              {/* ISO code + name */}
               <div
                 key={currentIndex}
                 style={{
-                  animation: 'fadeInUp 0.5s ease forwards'
+                  opacity: isAnimating ? 0 : 1,
+                  transform: isAnimating
+                    ? `translateX(${animDir === 'right' ? '-24px' : '24px'})`
+                    : 'translateX(0)',
+                  transition: 'opacity 0.35s ease, transform 0.35s ease'
                 }}
               >
-                <div style={{ fontSize: '20px', fontWeight: 800, color: '#1a1854', marginBottom: '6px', letterSpacing: '0.5px' }}>
-                  {currentItem.code}
-                </div>
+                {/* Category chip */}
+                <span
+                  style={{
+                    display: 'inline-block',
+                    backgroundColor: 'rgba(249,185,51,0.15)',
+                    color: '#f9b933',
+                    fontSize: '10.5px',
+                    fontWeight: 700,
+                    letterSpacing: '1.4px',
+                    textTransform: 'uppercase',
+                    padding: '4px 10px',
+                    borderRadius: '4px',
+                    marginBottom: '10px',
+                    border: '1px solid rgba(249,185,51,0.3)'
+                  }}
+                >
+                  {current.category}
+                </span>
 
-                <div style={{ fontSize: '16.5px', fontWeight: 700, color: '#1a1854' }}>
-                  {currentItem.name}
+                <div
+                  style={{
+                    fontSize: 'clamp(22px, 2.8vw, 32px)',
+                    fontWeight: 900,
+                    color: '#f9b933',
+                    lineHeight: 1.1,
+                    marginBottom: '8px',
+                    letterSpacing: '0.3px'
+                  }}
+                >
+                  {current.code}
+                </div>
+                <div
+                  style={{
+                    fontSize: 'clamp(14px, 1.6vw, 18px)',
+                    fontWeight: 600,
+                    color: 'rgba(255,255,255,0.9)',
+                    lineHeight: 1.4
+                  }}
+                >
+                  {current.name}
                 </div>
               </div>
+
+              {/* Progress bar */}
+              <div
+                style={{
+                  marginTop: '20px',
+                  height: '3px',
+                  backgroundColor: 'rgba(255,255,255,0.1)',
+                  borderRadius: '2px',
+                  overflow: 'hidden',
+                  width: '100%',
+                  maxWidth: '320px'
+                }}
+              >
+                <div
+                  style={{
+                    height: '100%',
+                    width: `${progress}%`,
+                    backgroundColor: '#f9b933',
+                    borderRadius: '2px',
+                    transition: 'width 0.05s linear'
+                  }}
+                />
+              </div>
+
+              {/* Counter */}
+              <div
+                style={{
+                  marginTop: '10px',
+                  fontSize: '12px',
+                  color: 'rgba(255,255,255,0.4)',
+                  fontWeight: 600,
+                  letterSpacing: '0.5px'
+                }}
+              >
+                {String(currentIndex + 1).padStart(2, '0')} / {String(standardsData.length).padStart(2, '0')}
+              </div>
+            </div>
+          </div>
+
+          {/* ─── Right: Nav arrows + dot pills ─── */}
+          <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-end', gap: '20px' }}>
+            {/* Arrow buttons */}
+            <div style={{ display: 'flex', gap: '10px' }}>
+              {[
+                { fn: prev, icon: <ChevronLeft size={18} strokeWidth={2.5} />, label: 'Previous' },
+                { fn: next, icon: <ChevronRight size={18} strokeWidth={2.5} />, label: 'Next' }
+              ].map(({ fn, icon, label }, i) => (
+                <button
+                  key={i}
+                  onClick={fn}
+                  aria-label={label}
+                  style={{
+                    width: '42px',
+                    height: '42px',
+                    borderRadius: '8px',
+                    border: '1.5px solid rgba(255,255,255,0.2)',
+                    backgroundColor: i === 1 ? '#f9b933' : 'transparent',
+                    color: i === 1 ? '#1a1854' : '#ffffff',
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    cursor: 'pointer',
+                    transition: 'all 0.2s ease'
+                  }}
+                  onMouseOver={e => {
+                    (e.currentTarget as HTMLElement).style.backgroundColor = i === 1 ? '#e0a520' : 'rgba(255,255,255,0.1)';
+                  }}
+                  onMouseOut={e => {
+                    (e.currentTarget as HTMLElement).style.backgroundColor = i === 1 ? '#f9b933' : 'transparent';
+                  }}
+                >
+                  {icon}
+                </button>
+              ))}
             </div>
 
-            {/* Dots Pagination */}
-            <div style={{ display: 'flex', justifyContent: 'center', gap: '6px', marginTop: '16px' }}>
+            {/* Dot pagination */}
+            <div style={{ display: 'flex', gap: '5px', flexWrap: 'wrap', justifyContent: 'flex-end', maxWidth: '180px' }}>
               {standardsData.map((_, idx) => (
                 <button
                   key={idx}
-                  onClick={() => setCurrentIndex(idx)}
+                  onClick={() => goTo(idx, idx > currentIndex ? 'right' : 'left')}
                   aria-label={`Go to slide ${idx + 1}`}
                   style={{
-                    width: idx === currentIndex ? '24px' : '6px',
+                    width: idx === currentIndex ? '20px' : '6px',
                     height: '6px',
                     borderRadius: '3px',
-                    backgroundColor: idx === currentIndex ? '#1a1854' : 'rgba(26, 24, 84, 0.3)',
+                    backgroundColor: idx === currentIndex ? '#f9b933' : 'rgba(255,255,255,0.25)',
                     border: 'none',
                     padding: 0,
                     cursor: 'pointer',
@@ -124,3 +318,5 @@ export const CertificationStandardsSlider: React.FC = () => {
     </section>
   );
 };
+
+
