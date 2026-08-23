@@ -12,7 +12,8 @@ import {
   Phone,
   Award,
   Globe,
-  MessageSquare
+  MessageSquare,
+  Send
 } from 'lucide-react';
 
 interface ZohoFormProps {
@@ -570,7 +571,10 @@ export const ZohoBiginForm: React.FC<ZohoFormProps> = ({ defaultStandard = 'Cert
             <span>Submitting...</span>
           </>
         ) : (
-          <span>Submit Query →</span>
+          <div style={{ display: 'inline-flex', alignItems: 'center', gap: '8px' }}>
+            <span>Submit Query</span>
+            <Send size={15} style={{ color: '#ffffff', flexShrink: 0 }} />
+          </div>
         )}
       </button>
     </form>

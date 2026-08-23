@@ -1,6 +1,6 @@
 import React from 'react';
 import { HeroWithQuoteForm } from '@/components/home/HeroWithQuoteForm';
-import { RecommendStatsSection } from '@/components/home/RecommendStatsSection';
+import { OurServicesSection } from '@/components/home/OurServicesSection';
 import { SplitSolutionsSection } from '@/components/home/SplitSolutionsSection';
 import { ExactServicesSection } from '@/components/home/ExactServicesSection';
 import { ISOStandardsShowcaseGrid } from '@/components/home/ISOStandardsShowcaseGrid';
@@ -18,13 +18,13 @@ export const metadata = {
 export default function HomePage() {
   return (
     <main>
-      {/* 1. Hero & Quote Form (Frames 0 & 1) */}
+      {/* 1. Hero & Floating Quote Form */}
       <HeroWithQuoteForm />
 
-      {/* 2. 96% Client Recommendation & 3 Light Cyan Cards (Frame 2) */}
-      <RecommendStatsSection />
+      {/* 2. Our Services Grid Section (Matching User Exact Mockup) */}
+      <OurServicesSection />
 
-      {/* 3. Split Image & Solutions List with Chevron Arrows (Frame 3) */}
+      {/* 3. Split Image & Solutions List with Chevron Arrows */}
       <SplitSolutionsSection />
 
       {/* 4. Our Core 4 Services Pillars */}
@@ -39,10 +39,10 @@ export default function HomePage() {
       {/* 7. 6 Step Essential Guide Lead Magnet */}
       <EssentialGuideBanner />
 
-      {/* 8. Real Results. Real ROI Testimonial & Video (Frames 4 & 5) */}
+      {/* 8. Real Results. Real ROI Testimonial & Video */}
       <RealResultsTestimonialSection />
 
-      {/* 9. News & Industry Insights with Segmented Tabs (Frames 6 & 7) */}
+      {/* 9. News & Industry Insights with Segmented Tabs */}
       <NewsInsightsSection />
 
       {/* 10. Industry Sectors We Support */}
@@ -50,5 +50,3 @@ export default function HomePage() {
     </main>
   );
 }
-
-

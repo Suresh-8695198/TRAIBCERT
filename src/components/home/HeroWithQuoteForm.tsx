@@ -7,6 +7,15 @@ import { ZohoBiginForm } from '@/components/forms/ZohoBiginForm';
 
 export const HeroWithQuoteForm: React.FC = () => {
   const [offsetY, setOffsetY] = useState(0);
+  const [animKey, setAnimKey] = useState(0);
+
+  // Re-trigger word-by-word staggered animation loop every 5 seconds
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setAnimKey(prev => prev + 1);
+    }, 5000);
+    return () => clearInterval(interval);
+  }, []);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -71,7 +80,7 @@ export const HeroWithQuoteForm: React.FC = () => {
               >
                 {["Independent,", "Impartial", "Certification", "Body", "for", "ISO", "Standards"].map((word, index) => (
                   <span
-                    key={index}
+                    key={`${animKey}-${index}`}
                     style={{
                       display: 'inline-block',
                       marginRight: '0.26em',

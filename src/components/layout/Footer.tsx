@@ -17,16 +17,20 @@ export const Footer: React.FC = () => {
   };
 
   return (
-    <footer style={{ backgroundColor: '#1a1854', color: 'rgba(255,255,255,0.85)', borderTop: '5px solid #f9b933', paddingTop: '56px', paddingBottom: '32px' }}>
+    <footer style={{ backgroundColor: '#1a1854', color: 'rgba(255,255,255,0.85)', borderTop: '5px solid #f9b933', paddingTop: '0px', paddingBottom: '32px', position: 'relative' }}>
       <div className="container">
         
-        {/* Newsletter Subscription Strip (Matching Screenshot 1) */}
+        {/* Newsletter Subscription Card (Solid White BG, Half Outside Footer / Half Inside Footer) */}
         <div style={{
-          background: 'rgba(255, 255, 255, 0.06)',
-          border: '1px solid rgba(255, 255, 255, 0.12)',
-          borderRadius: '14px',
+          backgroundColor: '#ffffff',
+          border: '1px solid #e2e8f0',
+          borderRadius: '12px',
           padding: '28px 36px',
-          marginBottom: '56px',
+          marginTop: '-65px',
+          marginBottom: '48px',
+          position: 'relative',
+          zIndex: 20,
+          boxShadow: '0 16px 40px rgba(0, 0, 0, 0.14)',
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'space-between',
@@ -34,17 +38,17 @@ export const Footer: React.FC = () => {
           gap: '24px'
         }}>
           <div>
-            <h3 style={{ fontSize: '20px', fontWeight: 800, color: '#ffffff', marginBottom: '4px' }}>
+            <h3 style={{ fontSize: '20px', fontWeight: 800, color: '#1a1854', marginBottom: '4px' }}>
               Stay informed on ISO & cyber standards
             </h3>
-            <p style={{ fontSize: '13.5px', color: 'rgba(255, 255, 255, 0.7)', margin: 0 }}>
+            <p style={{ fontSize: '13.5px', color: '#64748b', margin: 0 }}>
               Monthly insights, updates on standard revisions, and free resources. No spam.
             </p>
           </div>
 
           {subscribed ? (
-            <div style={{ display: 'flex', alignItems: 'center', gap: '8px', color: '#f9b933', fontWeight: 700, fontSize: '14px' }}>
-              <CheckCircle2 size={18} />
+            <div style={{ display: 'flex', alignItems: 'center', gap: '8px', color: '#2c2a75', fontWeight: 800, fontSize: '14px' }}>
+              <CheckCircle2 size={18} style={{ color: '#2f9e6e' }} />
               <span>Thank you for subscribing to TRAIBCERT Insights!</span>
             </div>
           ) : (
@@ -59,9 +63,9 @@ export const Footer: React.FC = () => {
                   flexGrow: 1,
                   padding: '12px 18px',
                   borderRadius: '8px',
-                  border: '1px solid rgba(255, 255, 255, 0.2)',
-                  backgroundColor: 'rgba(255, 255, 255, 0.1)',
-                  color: '#ffffff',
+                  border: '1px solid #cbd5e1',
+                  backgroundColor: '#f8fafc',
+                  color: '#0f172a',
                   fontSize: '14px',
                   outline: 'none'
                 }}
@@ -80,6 +84,12 @@ export const Footer: React.FC = () => {
                   whiteSpace: 'nowrap',
                   boxShadow: 'none',
                   transition: 'all 0.2s ease'
+                }}
+                onMouseOver={(e) => {
+                  (e.currentTarget as HTMLElement).style.backgroundColor = '#e0a520';
+                }}
+                onMouseOut={(e) => {
+                  (e.currentTarget as HTMLElement).style.backgroundColor = '#f9b933';
                 }}
               >
                 Subscribe
