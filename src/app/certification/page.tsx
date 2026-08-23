@@ -171,6 +171,32 @@ export default function CertificationLandingPage() {
     };
   }, []);
 
+  // IntersectionObserver effect to trigger scroll reveal animations on load/scroll
+  React.useEffect(() => {
+    // Avoid running on server side rendering
+    if (typeof window === 'undefined') return;
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('revealed');
+          // Once animated, we can unobserve
+          observer.unobserve(entry.target);
+        }
+      });
+    }, {
+      threshold: 0.08, // trigger early when 8% is visible
+      rootMargin: '0px 0px -40px 0px' // trigger slightly before it enters viewport
+    });
+
+    const elements = document.querySelectorAll('.reveal-element');
+    elements.forEach(el => observer.observe(el));
+
+    return () => {
+      elements.forEach(el => observer.unobserve(el));
+    };
+  }, []);
+
   const handleVerifySearch = (e: React.FormEvent) => {
     e.preventDefault();
     if (!certNumber.trim()) return;
@@ -701,7 +727,7 @@ export default function CertificationLandingPage() {
       </section>
 
       {/* Verify Your Certificate Here Section */}
-      <section style={{ 
+      <section className="verify-section" style={{ 
         padding: '88px 0', 
         backgroundColor: '#ffffff', 
         borderTop: '1px solid #f1f5f9',
@@ -745,7 +771,7 @@ export default function CertificationLandingPage() {
             <div style={{ width: '60px', height: '3px', backgroundColor: '#f9b933', margin: '16px auto 0', borderRadius: '2px' }} />
           </div>
 
-          <div style={{ 
+          <div className="verify-card-grid" style={{ 
             display: 'grid', 
             gridTemplateColumns: '1fr 1.2fr', 
             gap: '64px',
@@ -758,7 +784,7 @@ export default function CertificationLandingPage() {
           }}>
             
             {/* Left side Graphic Column: High-fidelity blue shield & magnifying glass vector */}
-            <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+            <div className="verify-graphic" style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
               <svg viewBox="0 0 340 320" style={{ width: '100%', height: 'auto', maxWidth: '340px' }}>
                 {/* Shield Outline in background */}
                 <path 

@@ -3,36 +3,35 @@
 import React, { useState } from 'react';
 import Link from 'next/link';
 import { 
-  ShieldCheck, 
   ArrowRight, 
-  CheckCircle2, 
-  Heart, 
-  Leaf, 
-  HeartPulse, 
-  Utensils, 
-  Cpu, 
-  Workflow, 
-  Fingerprint, 
-  ShieldAlert, 
-  Sparkles, 
-  Zap, 
+  Award, 
+  MessageSquareHeart, 
+  TreePine, 
+  HardHat, 
+  Wheat, 
+  Server, 
+  ShieldCheck, 
+  KeyRound, 
+  Gauge, 
+  Users, 
+  BatteryCharging, 
   GraduationCap
 } from 'lucide-react';
 import { trainingCoursesData } from '@/config/training';
 
-// Modernized icon mapping for training courses
+// Unique, field-specific icon mapping for training courses
 const iconMap: { [key: string]: any } = {
-  'iso-9001': CheckCircle2,         // Quality
-  'iso-10002': Heart,                // Customer Satisfaction
-  'iso-14001': Leaf,                 // Environmental
-  'iso-45001': HeartPulse,           // Health & Safety
-  'iso-22000': Utensils,             // Food Safety
-  'iso-20000-1': Cpu,                // IT Service
-  'iso-22301': Workflow,             // Business Continuity
-  'iso-27001': Fingerprint,          // Information Security
-  'iso-31000': ShieldAlert,          // Risk Management
-  'iso-26000': Sparkles,             // Social Responsibility
-  'iso-50001': Zap                   // Energy
+  'iso-9001': Award,                 // Quality - award/medal ribbon
+  'iso-10002': MessageSquareHeart,   // Customer Satisfaction - heart message
+  'iso-14001': TreePine,             // Environmental - tree/nature
+  'iso-45001': HardHat,              // Health & Safety - safety helmet
+  'iso-22000': Wheat,                // Food Safety - wheat/grain
+  'iso-20000-1': Server,             // IT Service - server rack
+  'iso-22301': ShieldCheck,          // Business Continuity - shield check
+  'iso-27001': KeyRound,             // Information Security - key/lock
+  'iso-31000': Gauge,                // Risk Management - gauge/meter
+  'iso-26000': Users,                // Social Responsibility - community
+  'iso-50001': BatteryCharging       // Energy - battery charging
 };
 
 // Exact titles for the training courses matching your screenshot
@@ -76,7 +75,7 @@ export default function TrainingLandingPage() {
     <div style={{ backgroundColor: '#f8fafc', minHeight: '100vh', fontFamily: 'var(--font-sans)', color: '#334155' }}>
       
       {/* Home / Training Breadcrumb Teal Bar */}
-      <div style={{ backgroundColor: '#1a80a2', padding: '16px 0', color: '#fff' }}>
+      <div style={{ backgroundColor: '#1a1854', padding: '16px 0', color: '#fff' }}>
         <div className="container" style={{ display: 'flex', alignItems: 'center', gap: '6px', fontSize: '12px', fontWeight: 800, letterSpacing: '0.8px' }}>
           <Link href="/" style={{ color: '#fff', textDecoration: 'none', opacity: 0.85 }}>HOME</Link>
           <span>/</span>
@@ -91,15 +90,17 @@ export default function TrainingLandingPage() {
           {/* Header Title & Exact Paragraph Content */}
           <div style={{ maxWidth: '1080px', margin: '0 auto 48px' }}>
             <h1 style={{ 
-              fontSize: '28px', 
+              fontSize: 'clamp(26px, 3.5vw, 36px)', 
               fontWeight: 800, 
               color: '#1a1854', 
               marginBottom: '20px',
-              fontFamily: 'var(--font-serif)'
+              fontFamily: 'var(--font-sans)',
+              letterSpacing: '0.5px',
+              textTransform: 'uppercase'
             }}>
               ISO Training Courses in UK
             </h1>
-            <p style={{ fontSize: '15.5px', color: '#334155', lineHeight: 1.7, margin: 0, textAlign: 'justify' }}>
+            <p style={{ fontSize: '15.5px', color: '#334155', lineHeight: 1.75, margin: 0, textAlign: 'justify', fontFamily: 'var(--font-sans)' }}>
               At TRAIBCERT, we have developed a suite of ISO training courses, total package of the approach, highly interactive with real world examples and open studies, an opportunity for individuals from different sectors, industry and background enrich their knowledge upon. The growing portfolio of courses is support our core services, which specialize in implementation, certification and continual auditing of ISO Management Standards.
               <br /><br />
               Our courses are delivered by specialists in their field, which provide you with high value knowledge and skills to those wanting to learn more about standards, procedures, international standards and assessment skills. Our Certification Training portfolio details as follows,

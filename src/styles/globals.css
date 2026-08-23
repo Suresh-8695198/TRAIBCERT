@@ -1177,8 +1177,97 @@ body.mobile-drawer-active .whatsapp-btn {
   word-break: break-word !important;
 }
 
+/* Scroll reveal animations */
+.reveal-element {
+  opacity: 0;
+  transform: translateY(35px);
+  transition: opacity 0.8s cubic-bezier(0.25, 1, 0.5, 1), 
+              transform 0.8s cubic-bezier(0.25, 1, 0.5, 1) !important;
+}
+
+.reveal-element.revealed {
+  opacity: 1 !important;
+  transform: translateY(0) !important;
+}
 
 
+/* ═══════════════════════════════════════════════════════════════
+   VERIFY CERTIFICATE SECTION – RESPONSIVE BREAKPOINTS
+═══════════════════════════════════════════════════════════════ */
 
+/* Tablet landscape / small desktop (≤ 900px) */
+@media (max-width: 900px) {
+  .verify-section {
+    padding: 56px 0 !important;
+  }
+  .verify-section h2 {
+    font-size: 26px !important;
+  }
+  .verify-card-grid {
+    grid-template-columns: 1fr !important;
+    gap: 32px !important;
+    padding: 40px 32px !important;
+    border-radius: 20px !important;
+  }
+  .verify-graphic {
+    order: -1;
+  }
+  .verify-graphic svg {
+    max-width: 260px !important;
+  }
+}
+
+/* Mobile / portrait tablets (≤ 600px) */
+@media (max-width: 600px) {
+  .verify-section {
+    padding: 40px 0 !important;
+  }
+  .verify-section h2 {
+    font-size: 22px !important;
+    margin-bottom: 32px !important;
+  }
+  .verify-card-grid {
+    padding: 28px 20px !important;
+    gap: 24px !important;
+    border-radius: 16px !important;
+    box-shadow: 0 16px 40px rgba(26,24,84,0.18) !important;
+  }
+  .verify-graphic {
+    display: none !important;
+  }
+  .verify-card-grid form {
+    gap: 18px !important;
+  }
+  .verify-card-grid input {
+    padding: 11px 14px 11px 42px !important;
+    font-size: 13.5px !important;
+  }
+  .verify-card-grid button {
+    padding: 11px 24px !important;
+    font-size: 13px !important;
+  }
+}
+
+/* Small phones (≤ 400px) */
+@media (max-width: 400px) {
+  .verify-section {
+    padding: 32px 0 !important;
+  }
+  .verify-section h2 {
+    font-size: 19px !important;
+  }
+  .verify-card-grid {
+    padding: 24px 16px !important;
+    border-radius: 14px !important;
+  }
+  .verify-card-grid form > div:last-of-type {
+    flex-direction: column !important;
+    gap: 10px !important;
+  }
+  .verify-card-grid form > div:last-of-type button {
+    width: 100% !important;
+    justify-content: center !important;
+  }
+}
 
 
