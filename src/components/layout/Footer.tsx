@@ -147,7 +147,8 @@ export const Footer: React.FC = () => {
             </div>
           </div>
 
-          {/* Column 2: Company Links */}
+          {/* COMMENTED OUT FOR CLIENT REVIEW - Footer link columns disabled */}
+          {/*
           <div>
             <h4 style={{ fontSize: '14px', fontWeight: 800, color: '#ffffff', textTransform: 'none', letterSpacing: '0.5px', marginBottom: '20px' }}>
               Company
@@ -163,7 +164,6 @@ export const Footer: React.FC = () => {
             </ul>
           </div>
 
-          {/* Column 3: Quick Links */}
           <div>
             <h4 style={{ fontSize: '14px', fontWeight: 800, color: '#ffffff', textTransform: 'none', letterSpacing: '0.5px', marginBottom: '20px' }}>
               Quick Links
@@ -185,7 +185,6 @@ export const Footer: React.FC = () => {
             </ul>
           </div>
 
-          {/* Column 4: Policies Links */}
           <div>
             <h4 style={{ fontSize: '14px', fontWeight: 800, color: '#ffffff', textTransform: 'none', letterSpacing: '0.5px', marginBottom: '20px' }}>
               Policies
@@ -200,6 +199,7 @@ export const Footer: React.FC = () => {
               ))}
             </ul>
           </div>
+          */}
         </div>
 
         {/* Bottom Copyright Strip */}

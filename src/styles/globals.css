@@ -1271,3 +1271,108 @@ body.mobile-drawer-active .whatsapp-btn {
 }
 
 
+/* ═══════════════════════════════════════════════════════════════
+   TRAINING PAGE – RESPONSIVE BREAKPOINTS
+═══════════════════════════════════════════════════════════════ */
+
+/* Tablet landscape (≤ 1024px): 4 cols → 2 cols */
+@media (max-width: 1024px) {
+  .training-main-section {
+    padding: 48px 0 64px !important;
+  }
+  .training-cards-grid {
+    grid-template-columns: repeat(2, 1fr) !important;
+    gap: 20px !important;
+    margin-bottom: 48px !important;
+  }
+  .training-photos-grid {
+    gap: 16px !important;
+  }
+  .training-photos-grid img {
+    height: 190px !important;
+  }
+}
+
+/* Tablet portrait / large mobile (≤ 768px) */
+@media (max-width: 768px) {
+  .training-main-section {
+    padding: 36px 0 56px !important;
+  }
+  .training-cards-grid {
+    grid-template-columns: repeat(2, 1fr) !important;
+    gap: 16px !important;
+    margin-bottom: 40px !important;
+  }
+  .training-cards-grid a {
+    min-height: 120px !important;
+    border-radius: 12px !important;
+  }
+  .training-photos-section {
+    padding-top: 40px !important;
+  }
+  .training-photo-caption {
+    font-size: 14px !important;
+    max-width: 100% !important;
+    padding: 0 8px !important;
+  }
+  .training-photos-grid {
+    grid-template-columns: repeat(2, 1fr) !important;
+    gap: 14px !important;
+  }
+  .training-photos-grid img {
+    height: 170px !important;
+  }
+}
+
+/* Mobile phones (≤ 540px): single column cards */
+@media (max-width: 540px) {
+  .training-main-section {
+    padding: 28px 0 48px !important;
+  }
+  .training-cards-grid {
+    grid-template-columns: 1fr !important;
+    gap: 14px !important;
+    margin-bottom: 36px !important;
+  }
+  .training-cards-grid a {
+    min-height: 100px !important;
+    border-radius: 14px !important;
+  }
+  .training-photos-section {
+    padding-top: 32px !important;
+  }
+  .training-photo-caption {
+    font-size: 13px !important;
+    line-height: 1.55 !important;
+    margin-bottom: 20px !important;
+  }
+  .training-photos-grid {
+    grid-template-columns: 1fr !important;
+    gap: 12px !important;
+    margin-bottom: 24px !important;
+  }
+  .training-photos-grid img {
+    height: 200px !important;
+  }
+}
+
+/* Small phones (≤ 400px) */
+@media (max-width: 400px) {
+  .training-main-section {
+    padding: 20px 0 36px !important;
+  }
+  .training-cards-grid {
+    gap: 12px !important;
+  }
+  .training-cards-grid a {
+    min-height: 90px !important;
+    border-radius: 12px !important;
+  }
+  .training-photo-caption {
+    font-size: 12.5px !important;
+  }
+  .training-photos-grid img {
+    height: 180px !important;
+    border-radius: 10px !important;
+  }
+}

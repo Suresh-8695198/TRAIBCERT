@@ -120,9 +120,10 @@ export const Header: React.FC = () => {
                 <ChevronDown size={14} style={{ transform: activeMenu === 'certification' ? 'rotate(180deg)' : 'none', transition: 'transform 0.2s' }} />
               </Link>
 
-              {activeMenu === 'certification' && (
+              {/* COMMENTED OUT FOR CLIENT REVIEW - Certification submenu dropdown disabled */}
+              {/* activeMenu === 'certification' && (
                 <MegaMenuCertification onClose={() => setActiveMenu(null)} />
-              )}
+              ) */}
             </div>
 
             {/* 3. TRAINING */}
@@ -150,12 +151,14 @@ export const Header: React.FC = () => {
                 <ChevronDown size={14} style={{ transform: activeMenu === 'training' ? 'rotate(180deg)' : 'none', transition: 'transform 0.2s' }} />
               </Link>
 
-              {activeMenu === 'training' && (
+              {/* COMMENTED OUT FOR CLIENT REVIEW - Training submenu dropdown disabled */}
+              {/* activeMenu === 'training' && (
                 <DropdownTraining onClose={() => setActiveMenu(null)} />
-              )}
+              ) */}
             </div>
 
-            {/* 4. RESOURCES */}
+            {/* COMMENTED OUT FOR CLIENT REVIEW - Resources menu disabled */}
+            {/*
             <div
               className="nav-item"
               style={{ height: '100%', display: 'flex', alignItems: 'center' }}
@@ -184,8 +187,10 @@ export const Header: React.FC = () => {
                 <MegaMenuResources onClose={() => setActiveMenu(null)} />
               )}
             </div>
+            */}
 
-            {/* 5. CONTACT US */}
+            {/* COMMENTED OUT FOR CLIENT REVIEW - Contact Us menu disabled */}
+            {/*
             <div
               className="nav-item"
               style={{ height: '100%', display: 'flex', alignItems: 'center', position: 'relative' }}
@@ -240,6 +245,7 @@ export const Header: React.FC = () => {
                 </div>
               )}
             </div>
+            */}
 
           </nav>
 
@@ -285,6 +291,8 @@ export const Header: React.FC = () => {
             </button>
 
             {/* Get a Quote Button */}
+            {/* COMMENTED OUT FOR CLIENT REVIEW - Get a Quote button disabled */}
+            {/*
             <Link
               href="/contact/enquiry"
               className="btn-quote"
@@ -305,6 +313,7 @@ export const Header: React.FC = () => {
               <span>Get a Quote</span>
               <ArrowRight size={14} />
             </Link>
+            */}
 
             {/* Mobile Toggle */}
             <button

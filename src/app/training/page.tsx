@@ -84,7 +84,7 @@ export default function TrainingLandingPage() {
       </div>
 
       {/* Main Section */}
-      <section style={{ padding: '60px 0 80px' }}>
+      <section className="training-main-section" style={{ padding: '60px 0 80px' }}>
         <div className="container">
           
           {/* Header Title & Exact Paragraph Content */}
@@ -108,7 +108,7 @@ export default function TrainingLandingPage() {
           </div>
 
           {/* 4-Column Training Course Cards Grid */}
-          <div style={{ 
+          <div className="training-cards-grid" style={{ 
             display: 'grid', 
             gridTemplateColumns: 'repeat(4, 1fr)', 
             gap: '24px',
@@ -224,8 +224,8 @@ export default function TrainingLandingPage() {
           </div>
 
           {/* Certificate Distribution Section */}
-          <div style={{ borderTop: '1.5px solid #e2e8f0', paddingTop: '56px', textAlign: 'center' }}>
-            <h3 style={{ 
+          <div className="training-photos-section" style={{ borderTop: '1.5px solid #e2e8f0', paddingTop: '56px', textAlign: 'center' }}>
+            <h3 className="training-photo-caption" style={{ 
               fontSize: '16px', 
               fontWeight: 800, 
               color: '#1a1854', 
@@ -238,7 +238,7 @@ export default function TrainingLandingPage() {
             </h3>
 
             {/* Premium 3-Photo Grid */}
-            <div style={{ 
+            <div className="training-photos-grid" style={{ 
               display: 'grid', 
               gridTemplateColumns: 'repeat(3, 1fr)', 
               gap: '24px',

@@ -83,68 +83,44 @@ export const MobileDrawer: React.FC<{ isOpen: boolean; onClose: () => void }> = 
             Home
           </Link>
 
-          {/* Certification Accordion */}
+          {/* Certification Accordion - simplified to direct link for client review */}
           <div style={{ borderBottom: '1px solid rgba(255, 255, 255, 0.08)' }}>
-            <button
-              onClick={() => toggleSub('certification')}
+            <Link
+              href="/certification"
+              onClick={onClose}
               style={{
-                width: '100%',
-                display: 'flex',
-                justifyContent: 'space-between',
-                alignItems: 'center',
+                display: 'block',
                 padding: '16px 28px',
                 fontSize: '17px',
                 fontWeight: 700,
                 color: '#ffffff',
-                background: 'none',
-                border: 'none',
-                cursor: 'pointer'
+                textDecoration: 'none'
               }}
             >
-              <span>Certification</span>
-              <ChevronDown size={20} style={{ color: '#f9b933', transform: openSub === 'certification' ? 'rotate(180deg)' : 'none', transition: 'transform 0.2s' }} />
-            </button>
-            {openSub === 'certification' && (
-              <div style={{ background: 'rgba(0, 0, 0, 0.15)', padding: '12px 28px 16px', display: 'flex', flexDirection: 'column', gap: '10px', fontSize: '14.5px' }}>
-                <Link href="/certification" onClick={onClose} style={{ color: 'rgba(255, 255, 255, 0.9)', textDecoration: 'none' }}>All ISO Standards Overview</Link>
-                <Link href="/certification/cyber-essentials" onClick={onClose} style={{ color: '#f9b933', textDecoration: 'none', fontWeight: 700 }}>Cyber Essentials Scheme</Link>
-                <Link href="/certification/iso-9001" onClick={onClose} style={{ color: 'rgba(255, 255, 255, 0.9)', textDecoration: 'none' }}>ISO 9001:2015 Quality</Link>
-                <Link href="/certification/iso-27001" onClick={onClose} style={{ color: 'rgba(255, 255, 255, 0.9)', textDecoration: 'none' }}>ISO 27001:2022 Information Security</Link>
-                <Link href="/certification/iso-14001" onClick={onClose} style={{ color: 'rgba(255, 255, 255, 0.9)', textDecoration: 'none' }}>ISO 14001:2026 Environment</Link>
-              </div>
-            )}
+              Certification
+            </Link>
           </div>
 
-          {/* Training Accordion */}
+          {/* Training Accordion - simplified to direct link for client review */}
           <div style={{ borderBottom: '1px solid rgba(255, 255, 255, 0.08)' }}>
-            <button
-              onClick={() => toggleSub('training')}
+            <Link
+              href="/training"
+              onClick={onClose}
               style={{
-                width: '100%',
-                display: 'flex',
-                justifyContent: 'space-between',
-                alignItems: 'center',
+                display: 'block',
                 padding: '16px 28px',
                 fontSize: '17px',
                 fontWeight: 700,
                 color: '#ffffff',
-                background: 'none',
-                border: 'none',
-                cursor: 'pointer'
+                textDecoration: 'none'
               }}
             >
-              <span>Training</span>
-              <ChevronDown size={20} style={{ color: '#f9b933', transform: openSub === 'training' ? 'rotate(180deg)' : 'none', transition: 'transform 0.2s' }} />
-            </button>
-            {openSub === 'training' && (
-              <div style={{ background: 'rgba(0, 0, 0, 0.15)', padding: '12px 28px 16px', display: 'flex', flexDirection: 'column', gap: '10px', fontSize: '14.5px' }}>
-                <Link href="/training" onClick={onClose} style={{ color: 'rgba(255, 255, 255, 0.9)', textDecoration: 'none' }}>All Training Courses</Link>
-                <a href={siteConfig.academyUrl} target="_blank" rel="noopener noreferrer" style={{ color: '#f9b933', textDecoration: 'none', fontWeight: 700 }}>E-Learning Academy ↗</a>
-              </div>
-            )}
+              Training
+            </Link>
           </div>
 
-          {/* Resources Accordion */}
+          {/* COMMENTED OUT FOR CLIENT REVIEW - Resources accordion disabled */}
+          {/*
           <div style={{ borderBottom: '1px solid rgba(255, 255, 255, 0.08)' }}>
             <button
               onClick={() => toggleSub('resources')}
@@ -189,10 +165,13 @@ export const MobileDrawer: React.FC<{ isOpen: boolean; onClose: () => void }> = 
           >
             Contact Us
           </Link>
+          */}
         </nav>
 
         {/* Sticky Bottom CTA Block (Matching Screenshot 3) */}
         <div style={{ padding: '24px 28px', borderTop: '1px solid rgba(255, 255, 255, 0.12)', backgroundColor: 'rgba(0, 0, 0, 0.15)' }}>
+          {/* COMMENTED OUT FOR CLIENT REVIEW - Get a Quote button disabled */}
+          {/*
           <Link
             href="/contact/enquiry"
             onClick={onClose}
@@ -213,6 +192,7 @@ export const MobileDrawer: React.FC<{ isOpen: boolean; onClose: () => void }> = 
           >
             Get a Quote →
           </Link>
+          */}
           
           <div style={{ textAlign: 'center', fontSize: '13px', color: 'rgba(255, 255, 255, 0.85)' }}>
             <a href={siteConfig.contact.ukPhoneTel} style={{ color: '#ffffff', fontWeight: 600, textDecoration: 'none' }}>{siteConfig.contact.ukPhone}</a>
